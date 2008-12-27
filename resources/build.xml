@@ -61,8 +61,8 @@
 
 <!-- #### (14) where can the source code be found? edit value. #### -->
 	<property name="source:host"  value="GitHub" />
-	<property name="source:url"  value="http://github.com/" />
-	<property name="source:repository"  value="http://code.google.com/p/yourProject/source/browse/" />
+	<property name="source:url"  value="http://github.com/michaelforrest/grimonium" />
+	<property name="source:repository"  value="http://github.com/michaelforrest/grimonium" />
 
 
 
