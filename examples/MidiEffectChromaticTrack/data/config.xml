@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+	<live_api out="IAC Bus 3"/>
+	<ableton in="IAC Bus 1" out="IAC Bus 2(.*)Apple Computer, Inc." />
+</config>

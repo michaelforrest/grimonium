@@ -30,6 +30,7 @@ import microkontrol.*;
 import netP5.*;
 /**
  * @author Michael Forrest
+ * gonna use midi channel 4 for controller messages
  */
 public class Grimonium {
 
@@ -49,8 +50,6 @@ public class Grimonium {
 
 	private AudioInput in;
 
-	private Ableton ableton;
-
 	public Grimonium(PApplet applet, String config_xml, String mapping_xml) {
 		this.applet = applet;
 		XMLElement xml = new XMLElement(applet, config_xml);
@@ -60,14 +59,22 @@ public class Grimonium {
 		boot(applet, xml);
 
 		XMLElement mapping = new XMLElement(applet,mapping_xml);
-		addChromaticTracks(mapping);
+		addChromaticTracks(mapping.getChildren("chromatic_track"));
+		addMidiEffectChromaticTracks(mapping.getChildren("midi_effect_chromatic_track"));
 	}
 
-	private void addChromaticTracks(XMLElement xml) {
-		XMLElement[] chromaticTracks = xml.getChildren("chromatic_track");
+	private void addMidiEffectChromaticTracks(XMLElement[] children) {
+		for(int i=0; i<children.length; i++){
+			XMLElement trackXml = children[i];
+			new MidiEffectChromaticTrack(trackXml, mk);
+		}
+
+	}
+
+	private void addChromaticTracks(XMLElement[] chromaticTracks) {
 		for(int i=0; i<chromaticTracks.length; i++){
 			XMLElement trackXml = chromaticTracks[i];
-			new ChromaticTrack(trackXml, mk, liveAPI);
+			new ChromaticTrack(trackXml, mk);
 		}
 
 	}
@@ -80,8 +87,8 @@ public class Grimonium {
 
 		minim = new Minim(applet);
 		in = minim.getLineIn(Minim.STEREO, 512);
-		ableton = new Ableton(mk);
-		liveAPI = new LiveAPI(xml.getChild("live_api"));
+		if(xml.getChild("ableton")!=null)  Ableton.init(xml.getChild("ableton"),mk);
+		if(xml.getChild("live_api")!=null) LiveAPI.init(xml.getChild("live_api"));
 	}
 
 	public String version() {

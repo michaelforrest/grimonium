@@ -2,14 +2,15 @@ package grimonium;
 
 import java.util.Hashtable;
 
+import processing.core.PApplet;
 import processing.xml.XMLElement;
 import rwmidi.MidiOutput;
-
+// http://www.assembla.com/wiki/show/live-api/API_Midi_Protocol
 public class LiveAPI extends MidiThing {
 	Hashtable<Integer, String> STATUS_BYTES = new Hashtable<Integer, String>();
 	private MidiOutput out;
 
-	public LiveAPI(XMLElement xml) {
+	private LiveAPI(XMLElement xml) {
 		setStatusBytes();
 		out = getOutput(xml.getStringAttribute("out"));
 	}
@@ -42,16 +43,27 @@ public class LiveAPI extends MidiThing {
 		STATUS_BYTES.put(60, "Song data");
 	}
 
-	int TRIGGER_TRACK = 0;
+	static int TRIGGER_TRACK = 0;
+	private static LiveAPI instance;
 	int GET_CLIP_DATA = 1;
 	int MONITOR_CLIP = 2;
 	int STOP_CLIP_MONITOR = 3;
 
-	public void trigger(int track, int scene) {
-		out.sendController(TRIGGER_TRACK, track, scene);
+	public static void trigger(int track, int scene) {
+		getInstance().out.sendController(TRIGGER_TRACK, track, scene);
+	}
+
+	private static LiveAPI getInstance() {
+		if(instance == null) PApplet.println("Error! You need to call LiveAPI.init()");
+		return instance;
 	}
 
 	public void stop(int track) {
 		out.sendController(TRIGGER_TRACK, track, 20);
+	}
+
+	public static void init(XMLElement xml) {
+		instance = new LiveAPI(xml);
+
 	}
 }
