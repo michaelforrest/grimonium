@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mappings>
-	<midi_effect_chromatic_track track="5" root="60" range="12" cc="0" pad="0" />
-	<chromatic_track track="6" root="60" range="12" pad="1" />
-	<midi_effect_chromatic_track track="7" root="60" range="12" cc="1" pad="2" />
-	<chromatic_track track="8" root="60" range="12" pad="3" />
+	<midi_effect_chromatic_track 	track="5" root="60" range="12" pad="0" fader="0" cc="0" />
+	<chromatic_track 							track="6" root="60" range="12" pad="1" fader="1" />
+	<midi_effect_chromatic_track 	track="7" root="60" range="12" pad="2" fader="2" cc="1"/>
+	<chromatic_track 							track="8" root="60" range="12" pad="3" fader="3" />
 </mappings>

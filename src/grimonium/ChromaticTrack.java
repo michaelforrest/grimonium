@@ -2,51 +2,69 @@ package grimonium;
 
 import microkontrol.MicroKontrol;
 import microkontrol.controls.ButtonListener;
+import microkontrol.controls.FaderListener;
 import microkontrol.controls.Pad;
 import processing.core.PApplet;
 import processing.xml.XMLElement;
 import rwmidi.Note;
 
-public class ChromaticTrack implements ButtonListener {
+public class ChromaticTrack implements ButtonListener, FaderListener {
 
-    protected int root;
-    protected int track;
-    protected int range;
-    protected boolean disabled = false;
+	private static final int NULL = -1;
+	protected int root;
+	protected int track;
+	protected int range;
+	protected boolean disabled = false;
 	protected Pad pad;
 
-    public ChromaticTrack(XMLElement xml, MicroKontrol mk) {
+	public ChromaticTrack(XMLElement xml, MicroKontrol mk) {
 
-        range = xml.getIntAttribute("range");
-        root = xml.getIntAttribute("root");
-        track = xml.getIntAttribute("track");
-        pad = mk.pads[xml.getIntAttribute("pad")];
-        pad.set(!disabled);
-        pad.listen(this);
-        mk.plugKeyboard(this);
+		range = xml.getIntAttribute("range");
+		root = xml.getIntAttribute("root");
+		track = xml.getIntAttribute("track");
+		pad = mk.pads[xml.getIntAttribute("pad")];
+		pad.set(!disabled);
+		pad.listen(this);
+		setupFader(xml.getIntAttribute("fader", NULL), mk);
+		mk.plugKeyboard(this);
 
-    }
-    public void noteOnReceived(Note n) {
-        if(disabled) return;
-        int scene = n.getPitch() - root;
-        if(scene < 0 || scene > range) return;
-        LiveAPI.trigger(track, scene);
-    }
+	}
 
-    public void noteOffReceived(Note n) {
-        //to.sendNoteOff(0, n.getPitch(), n.getVelocity());
-    }
+	private void setupFader(int id, MicroKontrol mk) {
+		if (id == NULL) return;
+		mk.faders[id].listen(this);
+
+	}
+
+	public void noteOnReceived(Note n) {
+		if (disabled) return;
+		int scene = n.getPitch() - root;
+		if (scene < 0 || scene > range) return;
+		LiveAPI.trigger(track, scene);
+	}
+
+	public void noteOffReceived(Note n) {
+		// to.sendNoteOff(0, n.getPitch(), n.getVelocity());
+	}
+
 	public void pressed() {
 		disabled = !disabled;
 		pad.set(!disabled);
 
 	}
+
 	public void released() {
 		// TODO Auto-generated method stub
 
 	}
+
 	public void updated() {
 		// TODO Auto-generated method stub
+
+	}
+
+	public void moved(Float value) {
+		PApplet.println("Fader is now " + value);
 
 	}
 
