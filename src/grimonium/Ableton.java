@@ -100,4 +100,8 @@ public class Ableton extends MidiThing {
 		instance = new Ableton(xml,mk);
 	}
 
+	public static void sendCC(int channel, int cc, int value) {
+		getInstance().sendController(channel, cc, value);
+	}
+
 }

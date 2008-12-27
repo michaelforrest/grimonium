@@ -4,10 +4,10 @@ import microkontrol.MicroKontrol;
 import processing.xml.XMLElement;
 import rwmidi.Note;
 
-public class MidiEffectChromaticTrack extends ChromaticTrack{
+public class PitchShiftTrack extends ChromaticTrack{
 
 	private int cc;
-	public MidiEffectChromaticTrack(XMLElement xml, MicroKontrol mk) {
+	public PitchShiftTrack(XMLElement xml, MicroKontrol mk) {
 		super(xml, mk);
 		cc = xml.getIntAttribute("cc");
 	}

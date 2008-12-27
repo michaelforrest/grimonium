@@ -60,13 +60,13 @@ public class Grimonium {
 
 		XMLElement mapping = new XMLElement(applet,mapping_xml);
 		addChromaticTracks(mapping.getChildren("chromatic_track"));
-		addMidiEffectChromaticTracks(mapping.getChildren("midi_effect_chromatic_track"));
+		addMidiEffectChromaticTracks(mapping.getChildren("pitch_shift_track"));
 	}
 
 	private void addMidiEffectChromaticTracks(XMLElement[] children) {
 		for(int i=0; i<children.length; i++){
 			XMLElement trackXml = children[i];
-			new MidiEffectChromaticTrack(trackXml, mk);
+			new PitchShiftTrack(trackXml, mk);
 		}
 
 	}

@@ -10,12 +10,13 @@ import rwmidi.Note;
 
 public class ChromaticTrack implements ButtonListener, FaderListener {
 
-	private static final int NULL = -1;
 	protected int root;
 	protected int track;
 	protected int range;
 	protected boolean disabled = false;
 	protected Pad pad;
+	private int faderChannel;
+	private int faderCC;
 
 	public ChromaticTrack(XMLElement xml, MicroKontrol mk) {
 
@@ -25,14 +26,16 @@ public class ChromaticTrack implements ButtonListener, FaderListener {
 		pad = mk.pads[xml.getIntAttribute("pad")];
 		pad.set(!disabled);
 		pad.listen(this);
-		setupFader(xml.getIntAttribute("fader", NULL), mk);
+		setupFader(xml.getChild("fader"),mk);
 		mk.plugKeyboard(this);
 
 	}
 
-	private void setupFader(int id, MicroKontrol mk) {
-		if (id == NULL) return;
-		mk.faders[id].listen(this);
+	private void setupFader(XMLElement xml, MicroKontrol mk) {
+		if(xml == null ) return;
+		mk.faders[xml.getIntAttribute("id")].listen(this);
+		faderCC = xml.getIntAttribute("cc");
+		faderChannel= xml.getIntAttribute("channel");
 
 	}
 
@@ -65,7 +68,7 @@ public class ChromaticTrack implements ButtonListener, FaderListener {
 
 	public void moved(Float value) {
 		PApplet.println("Fader is now " + value);
-
+		Ableton.sendCC(faderChannel, faderCC, (int) (value*127));
 	}
 
 }
