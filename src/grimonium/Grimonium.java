@@ -21,8 +21,8 @@
 
 package grimonium;
 
-import ddf.minim.AudioInput;
-import ddf.minim.Minim;
+//import ddf.minim.AudioInput;
+//import ddf.minim.Minim;
 import processing.core.PApplet;
 import processing.xml.XMLElement;
 import oscP5.*;
@@ -44,11 +44,9 @@ public class Grimonium {
 
 	private MicroKontrol mk;
 
-	private NetAddress animata;
+//	private Minim minim;
 
-	private Minim minim;
-
-	private AudioInput in;
+//	private AudioInput in;
 
 	public Grimonium(PApplet applet, String config_xml, String mapping_xml) {
 		this.applet = applet;
@@ -61,6 +59,14 @@ public class Grimonium {
 		XMLElement mapping = new XMLElement(applet,mapping_xml);
 		addChromaticTracks(mapping.getChildren("chromatic_track"));
 		addMidiEffectChromaticTracks(mapping.getChildren("pitch_shift_track"));
+		addNoteBones(mapping.getChildren("notebone"));
+	}
+
+	private void addNoteBones(XMLElement[] children) {
+		for (int i = 0; i < children.length; i++) {
+			XMLElement element = children[i];
+			new NoteBone(element);
+		}
 	}
 
 	private void addMidiEffectChromaticTracks(XMLElement[] children) {
@@ -83,10 +89,12 @@ public class Grimonium {
 		oscP5 = new OscP5(applet, 12000);
 		mk = new MicroKontrol(applet);
 
-		animata = new NetAddress(NetInfo.getHostAddress(), 7110);
+		NetAddress netAddress = new NetAddress(NetInfo.getHostAddress(), 7110);
+		PApplet.println("Sending Animata stuff to " + netAddress.address());
+		Animata.init(netAddress, oscP5);
 
-		minim = new Minim(applet);
-		in = minim.getLineIn(Minim.STEREO, 512);
+//		minim = new Minim(applet);
+//		in = minim.getLineIn(Minim.STEREO, 512);
 		if(xml.getChild("ableton")!=null)  Ableton.init(xml.getChild("ableton"),mk);
 		if(xml.getChild("live_api")!=null) LiveAPI.init(xml.getChild("live_api"));
 	}

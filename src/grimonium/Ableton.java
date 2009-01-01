@@ -15,7 +15,7 @@ public class Ableton extends MidiThing {
 	MidiInput from;
     MidiOutput to;
 
-    MidiTrack[] midiTracks = new MidiTrack[16];
+    public static MidiTrack[] midiTracks = new MidiTrack[16];
     microkontrol.controls.Button playPause;
     private MicroKontrol mk;
 
@@ -42,6 +42,7 @@ public class Ableton extends MidiThing {
 
     // FROM ABLETON
     public void noteOnReceived(Note n) {
+    	PApplet.println("Ableton model passing on a note on");
         midiTracks[n.getChannel()].noteOnReceived(n);
     }
 
