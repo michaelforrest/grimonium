@@ -45,7 +45,7 @@
 	<property name="versionNumber"  value="0.1.1"/>
 
 <!-- #### (9) your contact url. edit value. #### -->
-	<property name="yourLink"  value="http://grimaceworks.comc" />
+	<property name="yourLink"  value="http://grimaceworks.com" />
 
 <!-- #### (10) a comma separated list of keywords describing your library. edit value. #### -->
 	<property name="keywords"  value="music,live performance,processing,midi,animata,ableton live,propellerhead reason" />
