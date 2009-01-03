@@ -1,5 +1,7 @@
 package grimonium;
 
+import grimonium.NoteParser.BadNoteFormatException;
+
 import java.util.Observable;
 
 import microkontrol.MicroKontrol;
@@ -10,89 +12,115 @@ import rwmidi.MidiOutput;
 import rwmidi.Note;
 
 public class Ableton extends MidiThing {
-    private static final int CHANNEL = 4; // always 4 for this thing. just by convention.
+	public class Message {
+
+		private final int channel;
+		private final Integer note;
+
+		public Message(int channel, Integer note) {
+			this.channel = channel;
+			this.note = note;
+		}
+	}
+
+	private static final int CHANNEL = 4; // always 4 for this thing. just by
+											// convention.
 	private static Ableton instance;
 	MidiInput from;
-    MidiOutput to;
+	MidiOutput to;
 
-    public static MidiTrack[] midiTracks = new MidiTrack[16];
-    microkontrol.controls.Button playPause;
-    private MicroKontrol mk;
+	public static MidiTrack[] midiTracks = new MidiTrack[16];
+	microkontrol.controls.Button playPause;
+	private MicroKontrol mk;
 
+	private Ableton(XMLElement xml) {
+		mk = MicroKontrol.getInstance();
+		from = getInput(xml.getStringAttribute("in"), this);
+		to = getOutput(xml.getStringAttribute("out"));
 
+		for (int i = 0; i < midiTracks.length; i++)
+			midiTracks[i] = new MidiTrack(i);
+		addStopButtonMappings(xml.getChildren("stop"));
 
-    private Ableton(XMLElement xml) {
-        mk = MicroKontrol.getInstance();
-        from = getInput(xml.getStringAttribute("in"), this);
-        to = getOutput(xml.getStringAttribute("out"));
+		mk.plugKeyboard(new KeyboardProxy());
 
-        for (int i = 0; i < midiTracks.length; i++)
-            midiTracks[i] = new MidiTrack(i);
-        mk.plugKeyboard(new KeyboardProxy());
+		playPause = mk.buttons.get("ENTER");
+		playPause.listen("pressed", this, "togglePlaying");
+	}
 
-        playPause = mk.buttons.get("ENTER");
-        playPause.listen("pressed", this, "togglePlaying");
-    }
+	private void addStopButtonMappings(XMLElement[] children) {
+		if (children == null) return;
+		for (int i = 0; i < children.length; i++) {
+			XMLElement element = children[i];
+			try {
+				midiTracks[i].stop = new Message(element.getIntAttribute("channel") - 1,
+											NoteParser.convertStringToNoteNumber(element.getStringAttribute("note")));
+			} catch (BadNoteFormatException e) {
+				System.out.println(e.toString());
+			}
+		}
+	}
 
-    public void togglePlaying() {
-        playPause.toggle();
-        int cc = (playPause.isOn()) ? 115 : 114;
-        to.sendController(15, cc, 127);
-    }
+	public void togglePlaying() {
+		playPause.toggle();
+		int cc = (playPause.isOn()) ? 115 : 114;
+		to.sendController(15, cc, 127);
+	}
 
-    // FROM ABLETON
-    public void noteOnReceived(Note n) {
-    	PApplet.println("Ableton model passing on a note on");
-        midiTracks[n.getChannel()].noteOnReceived(n);
-    }
+	// FROM ABLETON
+	public void noteOnReceived(Note n) {
+//		PApplet.println("Ableton model passing on a note on");
+		midiTracks[n.getChannel()].noteOnReceived(n);
+	}
 
-    public void noteOffReceived(Note n) {
-        midiTracks[n.getChannel()].noteOffReceived(n);
-    }
+	public void noteOffReceived(Note n) {
+		midiTracks[n.getChannel()].noteOffReceived(n);
+	}
 
-    public void sendController(int channel, int cc, int value) {
-        PApplet.println("should send " + channel + "," + cc + "," + value);
-        to.sendController(channel, cc, value);
-    }
+	public void sendController(int channel, int cc, int value) {
+		PApplet.println("should send " + channel + "," + cc + "," + value);
+		to.sendController(channel, cc, value);
+	}
 
-    // TO ABLETON
-    public class KeyboardProxy {
-        public void noteOnReceived(Note n) {
-            to.sendNoteOn(0, n.getPitch(), n.getVelocity());
-        }
+	// TO ABLETON
+	public class KeyboardProxy {
+		public void noteOnReceived(Note n) {
+			to.sendNoteOn(0, n.getPitch(), n.getVelocity());
+		}
 
-        public void noteOffReceived(Note n) {
-            to.sendNoteOff(0, n.getPitch(), n.getVelocity());
-        }
-    }
+		public void noteOffReceived(Note n) {
+			to.sendNoteOff(0, n.getPitch(), n.getVelocity());
+		}
+	}
 
-    public class MidiTrack extends Observable {
-        Note lastNote;
-        int channel;
+	public class MidiTrack extends Observable {
+		public Message stop;
+		Note lastNote;
+		int channel;
 
-        MidiTrack(int channel) {
-            this.channel = channel;
-        }
+		MidiTrack(int channel) {
+			this.channel = channel;
+		}
 
-        public void noteOnReceived(Note n) {
-            lastNote = n;
-            setChanged();
-            notifyObservers("note_on");
-        }
+		public void noteOnReceived(Note n) {
+			lastNote = n;
+			setChanged();
+			notifyObservers("note_on");
+		}
 
-        public void noteOffReceived(Note n) {
-            lastNote = n;
-            setChanged();
-            notifyObservers("note_off");
-        }
-    }
+		public void noteOffReceived(Note n) {
+			lastNote = n;
+			setChanged();
+			notifyObservers("note_off");
+		}
+	}
 
-    public static void sendCC(int cc, int value) {
-       getInstance().sendController(CHANNEL, cc, value);
-    }
+	public static void sendCC(int cc, int value) {
+		getInstance().sendController(CHANNEL, cc, value);
+	}
 
 	public static Ableton getInstance() {
-		if(instance == null) PApplet.println("error - you need to call Ableton.init(xml) before using getInstance()");
+		if (instance == null) PApplet.println("error - you need to call Ableton.init(xml) before using getInstance()");
 		return instance;
 
 	}
@@ -105,4 +133,14 @@ public class Ableton extends MidiThing {
 		getInstance().sendController(channel, cc, value);
 	}
 
+	public static void stopTrack(int trackIndex) {
+		MidiTrack track = midiTracks[trackIndex];
+		System.out.println("stopping track " + trackIndex + " = " + track.stop.channel + ":" + track.stop.note);
+		instance.sendNoteOn(track.stop.channel,track.stop.note, 127);
+
+	}
+
+	private void sendNoteOn(int channel, Integer note, int velocity) {
+		to.sendNoteOn(channel, note, velocity);
+	}
 }

@@ -7,12 +7,13 @@ import junit.framework.TestCase;
 public class NoteBoneTest extends TestCase {
 
 	public void testConvertStringToNoteNumber() {
+		assertEquals(60, convert("C3"));
+		assertEquals(0, convert("C-2"));
+		assertEquals(12, convert("C-1"));
+		assertEquals(14, convert("D-1"));
+		assertEquals(13, convert("C#-1"));
+		assertEquals(24, convert("c0"));
 
-		assertEquals(0, convert("C0"));
-		assertEquals(12, convert("C1"));
-		assertEquals(14, convert("D1"));
-		assertEquals(13, convert("C#1"));
-		assertEquals(0, convert("c0"));
 	}
 	public void testThrowsErrorForInvalidFormat(){
 		try {

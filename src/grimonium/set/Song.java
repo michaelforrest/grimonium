@@ -75,6 +75,9 @@ public class Song {
 		System.arraycopy(B, 0, C, A.length, B.length);
 		return C;
 	}
-
+	@Override
+	public String toString() {
+		return super.toString() + "[" + name + "]";
+	}
 
 }

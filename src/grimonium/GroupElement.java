@@ -1,15 +1,18 @@
 package grimonium;
 
-import java.util.Observable;
 
 public class GroupElement{
 
+	protected boolean active = false;
+
 	public void activate() {
-		//PApplet.println("Activating " + this);
+		System.out.println("activating " + this);
+		active = true;
 	}
 
 	public void deactivate() {
-		//PApplet.println("Deactivating " + this);
+		System.out.println("deactivating " + this);
+		active = false;
 	}
 
 }

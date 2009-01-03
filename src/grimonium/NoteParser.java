@@ -2,6 +2,7 @@ package grimonium;
 
 import java.util.Hashtable;
 
+import processing.core.PApplet;
 import processing.xml.XMLElement;
 
 public class NoteParser {
@@ -31,18 +32,28 @@ public class NoteParser {
 			return convertStringToNoteNumber(noteName);
 		}
 	}
+
 	/*
 	 * C0 = 0
 	 * C1 = 12
 	 * C2 = 24 etc...
+	 * some regexp testing data:
+	 *  <stop channel="13" note="C#-2"/>
+		<stop channel="13" note="A-2"/>
+		<stop channel="13" note="F-1"/>
+		<stop channel="13" note="C#2"/>
+		<stop channel="13" note="C#2"/>
+		<stop channel="13" note="A2"/>
+		<stop channel="13" note="F3"/>
+		<stop channel="13" note="C#4"/>
+		<stop channel="13" note="A4"/>
 	 */
 	public static Integer convertStringToNoteNumber(String string) throws BadNoteFormatException{
 		try {
-			Integer octave = Integer.parseInt( stringAt(string, string.length()-1));
-			int base = 12 * octave;
-			char[] buffer = new char[2];
-			string.getChars(0, string.length()-1, buffer, 0);
-			String id = new String(buffer).trim().toUpperCase();
+			String[] matches = PApplet.match(string,"([^\\d-]*)(.*)");
+			Integer octave = Integer.parseInt( matches[2]);
+			int base = 12 * (octave + 2);
+			String id = matches[1].toUpperCase();
 			Integer offset =  notes.get( id) ;
 			return base + offset;
 

@@ -27,7 +27,8 @@ public class PadView  {
 	public void setSongPad(SongPad songPad) {
 		this.songPad = songPad;
 		LiveAPI.getClipName(songPad.track, songPad.scene, songPad);
-
+		// TODO : work out a better place for this...
+		pad.set(true);
 	}
 
 	public void draw() {
@@ -40,6 +41,7 @@ public class PadView  {
 	}
 
 	public void clearSongPad() {
+		pad.set(false);
 		songPad = null;
 	}
 
