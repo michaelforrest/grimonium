@@ -40,7 +40,6 @@ public class Song {
 	public void activate() {
 		MicroKontrol.getInstance().lcds[8].setText(name);
 		for (int i = 0; i < groups.length; i++) {
-			System.out.println("g:" + i);
 			ClipGroup group = groups[i];
 			group.activate();
 		}

@@ -36,7 +36,6 @@ public class ClipGroup {
 	}
 
 	public void activate() {
-		System.out.println("element: " + elements.length);
 		for (int i = 0; i < elements.length; i++) {
 			GroupElement element = elements[i];
 			element.activate();
