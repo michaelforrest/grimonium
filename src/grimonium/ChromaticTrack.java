@@ -3,6 +3,7 @@ package grimonium;
 import microkontrol.MicroKontrol;
 import microkontrol.controls.ButtonListener;
 import microkontrol.controls.FaderListener;
+import microkontrol.controls.LED;
 import microkontrol.controls.Pad;
 import processing.core.PApplet;
 import processing.xml.XMLElement;
@@ -24,10 +25,15 @@ public class ChromaticTrack implements ButtonListener, FaderListener {
 		root = xml.getIntAttribute("root");
 		track = xml.getIntAttribute("track");
 		pad = mk.pads[xml.getIntAttribute("pad")];
-		pad.set(!disabled);
+		updateLED();
 		pad.listen(this);
 		setupFader(xml.getChild("fader"),mk);
 		mk.plugKeyboard(this);
+
+	}
+
+	private void updateLED() {
+		pad.led.set( (disabled) ? LED.BLINK: LED.ON);
 
 	}
 
@@ -52,7 +58,7 @@ public class ChromaticTrack implements ButtonListener, FaderListener {
 
 	public void pressed() {
 		disabled = !disabled;
-		pad.set(!disabled);
+		updateLED();
 
 	}
 

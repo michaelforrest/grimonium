@@ -1,15 +1,16 @@
 package grimonium.gui;
 
+import grimonium.Grimonium;
+import grimonium.set.GrimoniumSet;
+import grimonium.set.SongPad;
+
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
 import microkontrol.MicroKontrol;
+import microkontrol.controls.LED;
 import microkontrol.controls.Pad;
-
-import grimonium.Grimonium;
-import grimonium.set.GrimoniumSet;
-import grimonium.set.SongPad;
 import processing.core.PApplet;
 
 public class MicroKontrolLights implements Observer {
@@ -32,14 +33,15 @@ public class MicroKontrolLights implements Observer {
 		turnOffPads();
 		ArrayList<SongPad> songPads = grimonium.set.currentSong().getSongPads();
 		for (SongPad songPad : songPads) {
-			songPad.pad.set(true);
+			songPad.updateHardwareView();
 		}
 	}
+
 
 	private void turnOffPads() {
 		for (int i = 0; i < pads.length; i++) {
 			Pad pad = pads[i];
-			pad.set(false);
+			pad.led.set(LED.OFF);
 		}
 	}
 

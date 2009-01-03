@@ -2,6 +2,7 @@ package grimonium.gui;
 
 import grimonium.LiveAPI;
 import grimonium.set.SongPad;
+import microkontrol.controls.LED;
 import microkontrol.controls.Pad;
 import processing.core.PApplet;
 import processing.core.PFont;
@@ -28,7 +29,7 @@ public class PadView  {
 		this.songPad = songPad;
 		LiveAPI.getClipName(songPad.track, songPad.scene, songPad);
 		// TODO : work out a better place for this...
-		pad.set(true);
+		pad.led.set(LED.ON);
 	}
 
 	public void draw() {
@@ -41,7 +42,7 @@ public class PadView  {
 	}
 
 	public void clearSongPad() {
-		pad.set(false);
+		pad.led.set(LED.OFF);
 		songPad = null;
 	}
 

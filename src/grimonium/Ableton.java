@@ -5,6 +5,7 @@ import grimonium.NoteParser.BadNoteFormatException;
 import java.util.Observable;
 
 import microkontrol.MicroKontrol;
+import microkontrol.controls.LED;
 import processing.core.PApplet;
 import processing.xml.XMLElement;
 import rwmidi.MidiInput;
@@ -32,6 +33,7 @@ public class Ableton extends MidiThing {
 	public static MidiTrack[] midiTracks = new MidiTrack[16];
 	microkontrol.controls.Button playPause;
 	private MicroKontrol mk;
+	private boolean playing  =false;
 
 	private Ableton(XMLElement xml) {
 		mk = MicroKontrol.getInstance();
@@ -62,8 +64,9 @@ public class Ableton extends MidiThing {
 	}
 
 	public void togglePlaying() {
-		playPause.toggle();
-		int cc = (playPause.isOn()) ? 115 : 114;
+		playing = !playing;
+		playPause.led.set(LED.BLINK);
+		int cc = (playing) ? 115 : 114;
 		to.sendController(15, cc, 127);
 	}
 

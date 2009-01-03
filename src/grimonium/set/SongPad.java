@@ -2,6 +2,7 @@ package grimonium.set;
 
 import microkontrol.MicroKontrol;
 import microkontrol.controls.ButtonListener;
+import microkontrol.controls.LED;
 import microkontrol.controls.Pad;
 import grimonium.Ableton;
 import grimonium.ClipDataResponder;
@@ -63,6 +64,16 @@ public class SongPad extends GroupElement implements ClipDataResponder, ButtonLi
 	public String toString() {
 		return super.toString() + "[" + clipName +"]";
 	}
+
+	public void updateHardwareView() {
+		if(playing) {
+			pad.led.set(LED.BLINK);
+		}else{
+			pad.led.set(LED.ON);
+		}
+	}
+
+
 
 
 }

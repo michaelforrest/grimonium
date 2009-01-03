@@ -3,6 +3,7 @@
 	<name>Grimonium</name>
 	<comment></comment>
 	<projects>
+		<project>MicroKontrol</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

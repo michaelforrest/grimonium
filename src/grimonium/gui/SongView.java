@@ -37,7 +37,6 @@ public class SongView implements Observer {
 			ClipGroup clipGroup = groups[i];
 			assignPads(clipGroup.getPads());
 		}
-
 	}
 
 	private void assignPads(SongPad[] pads) {
@@ -45,7 +44,6 @@ public class SongView implements Observer {
 			SongPad pad = pads[i];
 			padsView.assignPad(pad);
 		}
-
 	}
 
 	public void update(Observable o, Object arg) {
