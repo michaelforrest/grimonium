@@ -33,12 +33,14 @@ public class Song {
 		String name = element.getName();
 		if (name.equals("audio")) return new AudioGroup(element);
 		if (name.equals("midi")) return new MidiGroup(element);
+		System.out.println("Error, only <audio> and <midi> elements are supported at the top level in a song - you tried "+ name);
 		return null;
 	}
 
 	public void activate() {
 		MicroKontrol.getInstance().lcds[8].setText(name);
 		for (int i = 0; i < groups.length; i++) {
+			System.out.println("g:" + i);
 			ClipGroup group = groups[i];
 			group.activate();
 		}

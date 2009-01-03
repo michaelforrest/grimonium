@@ -30,10 +30,13 @@ public class ClipGroup {
 		if(name.equals("pad")) return new SongPad(element);
 		if(name.equals("notebone")) return new NoteBone(element);
 		if(name.equals("freqbone")) return new FreqBone(element);
+		if(name.equals("noterangebone")) return new NoteRangeBone(element);
+		System.out.println("Error parsing element " + name);
 		return null;
 	}
 
 	public void activate() {
+		System.out.println("element: " + elements.length);
 		for (int i = 0; i < elements.length; i++) {
 			GroupElement element = elements[i];
 			element.activate();

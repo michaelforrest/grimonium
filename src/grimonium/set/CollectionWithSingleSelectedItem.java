@@ -27,7 +27,7 @@ public class CollectionWithSingleSelectedItem extends Observable{
 		return collection[currentIndex];
 	}
 	protected void changeSelectionByOffset(Integer delta) {
-		currentIndex = PApplet.constrain(currentIndex + delta, 0, collection.length);
+		currentIndex = PApplet.constrain(currentIndex + delta, 0, collection.length-1);
 		select(collection[currentIndex]);
 	}
 }

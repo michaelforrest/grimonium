@@ -1,11 +1,14 @@
 package grimonium.set;
 
+import java.util.Observable;
+import java.util.Observer;
+
 import microkontrol.MicroKontrol;
 import microkontrol.controls.EncoderListener;
 import processing.core.PApplet;
 import processing.xml.XMLElement;
 
-public class GrimoniumSet extends CollectionWithSingleSelectedItem implements EncoderListener {
+public class GrimoniumSet extends CollectionWithSingleSelectedItem implements EncoderListener, Observer {
 
 	private Song[] songs;
 	private MicroKontrol mk;
@@ -16,13 +19,10 @@ public class GrimoniumSet extends CollectionWithSingleSelectedItem implements En
 		activateSong(0);
 		mk = MicroKontrol.getInstance();
 		mk.encoders[8].listen(this);
+		addObserver(this);
 	}
 	private void activateSong(int index) {
 		select(songs[index]);
-	}
-	public void select(Song song){
-		super.select(song);
-		current().activate();
 	}
 	public Song current() {
 		return (Song) super.current();
@@ -38,6 +38,10 @@ public class GrimoniumSet extends CollectionWithSingleSelectedItem implements En
 	}
 	public void moved(Integer delta) {
 		changeSelectionByOffset(delta);
+	}
+	public void update(Observable o, Object arg) {
+		if(arg.equals(CHANGED)) current().activate();
+
 	}
 
 }
