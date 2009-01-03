@@ -21,16 +21,18 @@
 
 package grimonium;
 
-//import ddf.minim.AudioInput;
-//import ddf.minim.Minim;
+// import ddf.minim.AudioInput;
+// import ddf.minim.Minim;
+import grimonium.set.CollectionWithSingleSelectedItem;
+import grimonium.set.GrimoniumSet;
 import processing.core.PApplet;
 import processing.xml.XMLElement;
 import oscP5.*;
 import microkontrol.*;
 import netP5.*;
+
 /**
- * @author Michael Forrest
- * gonna use midi channel 4 for controller messages
+ * @author Michael Forrest gonna use midi channel 4 for controller messages
  */
 public class Grimonium {
 
@@ -42,11 +44,11 @@ public class Grimonium {
 
 	private OscP5 oscP5;
 
-	private MicroKontrol mk;
+	public CollectionWithSingleSelectedItem set;
 
-//	private Minim minim;
+	// private Minim minim;
 
-//	private AudioInput in;
+	// private AudioInput in;
 
 	public Grimonium(PApplet applet, String config_xml, String mapping_xml) {
 		this.applet = applet;
@@ -56,11 +58,20 @@ public class Grimonium {
 
 		boot(applet, xml);
 
-		XMLElement mapping = new XMLElement(applet,mapping_xml);
+		XMLElement mapping = new XMLElement(applet, mapping_xml);
+		loadSet(mapping);
 		addChromaticTracks(mapping.getChildren("chromatic_track"));
 		addMidiEffectChromaticTracks(mapping.getChildren("pitch_shift_track"));
 		addNoteBones(mapping.getChildren("notebone"));
 	}
+
+	private void loadSet(XMLElement child) {
+		PApplet.println("name:" + child.getName());
+		set = new GrimoniumSet(child);
+
+
+	}
+
 
 	private void addNoteBones(XMLElement[] children) {
 		for (int i = 0; i < children.length; i++) {
@@ -70,33 +81,35 @@ public class Grimonium {
 	}
 
 	private void addMidiEffectChromaticTracks(XMLElement[] children) {
-		for(int i=0; i<children.length; i++){
+		for (int i = 0; i < children.length; i++) {
 			XMLElement trackXml = children[i];
-			new PitchShiftTrack(trackXml, mk);
+			new PitchShiftTrack(trackXml);
 		}
 
 	}
 
 	private void addChromaticTracks(XMLElement[] chromaticTracks) {
-		for(int i=0; i<chromaticTracks.length; i++){
+		for (int i = 0; i < chromaticTracks.length; i++) {
 			XMLElement trackXml = chromaticTracks[i];
-			new ChromaticTrack(trackXml, mk);
+			new ChromaticTrack(trackXml);
 		}
 
 	}
 
 	private void boot(PApplet applet, XMLElement xml) {
 		oscP5 = new OscP5(applet, 12000);
-		mk = new MicroKontrol(applet);
+		MicroKontrol.init(applet);
 
 		NetAddress netAddress = new NetAddress(NetInfo.getHostAddress(), 7110);
 		PApplet.println("Sending Animata stuff to " + netAddress.address());
 		Animata.init(netAddress, oscP5);
 
-//		minim = new Minim(applet);
-//		in = minim.getLineIn(Minim.STEREO, 512);
-		if(xml.getChild("ableton")!=null)  Ableton.init(xml.getChild("ableton"),mk);
-		if(xml.getChild("live_api")!=null) LiveAPI.init(xml.getChild("live_api"));
+		// minim = new Minim(applet);
+		// in = minim.getLineIn(Minim.STEREO, 512);
+		if (xml.getChild("ableton") != null)
+			Ableton.init(xml.getChild("ableton"));
+		if (xml.getChild("live_api") != null)
+			LiveAPI.init(xml.getChild("live_api"));
 	}
 
 	public String version() {

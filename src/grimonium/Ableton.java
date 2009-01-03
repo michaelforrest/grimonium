@@ -21,8 +21,8 @@ public class Ableton extends MidiThing {
 
 
 
-    private Ableton(XMLElement xml, MicroKontrol mk) {
-        this.mk = mk;
+    private Ableton(XMLElement xml) {
+        mk = MicroKontrol.getInstance();
         from = getInput(xml.getStringAttribute("in"), this);
         to = getOutput(xml.getStringAttribute("out"));
 
@@ -97,8 +97,8 @@ public class Ableton extends MidiThing {
 
 	}
 
-	public static void init(XMLElement xml, MicroKontrol mk) {
-		instance = new Ableton(xml,mk);
+	public static void init(XMLElement xml) {
+		instance = new Ableton(xml);
 	}
 
 	public static void sendCC(int channel, int cc, int value) {

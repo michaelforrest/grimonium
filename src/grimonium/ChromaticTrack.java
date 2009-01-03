@@ -18,8 +18,8 @@ public class ChromaticTrack implements ButtonListener, FaderListener {
 	private int faderChannel;
 	private int faderCC;
 
-	public ChromaticTrack(XMLElement xml, MicroKontrol mk) {
-
+	public ChromaticTrack(XMLElement xml) {
+		MicroKontrol mk = MicroKontrol.getInstance();
 		range = xml.getIntAttribute("range");
 		root = xml.getIntAttribute("root");
 		track = xml.getIntAttribute("track");

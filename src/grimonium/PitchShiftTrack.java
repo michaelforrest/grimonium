@@ -1,14 +1,13 @@
 package grimonium;
 
-import microkontrol.MicroKontrol;
 import processing.xml.XMLElement;
 import rwmidi.Note;
 
 public class PitchShiftTrack extends ChromaticTrack{
 
 	private int cc;
-	public PitchShiftTrack(XMLElement xml, MicroKontrol mk) {
-		super(xml, mk);
+	public PitchShiftTrack(XMLElement xml) {
+		super(xml);
 		cc = xml.getIntAttribute("cc");
 	}
 	public void pressed() {

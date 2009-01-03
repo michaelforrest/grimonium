@@ -6,15 +6,22 @@ import java.util.Observer;
 import processing.core.PApplet;
 import processing.xml.XMLElement;
 
-public class NoteBone implements Observer {
+public class NoteBone extends GroupElement implements Observer {
+
+
 	int channel;
 	int note;
 	String bone;
 	Ableton.MidiTrack model;
 
-	NoteBone(XMLElement xml) {
+	public NoteBone(XMLElement xml) {
 		channel = 0;//xml.getIntAttribute("channel");
-		note = xml.getIntAttribute("note");
+
+		try {
+			note = NoteParser.getNote(xml);
+		} catch (NoteParser.BadNoteFormatException e) {
+			PApplet.println(e.getMessage());
+		}
 		bone = xml.getStringAttribute("bone");
 		model = Ableton.midiTracks[channel];
 		model.addObserver(this);
