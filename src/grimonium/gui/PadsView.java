@@ -21,8 +21,8 @@ public class PadsView {
 		Rectangle first = new Rectangle(0, 0, SIZE, SIZE);
 		for (int i = 0; i < 16; i++) {
 			PadView view = new PadView(applet, mk.pads[i]);
-			view.p = first.topLeft().add(new Point(first.width * (i % 4), first.height * (int) (i / 4.0)));
-			view.rect = new Rectangle(view.p.x, view.p.y, first.width, first.height);
+			Point p = first.topLeft().add(new Point(first.width * (i % 4), first.height * (int) (i / 4.0)));
+			view.rect = new Rectangle(p.x, p.y, first.width, first.height);
 			padViews[i] = view;
 		}
 	}
@@ -36,6 +36,14 @@ public class PadsView {
 		for (int i = 0; i < padViews.length; i++) {
 			PadView view = padViews[i];
 			view.draw();
+		}
+
+	}
+
+	public void clearPadAssignments() {
+		for (int i = 0; i < padViews.length; i++) {
+			PadView padView = padViews[i];
+			padView.clearSongPad();
 		}
 
 	}

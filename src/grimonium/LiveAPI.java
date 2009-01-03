@@ -11,6 +11,7 @@ import rwmidi.MidiOutput;
 import rwmidi.SysexMessage;
 // http://www.assembla.com/wiki/show/live-api/API_Midi_Protocol
 public class LiveAPI extends MidiThing {
+
 	Hashtable<Integer, String> STATUS_BYTES = new Hashtable<Integer, String>();
 	private MidiOutput out;
 	private MidiInput in;
@@ -75,12 +76,70 @@ public class LiveAPI extends MidiThing {
 	public static void init(XMLElement xml) {
 		instance = new LiveAPI(xml);
 	}
+	private static final byte CLIP_DATA_HEADER = 1;
+	public static final int HEADER_FIELD = 1;
 
-	public static String getClipName(int track, int scene) {
-		sendCC(GET_CLIP_DATA,track,scene);
+	public static class ClipDataRequester {
+		private static final int TRACK_FIELD = 2;
+		private static final int SCENE_FIELD = 4;
+		private static final int TEXT_START_FIELD = 7;
+
+		private final int track;
+		private final int scene;
+		private final ClipDataResponder target;
+		private boolean disabled;
+
+
+		public ClipDataRequester(int track, int scene, ClipDataResponder target) {
+//			System.out.println("CREATED SYSDATA RESPONDER FOR " + track + "::" + scene);
+
+			this.track = track;
+			this.scene = scene;
+			this.target = target;
+			instance.in.plug(this,"sysexReceived");
+			sendCC(GET_CLIP_DATA,track,scene);
+		}
+
+		public void sysexReceived(SysexMessage message){
+
+			if(disabled) {
+//				System.out.println("returning cos " + this + " is disabled");
+				return;
+			}
+			byte[] m = message.getMessage();
+			if(m[HEADER_FIELD] != CLIP_DATA_HEADER) return;
+			int track = m[TRACK_FIELD];
+			int scene = m[SCENE_FIELD];
+			if(track == this.track && scene == this.scene){
+				//System.out.println(message.toString() + "received by " + this);
+				parseMessage(m);
+//				System.out.println("DELETING SYSDATA RESPONDER FOR " + track + "::" + scene);
+				//instance.in.unplug(this);
+				disable(this);
+			}
+
+		}
+		// OPTIMIZE (this is a memory leak now)
+		// or just call it once, or only set it up once. I dunno
+		private void disable(ClipDataRequester clipDataRequester) {
+			disabled = true;
+		}
+
+		private void parseMessage(byte[] m) {
+			StringBuilder builder = new StringBuilder();
+			for (int i = TEXT_START_FIELD; i < m.length-1; i++) {
+				byte b = m[i];
+				builder.append( (char) b);
+			}
+			target.setClipName(builder.toString());
+
+		}
+	}
+	public static String getClipName(int track, int scene, ClipDataResponder target) {
+		ClipDataRequester requester = new ClipDataRequester(track,scene, target);
 		return "waiting for name";
 	}
 	public void sysexReceived(SysexMessage message){
-		System.out.println(message.toString());
+		//System.out.println(message.toString());
 	}
 }

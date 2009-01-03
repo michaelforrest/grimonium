@@ -3,6 +3,7 @@ package grimonium.gui;
 import grimonium.Grimonium;
 import grimonium.set.ClipGroup;
 import grimonium.set.GrimoniumSet;
+import grimonium.set.GuiController;
 import grimonium.set.Song;
 import grimonium.set.SongPad;
 
@@ -17,11 +18,14 @@ public class GrimoniumView implements Observer {
 	private boolean clean = false;
 	private Song song;
 	private PadsView padsView;
+	private GuiController controller;
 
 	public GrimoniumView(PApplet applet, Grimonium grimonium) {
 		this.applet = applet;
 		this.grimonium = grimonium;
 		this.applet.registerDraw(this);
+		controller = GuiController.getInstance();
+		controller.addObserver(this);
 		registerToSet();
 		padsView = new PadsView(applet);
 	}
@@ -56,12 +60,13 @@ public class GrimoniumView implements Observer {
 	}
 
 	public void update(Observable o, Object arg) {
-		if (arg == GrimoniumSet.CHANGED) changeSong();
-
+		if(arg == GrimoniumSet.CHANGED) changeSong();
+		if(arg == GuiController.UPDATE_VIEW) refresh();
 	}
 
 	private void changeSong() {
 		song = grimonium.set.current();
+		padsView.clearPadAssignments();
 		assignPads();
 		refresh();
 	}

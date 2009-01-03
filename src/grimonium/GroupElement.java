@@ -1,8 +1,8 @@
 package grimonium;
 
-import processing.core.PApplet;
+import java.util.Observable;
 
-public class GroupElement {
+public class GroupElement{
 
 	public void activate() {
 		//PApplet.println("Activating " + this);
