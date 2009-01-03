@@ -14,14 +14,20 @@ import rwmidi.Note;
 
 public class Ableton extends MidiThing {
 	public class Message {
-
-		private final int channel;
-		private final Integer note;
-
+		public final int channel;
+		public final Integer note;
 		public Message(int channel, Integer note) {
 			this.channel = channel;
 			this.note = note;
 		}
+	}
+	public class CC extends Message{
+		public final int cc;
+		public CC(int channel, int cc) {
+			super(channel, null);
+			this.cc = cc;
+		}
+
 	}
 
 	private static final int CHANNEL = 4; // always 4 for this thing. just by
@@ -43,11 +49,20 @@ public class Ableton extends MidiThing {
 		for (int i = 0; i < midiTracks.length; i++)
 			midiTracks[i] = new MidiTrack(i);
 		addStopButtonMappings(xml.getChildren("stop"));
+		addFaderMappings(xml.getChildren("fader"));
 
 		mk.plugKeyboard(new KeyboardProxy());
 
 		playPause = mk.buttons.get("ENTER");
 		playPause.listen("pressed", this, "togglePlaying");
+	}
+
+	private void addFaderMappings(XMLElement[] children) {
+		if (children == null) return;
+		for (int i = 0; i < children.length; i++) {
+			XMLElement element = children[i];
+			midiTracks[i].fader = new CC(element.getIntAttribute("channel") - 1,element.getIntAttribute("cc"));
+		}
 	}
 
 	private void addStopButtonMappings(XMLElement[] children) {
@@ -97,6 +112,7 @@ public class Ableton extends MidiThing {
 	}
 
 	public class MidiTrack extends Observable {
+		public CC fader;
 		public Message stop;
 		Note lastNote;
 		int channel;
@@ -145,5 +161,11 @@ public class Ableton extends MidiThing {
 
 	private void sendNoteOn(int channel, Integer note, int velocity) {
 		to.sendNoteOn(channel, note, velocity);
+	}
+
+	public static void fadeTrack(int track, int value) {
+		CC fader = midiTracks[track].fader;
+		sendCC(fader.channel, fader.cc,value);
+
 	}
 }

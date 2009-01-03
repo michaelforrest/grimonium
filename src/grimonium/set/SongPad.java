@@ -19,8 +19,10 @@ public class SongPad extends GroupElement implements ClipDataResponder, ButtonLi
 	public Pad pad;
 	// TODO: playing should come from the clipdata
 	private boolean playing =  false;
-	public SongPad(XMLElement element) {
+	private final ClipGroup clipGroup;
+	public SongPad(XMLElement element, ClipGroup clipGroup) {
 
+		this.clipGroup = clipGroup;
 		id = element.getIntAttribute("id");
 		scene = element.getIntAttribute("scene");
 		track = element.getIntAttribute("track"); //added automatically by parent class
@@ -44,10 +46,11 @@ public class SongPad extends GroupElement implements ClipDataResponder, ButtonLi
 		if(playing){
 			Ableton.stopTrack(track);
 		}else{
+			clipGroup.clearAllPlaying();
 			LiveAPI.trigger(track, scene);
 		}
-
 		playing = !playing;
+		updateHardwareView();
 	}
 
 
@@ -65,12 +68,24 @@ public class SongPad extends GroupElement implements ClipDataResponder, ButtonLi
 		return super.toString() + "[" + clipName +"]";
 	}
 
+	@Override
+	public void activate() {
+		super.activate();
+		updateHardwareView();
+	}
 	public void updateHardwareView() {
 		if(playing) {
+			System.out.println("Setting " + this + " to blink!");
 			pad.led.set(LED.BLINK);
 		}else{
 			pad.led.set(LED.ON);
 		}
+	}
+
+	public void clearPlaying() {
+		playing = false;
+		updateHardwareView();
+
 	}
 
 

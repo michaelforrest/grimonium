@@ -73,10 +73,11 @@ public class ClipGroup {
 
 	private GroupElement createElement(XMLElement element) {
 		String name = element.getName();
-		if(name.equals("pad")) return new SongPad(element);
+		if(name.equals("pad")) return new SongPad(element, this);
 		if(name.equals("notebone")) return new NoteBone(element);
 		if(name.equals("freqbone")) return new FreqBone(element);
 		if(name.equals("noterangebone")) return new NoteRangeBone(element);
+		if(name.equals("fader")) return new GroupFader(element);
 		System.out.println("Error parsing element " + name);
 		return null;
 	}
@@ -98,6 +99,14 @@ public class ClipGroup {
 
 	public SongPad[] getPads() {
 		return pads;
+	}
+
+	public void clearAllPlaying() {
+		for (int i = 0; i < pads.length; i++) {
+			SongPad pad = pads[i];
+			pad.clearPlaying();
+		}
+
 	}
 
 }

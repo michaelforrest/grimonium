@@ -28,8 +28,7 @@ public class PadView  {
 	public void setSongPad(SongPad songPad) {
 		this.songPad = songPad;
 		LiveAPI.getClipName(songPad.track, songPad.scene, songPad);
-		// TODO : work out a better place for this...
-		pad.led.set(LED.ON);
+
 	}
 
 	public void draw() {

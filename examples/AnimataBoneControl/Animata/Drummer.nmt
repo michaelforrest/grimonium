@@ -4,23 +4,23 @@
         <texture location="drummer.png" x="0.000000" y="0.000000" scale="1.000000" />
         <mesh>
             <vertices>
-                <vertex x="138.028625" y="153.177063" u="0.780325" v="0.513930" selected="0" />
-                <vertex x="111.283340" y="208.753784" u="0.723340" v="0.704965" selected="0" />
-                <vertex x="164.352905" y="234.017273" u="0.860104" v="0.776603" selected="0" />
-                <vertex x="188.168213" y="173.665222" u="0.908949" v="0.570372" selected="0" />
+                <vertex x="115.690094" y="155.793945" u="0.780325" v="0.513930" selected="0" />
+                <vertex x="124.798218" y="216.794708" u="0.723340" v="0.704965" selected="0" />
+                <vertex x="182.891907" y="207.871063" u="0.860104" v="0.776603" selected="0" />
+                <vertex x="168.677795" y="144.566589" u="0.908949" v="0.570372" selected="0" />
                 <vertex x="119.358269" y="30.440224" u="0.298396" v="0.101467" selected="0" />
                 <vertex x="52.278885" y="242.098541" u="0.130697" v="0.806995" selected="0" />
                 <vertex x="193.601486" y="247.308594" u="0.484004" v="0.824362" selected="0" />
                 <vertex x="274.357300" y="214.745789" u="0.685893" v="0.715819" selected="0" />
                 <vertex x="263.285919" y="49.326675" u="0.658215" v="0.164422" selected="0" />
-                <vertex x="153.738251" y="77.973068" u="0.041149" v="0.316382" selected="0" />
-                <vertex x="122.025650" y="141.911682" u="-0.035373" v="0.531297" selected="0" />
-                <vertex x="186.581787" y="175.588593" u="0.127441" v="0.639839" selected="0" />
-                <vertex x="227.263275" y="82.494186" u="0.225129" v="0.327236" selected="0" />
-                <vertex x="146.802979" y="129.868042" u="0.780325" v="0.170935" selected="1" />
-                <vertex x="196.098724" y="166.957214" u="0.723340" v="0.318553" selected="1" />
-                <vertex x="248.715942" y="98.188309" u="0.990356" v="0.453146" selected="1" />
-                <vertex x="191.008301" y="50.430664" u="1.053853" v="0.220864" selected="1" />
+                <vertex x="150.565002" y="82.005692" u="0.041149" v="0.316382" selected="0" />
+                <vertex x="133.210999" y="151.235016" u="-0.035373" v="0.531297" selected="0" />
+                <vertex x="203.462921" y="170.376831" u="0.127441" v="0.639839" selected="0" />
+                <vertex x="223.363556" y="70.748306" u="0.225129" v="0.327236" selected="0" />
+                <vertex x="133.384033" y="98.611221" u="0.780325" v="0.170935" selected="1" />
+                <vertex x="146.685089" y="158.848328" u="0.723340" v="0.318553" selected="1" />
+                <vertex x="231.384735" y="140.865234" u="0.990356" v="0.453146" selected="1" />
+                <vertex x="218.637512" y="67.050781" u="1.053853" v="0.220864" selected="1" />
             </vertices>
             <faces>
                 <face v0="0" v1="1" v2="3" />
@@ -36,15 +36,16 @@
         </mesh>
         <skeleton>
             <joints>
-                <joint x="162.563919" y="95.059715" fixed="1" selected="0" />
-                <joint x="179.383331" y="139.641068" fixed="0" selected="0" />
+                <joint x="160.857254" y="93.779716" fixed="1" selected="0" />
+                <joint x="194.683258" y="145.905853" fixed="0" selected="0" />
                 <joint x="182.352615" y="96.096062" fixed="1" selected="0" />
-                <joint x="202.250854" y="125.815575" fixed="0" selected="0" />
-                <joint x="160.972687" y="170.454346" fixed="0" selected="0" />
-                <joint x="147.196579" y="208.660095" fixed="0" selected="0" />
-                <joint x="257.576019" y="77.222511" fixed="1" selected="0" />
-                <joint x="77.845451" y="75.896095" fixed="1" selected="0" />
-                <joint x="167.379120" y="152.165512" fixed="1" selected="0" />
+                <joint x="178.124725" y="131.611053" fixed="0" selected="0" />
+                <joint x="144.377548" y="157.191452" fixed="1" selected="0" />
+                <joint x="154.452164" y="196.535599" fixed="0" selected="0" />
+                <joint x="119.762680" y="89.169174" fixed="1" selected="0" />
+                <joint x="247.323975" y="227.025482" fixed="1" selected="1" />
+                <joint x="203.645798" y="163.258850" fixed="1" selected="0" />
+                <joint x="224.576752" y="191.971893" fixed="0" selected="0" />
             </joints>
             <bones>
                 <bone j0="0" j1="1" stiffness="0.500000" lm="1.000000" lmmin="0.010000" lmmax="1.000000" tempo="0.000000" time="1.570796" size="47.648651" selected="0" radius="1.000000">
@@ -71,9 +72,11 @@
                         <vertex id="3" d="37.605476" w="0.010000" ca="-26.510017" sa="-26.671911" />
                     </attached>
                 </bone>
-                <bone name="snare" j0="6" j1="3" stiffness="0.500000" lm="1.000000" lmmin="0.980000" lmmax="1.150000" tempo="0.000000" time="1.570796" size="73.635300" selected="0" radius="1.000000" />
-                <bone name="hat" j0="7" j1="1" stiffness="0.500000" lm="1.020000" lmmin="1.020000" lmmax="1.090000" tempo="0.000000" time="1.570796" size="117.538162" selected="0" radius="1.000000" />
-                <bone name="kick" j0="8" j1="5" stiffness="0.500000" lm="1.000000" lmmin="0.990000" lmmax="1.070000" tempo="0.000000" time="1.570796" size="59.991455" selected="0" radius="1.000000" />
+                <bone name="snare" j0="6" j1="3" stiffness="0.500000" lm="0.980000" lmmin="0.980000" lmmax="1.870000" tempo="0.000000" time="1.570796" size="73.635300" selected="0" radius="1.000000" />
+                <bone name="kick" j0="8" j1="5" stiffness="0.500000" lm="0.990000" lmmin="0.990000" lmmax="1.370000" tempo="0.000000" time="1.570796" size="59.991455" selected="0" radius="1.000000" />
+                <bone j0="1" j1="9" stiffness="0.500000" lm="1.000000" lmmin="0.010000" lmmax="1.000000" tempo="0.000000" time="1.570796" size="47.669926" selected="0" radius="1.000000" />
+                <bone j0="0" j1="9" stiffness="0.500000" lm="1.000000" lmmin="0.010000" lmmax="1.000000" tempo="0.000000" time="1.570796" size="42.668678" selected="0" radius="1.000000" />
+                <bone name="hat" j0="9" j1="7" stiffness="0.500000" lm="0.010000" lmmin="0.010000" lmmax="1.000000" tempo="0.000000" time="1.570796" size="97.152901" selected="0" radius="1.000000" />
             </bones>
         </skeleton>
     </layer>

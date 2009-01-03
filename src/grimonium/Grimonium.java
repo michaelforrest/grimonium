@@ -40,8 +40,6 @@ public class Grimonium {
 
 	public final String VERSION = "0.1.0";
 
-	private LiveAPI liveAPI;
-
 	private OscP5 oscP5;
 
 	public GrimoniumSet set;

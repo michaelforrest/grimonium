@@ -2,9 +2,7 @@ package grimonium.gui;
 
 import grimonium.Grimonium;
 import grimonium.set.GrimoniumSet;
-import grimonium.set.SongPad;
 
-import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -31,10 +29,10 @@ public class MicroKontrolLights implements Observer {
 
 	private void changeSong() {
 		turnOffPads();
-		ArrayList<SongPad> songPads = grimonium.set.currentSong().getSongPads();
-		for (SongPad songPad : songPads) {
-			songPad.updateHardwareView();
-		}
+//		ArrayList<SongPad> songPads = grimonium.set.currentSong().getSongPads();
+//		for (SongPad songPad : songPads) {
+//			songPad.updateHardwareView();
+//		}
 	}
 
 
