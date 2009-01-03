@@ -1,10 +1,15 @@
 package grimonium.set;
 
+import java.util.ArrayList;
+import java.util.Observable;
+
 import microkontrol.MicroKontrol;
 import processing.xml.XMLElement;
 
-public class Song {
+public class Song extends Observable{
 
+	public static final String ACTIVATED = "activated";
+	public static final String DEACTIVATED = "deactivated";
 	private String name;
 	private Scene stage;
 	public ClipGroup[] groups;
@@ -61,12 +66,16 @@ public class Song {
 			ClipGroup group = groups[i];
 			group.activate();
 		}
+		setChanged();
+		notifyObservers(ACTIVATED);
 	}
 	public void deactivate(){
 		for (int i = 0; i < groups.length; i++) {
 			ClipGroup group = groups[i];
 			group.deactivate();
 		}
+		setChanged();
+		notifyObservers(DEACTIVATED);
 	}
 
 	public static XMLElement[] concat(XMLElement[] A, XMLElement[] B) {
@@ -78,6 +87,23 @@ public class Song {
 	@Override
 	public String toString() {
 		return super.toString() + "[" + name + "]";
+	}
+
+	public ArrayList<SongPad> getSongPads() {
+		ArrayList<SongPad> result = new ArrayList<SongPad>();
+		for (int i = 0; i < groups.length; i++) {
+			ClipGroup group = groups[i];
+			 addPadsTo(result,group.pads);
+		}
+		return result;
+	}
+
+	private void addPadsTo(ArrayList<SongPad> result, SongPad[] pads) {
+		for (int i = 0; i < pads.length; i++) {
+			SongPad songPad = pads[i];
+			result.add(songPad);
+		}
+
 	}
 
 }

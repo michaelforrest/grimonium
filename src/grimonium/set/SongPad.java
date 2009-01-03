@@ -15,7 +15,7 @@ public class SongPad extends GroupElement implements ClipDataResponder, ButtonLi
 	public int scene;
 	public int track;
 	public String clipName = "dunno";
-	private Pad pad;
+	public Pad pad;
 	// TODO: playing should come from the clipdata
 	private boolean playing =  false;
 	public SongPad(XMLElement element) {

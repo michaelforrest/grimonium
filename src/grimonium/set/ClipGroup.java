@@ -9,7 +9,7 @@ public class ClipGroup {
 
 	private int track;
 	private GroupElement[] elements;
-	private SongPad[] pads;
+	SongPad[] pads;
 	private String id;
 
 	public ClipGroup(XMLElement element) {

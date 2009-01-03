@@ -13,12 +13,13 @@ import java.util.Observer;
 import processing.core.PApplet;
 
 public class GrimoniumView implements Observer {
+	private static final int Z_SPACING = 30;
 	private final PApplet applet;
 	private final Grimonium grimonium;
 	private boolean clean = false;
-	private Song song;
-	private PadsView padsView;
 	private GuiController controller;
+	private SongView[] songViews;
+	private MicroKontrolLights microKontrolLights;
 
 	public GrimoniumView(PApplet applet, Grimonium grimonium) {
 		this.applet = applet;
@@ -26,37 +27,30 @@ public class GrimoniumView implements Observer {
 		this.applet.registerDraw(this);
 		controller = GuiController.getInstance();
 		controller.addObserver(this);
-		registerToSet();
-		padsView = new PadsView(applet);
+		grimonium.set.addObserver(this);
+		addSongViews();
+		microKontrolLights = new MicroKontrolLights(applet, grimonium);
 	}
 
-	private void registerToSet() {
-		grimonium.set.addObserver(this);
-
+	private void addSongViews() {
+		songViews = new SongView[grimonium.set.songs.length];
+		for (int i = 0; i < grimonium.set.songs.length; i++) {
+			Song song = grimonium.set.songs[i];
+			songViews[i] = new SongView(applet,song, i * Z_SPACING);
+		}
 	}
 
 	public void draw() {
 		if (clean) return;
 		applet.background(0);
-		padsView.draw();
+		applet.pushMatrix();
+		//applet.rotateX(1);
+		for (int i = 0; i < songViews.length; i++) {
+			SongView view = songViews[i];
+			view.draw();
+		}
+		applet.popMatrix();
 		clean = true;
-	}
-
-	private void assignPads() {
-		ClipGroup[] groups = song.groups;
-		for (int i = 0; i < groups.length; i++) {
-			ClipGroup clipGroup = groups[i];
-			assignPads(clipGroup.getPads());
-		}
-
-	}
-
-	private void assignPads(SongPad[] pads) {
-		for (int i = 0; i < pads.length; i++) {
-			SongPad pad = pads[i];
-			padsView.assignPad(pad);
-		}
-
 	}
 
 	public void update(Observable o, Object arg) {
@@ -65,10 +59,8 @@ public class GrimoniumView implements Observer {
 	}
 
 	private void changeSong() {
-		song = grimonium.set.current();
-		padsView.clearPadAssignments();
-		assignPads();
 		refresh();
+
 	}
 
 	private void refresh() {

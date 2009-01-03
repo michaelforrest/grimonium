@@ -7,7 +7,7 @@ import processing.xml.XMLElement;
 
 public class GrimoniumSet extends CollectionWithSingleSelectedItem implements EncoderListener {
 
-	private Song[] songs;
+	public Song[] songs;
 	private MicroKontrol mk;
 	public GrimoniumSet(XMLElement child) {
 		if(!child.getName().equals("set")) return;
@@ -42,6 +42,9 @@ public class GrimoniumSet extends CollectionWithSingleSelectedItem implements En
 	}
 	public void moved(Integer delta) {
 		changeSelectionByOffset(delta);
+	}
+	public Song currentSong() {
+		return current();
 	}
 
 
