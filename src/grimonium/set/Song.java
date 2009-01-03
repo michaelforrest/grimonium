@@ -6,13 +6,13 @@ import processing.xml.XMLElement;
 public class Song {
 
 	private String name;
-	private Scene scene;
+	private Scene stage;
 	public ClipGroup[] groups;
 	private int sceneOffset;
 
 	public Song(XMLElement element) {
 		name = element.getStringAttribute("name");
-		scene = new Scene(element.getChild("scene"));
+		stage = new Scene(element.getChild("stage"));
 		sceneOffset = element.getIntAttribute("sceneoffset");
 
 		XMLElement[] audios = element.getChildren("audio");
