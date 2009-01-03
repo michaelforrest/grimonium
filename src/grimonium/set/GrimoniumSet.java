@@ -40,7 +40,7 @@ public class GrimoniumSet extends CollectionWithSingleSelectedItem implements En
 		changeSelectionByOffset(delta);
 	}
 	public void update(Observable o, Object arg) {
-		if(arg.equals(CHANGED)) current().activate();
+		if(arg==CHANGED) current().activate();
 
 	}
 

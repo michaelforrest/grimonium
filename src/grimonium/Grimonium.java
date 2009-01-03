@@ -23,13 +23,13 @@ package grimonium;
 
 // import ddf.minim.AudioInput;
 // import ddf.minim.Minim;
-import grimonium.set.CollectionWithSingleSelectedItem;
 import grimonium.set.GrimoniumSet;
+import microkontrol.MicroKontrol;
+import netP5.NetAddress;
+import netP5.NetInfo;
+import oscP5.OscP5;
 import processing.core.PApplet;
 import processing.xml.XMLElement;
-import oscP5.*;
-import microkontrol.*;
-import netP5.*;
 
 /**
  * @author Michael Forrest gonna use midi channel 4 for controller messages
@@ -44,7 +44,7 @@ public class Grimonium {
 
 	private OscP5 oscP5;
 
-	public CollectionWithSingleSelectedItem set;
+	public GrimoniumSet set;
 
 	// private Minim minim;
 

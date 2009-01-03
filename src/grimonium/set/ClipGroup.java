@@ -9,10 +9,34 @@ public class ClipGroup {
 
 	private int track;
 	private GroupElement[] elements;
+	private SongPad[] pads;
 
 	public ClipGroup(XMLElement element) {
 		track = element.getIntAttribute("track");
 		addElements(element.getChildren());
+		createPadsArray();
+	}
+
+	private void createPadsArray() {
+		int length = countPads();
+		pads = new SongPad[length];
+		int index = 0;
+		for (int i = 0; i < elements.length; i++) {
+			GroupElement element = elements[i];
+			if(element instanceof SongPad ){
+				pads[index] = (SongPad) element;
+				index ++;
+			}
+		}
+	}
+
+	private int countPads() {
+		int length = 0;
+		for (int i = 0; i < elements.length; i++) {
+			GroupElement element = elements[i];
+			if (element instanceof SongPad) length ++;
+		}
+		return length;
 	}
 
 	private void addElements(XMLElement[] children) {
@@ -20,6 +44,7 @@ public class ClipGroup {
 		for (int i = 0; i < children.length; i++) {
 			XMLElement element = children[i];
 			element.setAttribute("track", Integer.toString(track));
+			
 			elements[i] = createElement(element);
 		}
 
@@ -48,6 +73,10 @@ public class ClipGroup {
 			element.deactivate();
 		}
 
+	}
+
+	public SongPad[] getPads() {
+		return pads;
 	}
 
 }

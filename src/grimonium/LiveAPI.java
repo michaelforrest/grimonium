@@ -2,17 +2,23 @@ package grimonium;
 
 import java.util.Hashtable;
 
+import com.sun.corba.se.impl.protocol.giopmsgheaders.Message;
+
 import processing.core.PApplet;
 import processing.xml.XMLElement;
+import rwmidi.MidiInput;
 import rwmidi.MidiOutput;
+import rwmidi.SysexMessage;
 // http://www.assembla.com/wiki/show/live-api/API_Midi_Protocol
 public class LiveAPI extends MidiThing {
 	Hashtable<Integer, String> STATUS_BYTES = new Hashtable<Integer, String>();
 	private MidiOutput out;
+	private MidiInput in;
 
 	private LiveAPI(XMLElement xml) {
 		setStatusBytes();
 		out = getOutput(xml.getStringAttribute("out"));
+		in = getInput(xml.getStringAttribute("in"), this);
 	}
 
 	void setStatusBytes() {
@@ -45,12 +51,16 @@ public class LiveAPI extends MidiThing {
 
 	static int TRIGGER_TRACK = 0;
 	private static LiveAPI instance;
-	int GET_CLIP_DATA = 1;
-	int MONITOR_CLIP = 2;
+	static int GET_CLIP_DATA = 1;
+	static int MONITOR_CLIP = 2;
 	int STOP_CLIP_MONITOR = 3;
 
 	public static void trigger(int track, int scene) {
-		getInstance().out.sendController(TRIGGER_TRACK, track, scene);
+		sendCC(TRIGGER_TRACK, track, scene);
+	}
+
+	private static void sendCC(int message, int track, int scene) {
+		getInstance().out.sendController(message, track,scene);
 	}
 
 	private static LiveAPI getInstance() {
@@ -64,6 +74,13 @@ public class LiveAPI extends MidiThing {
 
 	public static void init(XMLElement xml) {
 		instance = new LiveAPI(xml);
+	}
 
+	public static String getClipName(int track, int scene) {
+		sendCC(GET_CLIP_DATA,track,scene);
+		return "waiting for name";
+	}
+	public void sysexReceived(SysexMessage message){
+		System.out.println(message.toString());
 	}
 }

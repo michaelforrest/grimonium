@@ -7,11 +7,13 @@ public class Song {
 
 	private String name;
 	private Scene scene;
-	private ClipGroup[] groups;
+	public ClipGroup[] groups;
+	private int sceneOffset;
 
 	public Song(XMLElement element) {
 		name = element.getStringAttribute("name");
 		scene = new Scene(element.getChild("scene"));
+		sceneOffset = element.getIntAttribute("sceneoffset");
 
 		XMLElement[] audios = element.getChildren("audio");
 		XMLElement[] midis = element.getChildren("midi");
@@ -21,12 +23,28 @@ public class Song {
 	}
 
 	private void addGroups(XMLElement[] children) {
+		adjustSceneOffsets(children);
 		for (int i = 0; i < children.length; i++) {
 			XMLElement element = children[i];
 			ClipGroup group = createGroup(element);
 			groups[i] = group;
 		}
 
+	}
+
+	private void adjustSceneOffsets(XMLElement[] groups) {
+		for (int i = 0; i < groups.length; i++) {
+			XMLElement group = groups[i];
+			adjustSceneOffset(group.getChildren("pad"));
+		}
+	}
+
+	private void adjustSceneOffset(XMLElement[] pads) {
+		for (int i = 0; i < pads.length; i++) {
+			XMLElement pad = pads[i];
+			Integer newOffset = pad.getIntAttribute("scene") + sceneOffset;
+			pad.setAttribute("scene", newOffset.toString());
+		}
 	}
 
 	private ClipGroup createGroup(XMLElement element) {
@@ -57,5 +75,6 @@ public class Song {
 		System.arraycopy(B, 0, C, A.length, B.length);
 		return C;
 	}
+
 
 }
