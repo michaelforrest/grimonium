@@ -83,6 +83,7 @@ public class LiveAPI extends MidiThing {
 		private static final int TRACK_FIELD = 2;
 		private static final int SCENE_FIELD = 4;
 		private static final int TEXT_START_FIELD = 7;
+		public static final int CLIP_DATA_FIELD = 6;
 
 		private final int track;
 		private final int scene;
@@ -111,14 +112,29 @@ public class LiveAPI extends MidiThing {
 			int track = m[TRACK_FIELD];
 			int scene = m[SCENE_FIELD];
 			if(track == this.track && scene == this.scene){
-				//System.out.println(message.toString() + "received by " + this);
+				System.out.println(message.toString() + "received by " + this);
 				parseMessage(m);
+				parseClipState(m);
 //				System.out.println("DELETING SYSDATA RESPONDER FOR " + track + "::" + scene);
 				//instance.in.unplug(this);
 				disable(this);
 			}
 
 		}
+		/*
+		 	PLAYING
+			0000 - f0 01 00 00 00 16 1d 42 6f 73 62 6f 20 42 65 61  - .......Bosbo Bea
+			data[6] = "11101" -- look for &(00100) = &(4)
+			NOT PLAYING
+								s
+			0000 - f0 01 00 00 01 16 19 42 6f 73 62 6f 20 42 65 61  - .......Bosbo Bea
+			data[6] = "11001"
+		 */
+		private void parseClipState(byte[] m) {
+			byte data = m[CLIP_DATA_FIELD];
+			target.setClipTriggered((data & 4) > 0);
+		}
+
 		// OPTIMIZE (this is a memory leak now)
 		// or just call it once, or only set it up once. I dunno
 		private void disable(ClipDataRequester clipDataRequester) {
@@ -132,6 +148,7 @@ public class LiveAPI extends MidiThing {
 				builder.append( (char) b);
 			}
 			target.setClipName(builder.toString());
+
 
 		}
 	}

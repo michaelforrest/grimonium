@@ -1,4 +1,4 @@
-package grimonium;
+package test;
 
 import junit.framework.TestCase;
 

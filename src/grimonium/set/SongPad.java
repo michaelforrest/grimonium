@@ -97,6 +97,10 @@ public class SongPad extends GroupElement implements ClipDataResponder, ButtonLi
 		return playing;
 	}
 
+	public void setClipTriggered(boolean b) {
+		playing = b;
+	}
+
 
 
 
