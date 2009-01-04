@@ -18,7 +18,10 @@
 <!-- #### (3) add the jar files that are required for compiling. edit name.
 		for more include files. duplicate <include name="" /> #### -->
 			<include name='core.jar'/>
+<!--			<include name='${processing}/MicroKontrol/library/MicroKontrol.jar'/>
 			<include name='libraries/rwmidi/library/rwmidi.jar'/>
+			<include name='libraries/opengl/library/opengl.jar'/>
+			<include name='libraries/opengl/library/jogl.jar'/>-->
 		</fileset>
 	</path>
 

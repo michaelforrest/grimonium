@@ -23,6 +23,7 @@ package grimonium;
 
 // import ddf.minim.AudioInput;
 // import ddf.minim.Minim;
+import grimonium.gui.Animator;
 import grimonium.set.GrimoniumSet;
 import microkontrol.MicroKontrol;
 import netP5.NetAddress;
@@ -101,7 +102,7 @@ public class Grimonium {
 		NetAddress netAddress = new NetAddress(NetInfo.getHostAddress(), 7110);
 		PApplet.println("Sending Animata stuff to " + netAddress.address());
 		Animata.init(netAddress, oscP5);
-
+		Animator.init(applet);
 		// minim = new Minim(applet);
 		// in = minim.getLineIn(Minim.STEREO, 512);
 		if (xml.getChild("ableton") != null)

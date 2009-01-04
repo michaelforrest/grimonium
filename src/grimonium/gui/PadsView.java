@@ -11,7 +11,7 @@ public class PadsView {
 
 	public PadsView(PApplet applet) {
 		this.applet = applet;
-		PadView.font = applet.loadFont("HelveticaNeue-CondensedBlack-20.vlw");
+		if(!PadView.initialised) PadView.init(applet);
 		addPadViews();
 	}
 

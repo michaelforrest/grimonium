@@ -1,0 +1,88 @@
+package grimonium.gui;
+
+import java.util.Observable;
+import java.util.Observer;
+
+import processing.core.PApplet;
+
+public class Animator extends Observable implements Observer {
+
+
+	private static Engine engine;
+	float targetValue;
+	float initialValue;
+	float difference;
+	float frameIncrement;
+	float currentValue = 0;
+	float frame = 0;
+	boolean isComplete = false;
+
+	public Animator(float startValue, Observer target) {
+		engine.addObserver(this);
+		initialValue = currentValue = startValue;
+		addObserver(target);
+	}
+
+	void set(float value, int _frames) {
+		targetValue = value;
+		initialValue = currentValue;
+		difference = (value - initialValue);
+		frameIncrement = 1 / (float) _frames;
+		isComplete = false;
+		frame = 0;
+	}
+
+	float getValue() {
+		return currentValue;
+	}
+
+	public void update(Observable o, Object arg) {
+		// Just gonna assume it's always nextFrame.
+		if (frame >= 1) return;
+		frame += frameIncrement;
+		currentValue = initialValue + (difference * easeOutQuad(frame));
+		changed();
+		if (frame >= 1) complete();
+	}
+
+	void changed() {
+		setChanged();
+		notifyObservers(NEXT_FRAME);
+	}
+
+	boolean isComplete() {
+		return isComplete;
+	}
+
+	void complete() {
+		currentValue = targetValue;
+		isComplete = true;
+		notifyObservers("complete");
+	}
+
+	void stop() {
+		// engine.deleteObserver(this);
+	}
+
+	float easeOutQuad(float t) {
+		return -1 * (t /= 1) * (t - 2);
+	}
+
+	public static void init(PApplet applet) {
+		engine = new Engine(applet);
+
+	};
+	public static final String NEXT_FRAME = "nextFrame";
+	public static class Engine extends Observable{
+
+		public Engine(PApplet applet) {
+			applet.registerDraw(this);
+		}
+		public void draw() {
+			setChanged();
+		    notifyObservers(NEXT_FRAME);
+		}
+
+	}
+
+}

@@ -10,6 +10,7 @@ public class GrimoniumSet extends CollectionWithSingleSelectedItem implements En
 	public Song[] songs;
 	private MicroKontrol mk;
 	public GrimoniumSet(XMLElement child) {
+
 		if(!child.getName().equals("set")) return;
 		addSongs(child.getChildren("songs/song"));
 		setCollection(songs);
