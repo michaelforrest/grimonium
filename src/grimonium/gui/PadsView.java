@@ -29,15 +29,15 @@ public class PadsView {
 
 	public void assignPad(SongPad pad) {
 		padViews[pad.id].setSongPad(pad);
-
 	}
 
 	public void draw() {
+		
 		for (int i = 0; i < padViews.length; i++) {
 			PadView view = padViews[i];
 			view.draw();
 		}
-
+		
 	}
 
 	public void clearPadAssignments() {

@@ -11,10 +11,11 @@ public class Song extends Observable{
 
 	public static final String ACTIVATED = "activated";
 	public static final String DEACTIVATED = "deactivated";
-	private String name;
+	public String name;
 	private Scene stage;
 	public ClipGroup[] groups;
 	private int sceneOffset;
+	private boolean active;
 
 	public Song(XMLElement element) {
 		name = element.getStringAttribute("name");
@@ -69,6 +70,7 @@ public class Song extends Observable{
 			ClipGroup group = groups[i];
 			group.activate();
 		}
+		setActive(true);
 		setChanged();
 		notifyObservers(ACTIVATED);
 	}
@@ -77,6 +79,7 @@ public class Song extends Observable{
 			ClipGroup group = groups[i];
 			group.deactivate();
 		}
+		setActive(false);
 		setChanged();
 		notifyObservers(DEACTIVATED);
 	}
@@ -107,6 +110,14 @@ public class Song extends Observable{
 			result.add(songPad);
 		}
 
+	}
+
+	public void setActive(boolean active) {
+		this.active = active;
+	}
+
+	public boolean isActive() {
+		return active;
 	}
 
 }

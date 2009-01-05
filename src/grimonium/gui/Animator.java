@@ -30,6 +30,7 @@ public class Animator extends Observable implements Observer {
 		frameIncrement = 1 / (float) _frames;
 		isComplete = false;
 		frame = 0;
+		frame += frameIncrement;
 	}
 
 	float getValue() {
@@ -38,7 +39,7 @@ public class Animator extends Observable implements Observer {
 
 	public void update(Observable o, Object arg) {
 		// Just gonna assume it's always nextFrame.
-		if (frame >= 1) return;
+		if (frame >= 1 || frame == 0) return;
 		frame += frameIncrement;
 		currentValue = initialValue + (difference * easeOutQuad(frame));
 		changed();

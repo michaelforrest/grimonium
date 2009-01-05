@@ -1,12 +1,16 @@
 package grimonium.gui;
 
+import java.util.Hashtable;
+
 import javax.media.opengl.GL;
 
 import processing.core.PApplet;
+import processing.core.PImage;
 import processing.opengl.PGraphicsOpenGL;
 
 public class ViewBase {
 
+	protected static Hashtable<String, PImage> images = new Hashtable<String, PImage>();
 	protected final PApplet applet;
 
 	public ViewBase(PApplet applet) {
@@ -37,6 +41,15 @@ public class ViewBase {
 		gl.glBlendFunc(GL.GL_SRC_ALPHA, GL.GL_ONE_MINUS_SRC_ALPHA);
 		// gl.glDisable(GL.GL_BLEND);
 		((PGraphicsOpenGL) applet.g).endGL();
+	}
+
+	protected PImage loadOrRetrieveImage(String file, PApplet applet) {
+		PImage image = images.get(file);
+		if(image == null) {
+			image = applet.loadImage(file);
+			images.put(file, image);
+		}
+		return image;
 	}
 
 }

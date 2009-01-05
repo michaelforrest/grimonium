@@ -21,6 +21,7 @@ public class GrimoniumView extends ViewBase implements Observer {
     private SongView[] songViews;
     private MicroKontrolLights microKontrolLights;
     private Animator zAnimator;
+	private SongViewHelper[] helpers;
 
 
 //    private PGraphicsOpenGL pGraphicsOpenGL;
@@ -47,12 +48,14 @@ public class GrimoniumView extends ViewBase implements Observer {
     }
 
     private void createViewHelpers() {
+    	helpers = new SongViewHelper[grimonium.set.songs.length];
         int z = 0;
         for (int i = 0; i < grimonium.set.songs.length; i++) {
             Song song = grimonium.set.songs[i];
             SongViewHelper helper = new SongViewHelper(song);
-            helper.z = i * -Z_SPACING;
+            helper.z = i * Z_SPACING;
             helper.addObserver(this);
+            helpers[i] = helper;
         }
 
     }
@@ -61,18 +64,18 @@ public class GrimoniumView extends ViewBase implements Observer {
         songViews = new SongView[grimonium.set.songs.length];
         for (int i = 0; i < grimonium.set.songs.length; i++) {
             Song song = grimonium.set.songs[i];
-            songViews[i] = new SongView(applet, song, i * Z_SPACING);
+            songViews[i] = new SongView(applet, song, helpers[i]);
         }
     }
 
     public void draw() {
         if (clean) return;
         applet.background(0);
-       // setupLights();
-        applet.pointLight(255, 255, 255, applet.width * .1f, applet.height * .1f, 1000 );
-       // applet.directionalLight(100, 100, 100, 0, 0, -1);
+     //   applet.lightFalloff(1,0,.015f);
+  //      applet.pointLight(255, 255, 255, applet.width * .1f, applet.height * .1f, 100 );
+  //      applet.pointLight(255, 255, 255, applet.width * .2f, applet.height * .1f, 100 );
         applet.pushMatrix();
-        applet.translate(applet.width * .1f, applet.height * .1f, zAnimator.currentValue);
+        applet.translate(0,0, zAnimator.currentValue);
 
         drawSongViews();
         applet.popMatrix();
@@ -95,7 +98,7 @@ public class GrimoniumView extends ViewBase implements Observer {
     }
 
     private void update(SongViewHelper helper) {
-        zAnimator.set(helper.z, 10);
+        zAnimator.set(-helper.z, 10);
     }
 
     private void changeSong() {
