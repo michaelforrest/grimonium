@@ -13,7 +13,6 @@ import rwmidi.*;
 Grimonium grimonium;
 
 void setup() {
-  
   size(1870, 380, OPENGL);
   hint(ENABLE_OPENGL_4X_SMOOTH) ;
   frameRate(30);

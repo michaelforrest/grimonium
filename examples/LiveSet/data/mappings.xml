@@ -22,11 +22,11 @@
 			<audio id="rhythm" track="2">
 				<freqbone mid="bosbotrance"/>
 				<pad id="2" scene="0"/>
-				<pad id="3" scene="1"/>
+				<pad id="6" scene="1"/>
 			</audio>
 			<audio id="lead" track="3">
 				<freqbone high="bosbolead"/>
-				<pad id="6" scene="0"/>
+				<pad id="3" scene="0"/>
 				<pad id="7" scene="1"/>
 			</audio>
 			<audio id="bass" track="1">
