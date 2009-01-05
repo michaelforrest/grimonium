@@ -11,7 +11,8 @@ import processing.core.PImage;
 public class PadView extends ViewBase {
 
 	private static final int FONT_SIZE = 16;
-	private static final float MARGIN = 10;
+	private static final float MARGIN = 11;
+	private static final int OUTLINE_MARGIN = 2;
 	public static PFont font;
 	public static boolean initialised;
 	public static PImage texture;
@@ -40,25 +41,22 @@ public class PadView extends ViewBase {
 		// PApplet.MULTIPLY);
 	}
 
-	public void draw() {
-		applet.noStroke();
-		int alpha = 0x99000000;//(songPad != null && songPad.isActive()) ? 0x99000000 : 0x33000000;
-		applet.fill(songPad == null ? 0x00000000 : songPad.group.colour + alpha);
-		applet.rect(rect.x, rect.y, rect.width, rect.height);
-		multiply();
+	public void draw(){
+		if(songPad == null ) return;
+		applet.tint(0xFF000000 + songPad.group.colour, 0xCC);
 		applet.image(texture, rect.x, rect.y);
-		if(songPad != null && songPad.isPlaying()) applet.image(playing, rect.x, rect.y);
-		noBlend();
-		applet.fill(255);
-		if (songPad == null) return;
+		if(songPad.isPlaying()) applet.image(playing, rect.x, rect.y);
+		
+		drawText();
+	}
+
+	private void drawText() {
 		applet.translate(0, 0, 1);
 		applet.textFont(font, FONT_SIZE);
-		applet.textAlign(PApplet.CENTER);
-
 		applet.text(songPad.clipName, rect.x + MARGIN, rect.y+ MARGIN, rect.width - 2* MARGIN, rect.height-2*MARGIN);
-		//applet.translate(0, 0, 1);
 		applet.translate(0, 0, -1);
 	}
+
 
 	public void clearSongPad() {
 		pad.led.set(LED.OFF);
@@ -67,7 +65,7 @@ public class PadView extends ViewBase {
 
 	public static void init(PApplet applet) {
 		font = applet.loadFont("HelveticaNeue-CondensedBlack-20.vlw");
-		texture = applet.loadImage("padtexturesolid.png");
+		texture = applet.loadImage("padtexture.png");
 		playing = applet.loadImage("padplaying.png");
 		initialised = true;
 

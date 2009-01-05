@@ -14,7 +14,7 @@ import processing.core.PApplet;
 import processing.opengl.PGraphicsOpenGL;
 
 public class GrimoniumView extends ViewBase implements Observer {
-    private static final int Z_SPACING = 500;
+    private static final int Z_SPACING = 200;
     private final Grimonium grimonium;
     private boolean clean = false;
     private GuiController controller;
@@ -67,20 +67,24 @@ public class GrimoniumView extends ViewBase implements Observer {
 
     public void draw() {
         if (clean) return;
-        //setupOpenGL();
         applet.background(0);
+       // setupLights();
+        applet.pointLight(255, 255, 255, applet.width * .1f, applet.height * .1f, 1000 );
+       // applet.directionalLight(100, 100, 100, 0, 0, -1);
         applet.pushMatrix();
         applet.translate(applet.width * .1f, applet.height * .1f, zAnimator.currentValue);
-        applet.lights();
-        applet.pointLight(255, 255, 255, 0,0, zAnimator.currentValue + 50 );
-        // applet.rotateX(.3f);
-        for (int i = 0; i < songViews.length; i++) {
-            SongView view = songViews[i];
-            view.draw();
-        }
+
+        drawSongViews();
         applet.popMatrix();
         clean = true;
     }
+
+	private void drawSongViews() {
+		for (int i = 0; i < songViews.length; i++) {
+            SongView view = songViews[i];
+            view.draw();
+        }
+	}
 
 
     public void update(Observable o, Object arg) {

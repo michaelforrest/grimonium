@@ -152,6 +152,11 @@
 		<classpath>
   			<path location='${libraryClasspath}/core.jar'/>
   			<path location='${libraryClasspath}/libraries/rwmidi/library/rwmidi.jar'/>
+  			<path location='${libraryClasspath}/libraries/OscP5/library/OscP5.jar'/>
+			<path location='${processing}/MicroKontrol/library/MicroKontrol.jar'/>
+			<path location='libraries/rwmidi/library/rwmidi.jar'/>
+			<path location='libraries/opengl/library/opengl.jar'/>
+			<path location='libraries/opengl/library/jogl.jar'/>
   		</classpath>
  		<taglet name='ExampleTaglet' path='resources/code'/>
  		<fileset dir='${src}' defaultexcludes='yes'>
