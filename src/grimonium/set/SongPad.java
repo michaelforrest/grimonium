@@ -12,7 +12,7 @@ import processing.xml.XMLElement;
 
 public class SongPad extends GroupElement implements ClipDataResponder, ButtonListener{
 	public static final String CHANGED = "changed";
-	public int id ;
+	public int pad_id ;
 	public int scene;
 	public int track;
 	public String clipName = "Some Clip Not Found";
@@ -23,10 +23,10 @@ public class SongPad extends GroupElement implements ClipDataResponder, ButtonLi
 	public SongPad(XMLElement element, ClipGroup group) {
 
 		this.group = group;
-		id = element.getIntAttribute("id");
+		pad_id = element.getIntAttribute("pad");
 		scene = element.getIntAttribute("scene");
 		track = element.getIntAttribute("track"); //added automatically by parent class
-		pad = MicroKontrol.getInstance().pads[id];
+		pad = MicroKontrol.getInstance().pads[pad_id];
 
 		pad.listen(this);
 	}

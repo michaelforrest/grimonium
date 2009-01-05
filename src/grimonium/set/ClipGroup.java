@@ -48,7 +48,7 @@ public class ClipGroup {
 		for (int i = 0; i < pads.length; i++) {
 			SongPad checked = pads[i];
 			if(checked!=pad){
-				if(pad.track == checked.track && pad.scene == checked.scene) System.out.println("ERROR, you have duplicated a clip in your XML - in group "+ id +"," + pad.id +" is a duplicate");
+				if(pad.track == checked.track && pad.scene == checked.scene) System.out.println("ERROR, you have duplicated a clip in your XML - in group "+ id +"," + pad.pad_id +" is a duplicate");
 				//if(pad.id == checked.id) System.out.println("Error, you can't assign two clips to the same pad");
 			}
 		}
@@ -90,7 +90,7 @@ public class ClipGroup {
 
 	private GroupElement createElement(XMLElement element) {
 		String name = element.getName();
-		if(name.equals("pad")) return new SongPad(element, this);
+		if(name.equals("clip")) return new SongPad(element, this);
 		if(name.equals("notebone")) return new NoteBone(element);
 		if(name.equals("freqbone")) return new FreqBone(element);
 		if(name.equals("noterangebone")) return new NoteRangeBone(element);

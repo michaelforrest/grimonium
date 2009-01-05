@@ -42,7 +42,7 @@ public class Song extends Observable{
 	private void adjustSceneOffsets(XMLElement[] groups) {
 		for (int i = 0; i < groups.length; i++) {
 			XMLElement group = groups[i];
-			adjustSceneOffset(group.getChildren("pad"));
+			adjustSceneOffset(group.getChildren("clip"));
 		}
 	}
 

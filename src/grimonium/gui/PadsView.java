@@ -28,7 +28,7 @@ public class PadsView {
 	}
 
 	public void assignPad(SongPad pad) {
-		padViews[pad.id].setSongPad(pad);
+		padViews[pad.pad_id].setSongPad(pad);
 	}
 
 	public void draw() {

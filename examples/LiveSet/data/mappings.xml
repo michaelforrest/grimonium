@@ -13,30 +13,30 @@
 			<audio id="beats" track="0">
 				<freqbone low="kick" med="snare" high="hihat"/>
 				<fader id="0" max="110.0"/>
-				<pad id="0" scene="0"/>
-				<pad id="1" scene="1"/>
-				<pad id="4" scene="2"/>
-				<pad id="5" scene="3"/>
-				<pad id="12" scene="4"/>
+				<clip pad="0" scene="0"/>
+				<clip pad="1" scene="1"/>
+				<clip pad="4" scene="2"/>
+				<clip pad="5" scene="3"/>
+				<clip pad="12" scene="4"/>
 			</audio>
 			<audio id="rhythm" track="2">
 				<freqbone mid="bosbotrance"/>
-				<pad id="2" scene="0"/>
-				<pad id="6" scene="1"/>
+				<clip pad="2" scene="0"/>
+				<clip pad="6" scene="1"/>
 			</audio>
 			<audio id="lead" track="3">
 				<freqbone high="bosbolead"/>
-				<pad id="3" scene="0"/>
-				<pad id="7" scene="1"/>
+				<clip pad="3" scene="0"/>
+				<clip pad="7" scene="1"/>
 			</audio>
 			<audio id="bass" track="1">
 				<freqbone low="bosbobass"/>
-				<pad id="10" scene="0"/>
-				<pad id="11" scene="1"/>
+				<clip pad="10" scene="0"/>
+				<clip pad="11" scene="1"/>
 			</audio>
 			<audio id="bits" track="3">
 				<freqbone med="bosbobits" high="bosbohibits"/>
-				<pad id="13" scene="3"/>
+				<clip pad="13" scene="3"/>
 			</audio>
 		</song>
 		<!-- HOROSKOPE -->
@@ -49,59 +49,59 @@
 				<notebone note="A#3" bone="kick"/>
 				<notebone note="G2" bone="hat"/>
 				<notebone note="D#2" bone="snare"/>
-				<pad id="0" scene="0"/>
+				<clip pad="0" scene="0"/>
 			</midi>
 			<midi id="bass" track="5">
-				<pad id="12" scene="0"/>
+				<clip pad="12" scene="0"/>
 			</midi>
 			<midi id="bits" track="6">
-				<pad id="13" scene="0"/>
+				<clip pad="13" scene="0"/>
 			</midi>
 			<midi id="bits" track="7">
-				<pad id="14" scene="0"/>
+				<clip pad="14" scene="0"/>
 			</midi>
 			<midi id="lead" track="8">
 				<noterangebone low="48" high="72" bone="horoskope"/>
-				<pad id="3" scene="0"/>
-				<pad id="7" scene="1"/>
-				<pad id="11" scene="2"/>
-				<pad id="15" scene="3"/>
+				<clip pad="3" scene="0"/>
+				<clip pad="7" scene="1"/>
+				<clip pad="11" scene="2"/>
+				<clip pad="15" scene="3"/>
 			</midi>
 		</song>
 		<song name="Nothing" sceneoffset="0">
 			<midi id="beats" track="0">
-				<pad id="0" scene="0"/>
-				<pad id="2" scene="1"/>
-				<pad id="4" scene="2"/>
-				<pad id="6" scene="3"/>
-				<pad id="8" scene="4"/>
-				<pad id="10" scene="5"/>
-				<pad id="12" scene="6"/>
-				<pad id="14" scene="7"/>
+				<clip pad="0" scene="0"/>
+				<clip pad="2" scene="1"/>
+				<clip pad="4" scene="2"/>
+				<clip pad="6" scene="3"/>
+				<clip pad="8" scene="4"/>
+				<clip pad="10" scene="5"/>
+				<clip pad="12" scene="6"/>
+				<clip pad="14" scene="7"/>
 			</midi>
 		</song>
 		<song name="Nothing" sceneoffset="0">
 			<midi id="beats" track="0">
-				<pad id="0" scene="0"/>
-				<pad id="2" scene="1"/>
-				<pad id="4" scene="2"/>
-				<pad id="6" scene="3"/>
-				<pad id="8" scene="4"/>
-				<pad id="10" scene="5"/>
-				<pad id="12" scene="6"/>
-				<pad id="14" scene="7"/>
+				<clip pad="0" scene="0"/>
+				<clip pad="2" scene="1"/>
+				<clip pad="4" scene="2"/>
+				<clip pad="6" scene="3"/>
+				<clip pad="8" scene="4"/>
+				<clip pad="10" scene="5"/>
+				<clip pad="12" scene="6"/>
+				<clip pad="14" scene="7"/>
 			</midi>
 		</song>
 		<song name="Nothing" sceneoffset="0">
 			<midi id="beats" track="0">
-				<pad id="0" scene="0"/>
-				<pad id="2" scene="1"/>
-				<pad id="4" scene="2"/>
-				<pad id="6" scene="3"/>
-				<pad id="8" scene="4"/>
-				<pad id="10" scene="5"/>
-				<pad id="12" scene="6"/>
-				<pad id="14" scene="7"/>
+				<clip pad="0" scene="0"/>
+				<clip pad="2" scene="1"/>
+				<clip pad="4" scene="2"/>
+				<clip pad="6" scene="3"/>
+				<clip pad="8" scene="4"/>
+				<clip pad="10" scene="5"/>
+				<clip pad="12" scene="6"/>
+				<clip pad="14" scene="7"/>
 			</midi>
 		</song>
 	</songs>
