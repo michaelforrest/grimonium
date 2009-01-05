@@ -28,6 +28,7 @@ public class SongView implements Observer {
 	public void draw() {
 		applet.pushMatrix();
 		applet.translate(0, 0, z);
+		
 		padsView.draw();
 		applet.popMatrix();
 	}

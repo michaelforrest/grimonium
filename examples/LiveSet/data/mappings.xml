@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<set>
+	<songs>
+		<!-- BUMPY BOSBO -->
+		<song name="Bumpy Bosbo" tempo="133" sceneoffset="0">
+			<stage zoom="0" pan="0">
+				<layer id="bosbodrums"/>
+				<layer id="basscat"/>
+				<layer id="trancecat"/>
+				<layer id="leadcat"/>
+			</stage>
+			<!-- should validate for repetition -->
+			<audio id="beats" track="0">
+				<freqbone low="kick" med="snare" high="hihat"/>
+				<fader id="0" max="110.0"/>
+				<pad id="0" scene="0"/>
+				<pad id="1" scene="1"/>
+				<pad id="4" scene="2"/>
+				<pad id="5" scene="3"/>
+				<pad id="12" scene="4"/>
+			</audio>
+			<audio id="rhythm" track="2">
+				<freqbone mid="bosbotrance"/>
+				<pad id="2" scene="0"/>
+				<pad id="3" scene="1"/>
+			</audio>
+			<audio id="lead" track="3">
+				<freqbone high="bosbolead"/>
+				<pad id="6" scene="0"/>
+				<pad id="7" scene="1"/>
+			</audio>
+			<audio id="bass" track="1">
+				<freqbone low="bosbobass"/>
+				<pad id="10" scene="0"/>
+				<pad id="11" scene="1"/>
+			</audio>
+			<audio id="bits" track="3">
+				<freqbone med="bosbobits" high="bosbohibits"/>
+				<pad id="13" scene="3"/>
+			</audio>
+		</song>
+		<!-- HOROSKOPE -->
+		<song name="Horoskope" tempo="105" sceneoffset="6">
+			<stage pan="0" zoom="0">
+				<layer id="gabbadrums"/>
+				<layer id="horoskope"/>
+			</stage>
+			<midi id="beats" track="4">
+				<notebone note="A#3" bone="kick"/>
+				<notebone note="G2" bone="hat"/>
+				<notebone note="D#2" bone="snare"/>
+				<pad id="0" scene="0"/>
+			</midi>
+			<midi id="bass" track="5">
+				<pad id="12" scene="0"/>
+			</midi>
+			<midi id="bits" track="6">
+				<pad id="13" scene="0"/>
+			</midi>
+			<midi id="bits" track="7">
+				<pad id="14" scene="0"/>
+			</midi>
+			<midi id="lead" track="8">
+				<noterangebone low="48" high="72" bone="horoskope"/>
+				<pad id="3" scene="0"/>
+				<pad id="7" scene="1"/>
+				<pad id="11" scene="2"/>
+				<pad id="15" scene="3"/>
+			</midi>
+		</song>
+	</songs>
+	<common>
+		<encoder id="7" name="tempo" channel="1" cc="2"/>
+		<button id="SETTING" name="reverb" channel="2" cc="107" type="gate"/>
+		<button id="EXIT" name="delay" channel="2" cc="106" type="toggle"/>
+	</common>
+	<!-- CONFIG -->
+	<colours>
+		<colour id="beats" colour="red"/>
+		<colour id="rhythm" colour="green"/>
+		<colour id="lead" colour="yellow"/>
+		<colour id="bass" colour="blue"/>
+		<colour id="bits" colour="orange"/>
+	</colours>
+	<!--
+		PADS:
+		0  1  2  3
+		4  5  6  7
+		8  9  10 11
+		12 13 14 15
+		TRACKS:
+		0 Beats
+		1 Bass
+		2 Lead
+		3 Lead
+		4 Grime Selection
+		5 Bass
+		6 Piano
+		7 Dark Euph
+		8 Horoskope
+	-->
+</set>

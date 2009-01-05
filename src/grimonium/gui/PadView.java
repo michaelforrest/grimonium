@@ -42,7 +42,7 @@ public class PadView extends ViewBase {
 
 	public void draw() {
 		applet.noStroke();
-		int alpha = (songPad != null && songPad.isActive()) ? 0x99000000 : 0x33000000;
+		int alpha = 0x99000000;//(songPad != null && songPad.isActive()) ? 0x99000000 : 0x33000000;
 		applet.fill(songPad == null ? 0x00000000 : songPad.group.colour + alpha);
 		applet.rect(rect.x, rect.y, rect.width, rect.height);
 		multiply();

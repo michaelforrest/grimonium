@@ -68,11 +68,11 @@ public class GrimoniumView extends ViewBase implements Observer {
     public void draw() {
         if (clean) return;
         //setupOpenGL();
-        applet.lights();
-        applet.pointLight(255, 255, 255, 0, 0, 1000);
         applet.background(0);
         applet.pushMatrix();
         applet.translate(applet.width * .1f, applet.height * .1f, zAnimator.currentValue);
+        applet.lights();
+        applet.pointLight(255, 255, 255, 0,0, zAnimator.currentValue + 50 );
         // applet.rotateX(.3f);
         for (int i = 0; i < songViews.length; i++) {
             SongView view = songViews[i];

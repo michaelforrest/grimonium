@@ -15,7 +15,7 @@ public class SongPad extends GroupElement implements ClipDataResponder, ButtonLi
 	public int id ;
 	public int scene;
 	public int track;
-	public String clipName = "dunno";
+	public String clipName = "?";
 	public Pad pad;
 	// TODO: playing should come from the clipdata
 	private boolean playing =  false;

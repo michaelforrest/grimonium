@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+	<live_api out="IAC Bus 3" in="IAC Bus 3"/>
+	<ableton in="IAC Bus 1" out="IAC Bus 2">
+		<!-- using 1-based channel numbers for readability -->
+		<stop channel="13" note="C#-2"/>
+		<stop channel="13" note="A-2"/>
+		<stop channel="13" note="F-1"/>
+		<stop channel="13" note="C#0"/>
+		<stop channel="13" note="C#2"/>
+		<stop channel="13" note="A2"/>
+		<stop channel="13" note="F3"/>
+		<stop channel="13" note="C#4"/>
+		<stop channel="13" note="A4"/>
+		
+		<fader channel="16" cc="49"/>
+		<fader channel="16" cc="50"/>
+		<fader channel="16" cc="51"/>
+		<fader channel="16" cc="52"/>
+		
+	</ableton>
+</config>

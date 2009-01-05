@@ -10,13 +10,20 @@ public class GrimoniumSet extends CollectionWithSingleSelectedItem implements En
 	public Song[] songs;
 	private MicroKontrol mk;
 	public GrimoniumSet(XMLElement child) {
-
 		if(!child.getName().equals("set")) return;
+		mk = MicroKontrol.getInstance();
+		addCommon(child.getChild("common"));
 		addSongs(child.getChildren("songs/song"));
 		setCollection(songs);
 		activateSong(0);
-		mk = MicroKontrol.getInstance();
 		mk.encoders[8].listen(this);
+	}
+	private void addCommon(XMLElement child) {
+//		for (int i = 0; i < child.getChildren().length; i++) {
+//			XMLElement element = child.getChildren()[i];
+//			if(element.getName().equals("encoder")) mk.encoders[]
+//		}
+
 	}
 	private void activateSong(int index) {
 		select(songs[index]);

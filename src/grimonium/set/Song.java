@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Observable;
 
 import microkontrol.MicroKontrol;
+import microkontrol.controls.LCD;
 import processing.xml.XMLElement;
 
 public class Song extends Observable{
@@ -61,7 +62,9 @@ public class Song extends Observable{
 	}
 
 	public void activate() {
-		MicroKontrol.getInstance().lcds[8].setText(name);
+		LCD mainLCD = MicroKontrol.getInstance().lcds[8];
+		mainLCD.setText(name);
+		mainLCD.setColor("orange");
 		for (int i = 0; i < groups.length; i++) {
 			ClipGroup group = groups[i];
 			group.activate();
