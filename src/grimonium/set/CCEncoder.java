@@ -5,6 +5,7 @@ import grimonium.GroupElement;
 import microkontrol.MicroKontrol;
 import microkontrol.controls.Encoder;
 import microkontrol.controls.EncoderListener;
+import microkontrol.controls.LCD;
 import processing.xml.XMLElement;
 
 public class CCEncoder extends GroupElement implements EncoderListener {
@@ -14,6 +15,8 @@ public class CCEncoder extends GroupElement implements EncoderListener {
 
 	//<encoder id="7" name="tempo" channel="1" cc="2"/>
 	public CCEncoder(XMLElement element) {
+		addLCDs(element.getChildren("lcd"),LCD.ORANGE);
+		turnOnLCDHints();
 		cc = element.getIntAttribute("cc");
 		channel = element.getIntAttribute("channel")-1;
 		encoder = MicroKontrol.getInstance().encoders[element.getIntAttribute("id")];
