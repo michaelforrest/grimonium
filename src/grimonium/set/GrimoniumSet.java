@@ -1,5 +1,6 @@
 package grimonium.set;
 
+import grimonium.GroupElement;
 import microkontrol.MicroKontrol;
 import microkontrol.controls.EncoderListener;
 import processing.core.PApplet;
@@ -9,6 +10,7 @@ public class GrimoniumSet extends CollectionWithSingleSelectedItem implements En
 
 	public Song[] songs;
 	private MicroKontrol mk;
+	private GroupElement[] commonElements;
 	public GrimoniumSet(XMLElement child) {
 		if(!child.getName().equals("set")) return;
 		mk = MicroKontrol.getInstance();
@@ -19,10 +21,11 @@ public class GrimoniumSet extends CollectionWithSingleSelectedItem implements En
 		mk.encoders[8].listen(this);
 	}
 	private void addCommon(XMLElement child) {
-//		for (int i = 0; i < child.getChildren().length; i++) {
-//			XMLElement element = child.getChildren()[i];
-//			if(element.getName().equals("encoder")) mk.encoders[]
-//		}
+		commonElements = new GroupElement[child.getChildren().length];
+		for (int i = 0; i < child.getChildren().length; i++) {
+			XMLElement element = child.getChildren()[i];
+			commonElements[i] = ElementFactory.create(element);
+		}
 
 	}
 	private void activateSong(int index) {

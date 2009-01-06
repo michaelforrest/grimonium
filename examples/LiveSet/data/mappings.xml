@@ -108,7 +108,7 @@
 	<common>
 		<encoder id="7" name="tempo" channel="1" cc="2"/>
 		<button id="SETTING" name="reverb" channel="2" cc="107" type="gate"/>
-		<button id="EXIT" name="delay" channel="2" cc="106" type="toggle"/>
+		<button id="MESSAGE" name="delay" channel="2" cc="106" type="toggle"/>
 	</common>
 	<!-- CONFIG -->
 	<colours>
