@@ -21,7 +21,7 @@ public class CCEncoder extends GroupElement implements EncoderListener {
 	}
 
 	public void moved(Integer change) {
-		int message = (change > 0) ? change: 64 - change;
+		int message = (change > 0) ? change : 64 - change;
 		Ableton.sendCC(channel,cc,message);
 	}
 

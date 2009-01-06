@@ -98,9 +98,8 @@ public class Ableton extends MidiThing {
 
 	public void togglePlaying() {
 		playing = !playing;
-		playPause.led.set(LED.BLINK);
-		int cc = (playing) ? 115 : 114;
-		to.sendController(15, cc, 127);
+		playPause.led.set( playing ? LED.ON : LED.OFF);
+		sendCC(playing ? play : stop, 127);
 	}
 
 	// FROM ABLETON
