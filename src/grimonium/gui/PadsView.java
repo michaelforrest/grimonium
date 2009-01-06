@@ -8,9 +8,11 @@ public class PadsView {
 	private static final int SIZE = 80;
 	public PadView[] padViews;
 	private final PApplet applet;
+	private SongViewHelper helper;
 
-	public PadsView(PApplet applet) {
+	public PadsView(PApplet applet, SongViewHelper helper) {
 		this.applet = applet;
+		this.helper = helper;
 		if(!PadView.initialised) PadView.init(applet);
 		addPadViews();
 	}
@@ -20,7 +22,7 @@ public class PadsView {
 		padViews = new PadView[16];
 		Rectangle first = new Rectangle(0, 0, SIZE, SIZE);
 		for (int i = 0; i < 16; i++) {
-			PadView view = new PadView(applet, mk.pads[i]);
+			PadView view = new PadView(applet, mk.pads[i],helper);
 			Point p = first.topLeft().add(new Point(first.width * (i % 4), first.height * (int) (i / 4.0)));
 			view.rect = new Rectangle(p.x, p.y, first.width, first.height);
 			padViews[i] = view;
@@ -32,12 +34,12 @@ public class PadsView {
 	}
 
 	public void draw() {
-		
+
 		for (int i = 0; i < padViews.length; i++) {
 			PadView view = padViews[i];
 			view.draw();
 		}
-		
+
 	}
 
 	public void clearPadAssignments() {

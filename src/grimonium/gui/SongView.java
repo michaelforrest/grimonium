@@ -25,17 +25,17 @@ public class SongView implements Observer {
 		this.song = song;
 		this.helper = helper;
 		if(TITLE==null) TITLE = applet.loadFont("Zapfino-40.vlw");
-		padsView = new PadsView(applet);
+		padsView = new PadsView(applet,helper);
 		livery = new LiveryView("gramophone1.png", applet, helper);
 		assignPads();
 		song.addObserver(this);
 	}
 
 	public void draw() {
-		applet.tint(255,(song.isActive() ? 255 : 100));
+		applet.tint(255,helper.getTint());
 		applet.pushMatrix();
 		applet.translate(0, 0, helper.z);
-		livery.draw(applet.height * PADS_MARGIN, song.isActive());
+		livery.draw(applet.height * PADS_MARGIN);
 		drawText();
 		drawPads();
 		applet.popMatrix();
@@ -44,6 +44,7 @@ public class SongView implements Observer {
 	private void drawText() {
 		applet.pushMatrix();
 		applet.rotate(-PApplet.PI * .5f);
+		applet.fill(0xFFFFFFFF,helper.getTint());
 		applet.textFont(TITLE,40);
 		applet.textLeading(50);
 		applet.text(song.name,-applet.height, 0.11f*applet.width);

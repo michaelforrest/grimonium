@@ -16,8 +16,7 @@ public class PadView extends ViewBase implements Observer {
 	private static final int FONT_SIZE = 16;
 	private static final float MARGIN = 11;
 	private static final int OUTLINE_MARGIN = 2;
-	private static final int INACTIVE_ALPHA = 0x66;
-	private static final int ACTIVE_ALPHA = 0xCC;
+
 	public static PFont font;
 	public static boolean initialised;
 	public static PImage texture;
@@ -30,17 +29,18 @@ public class PadView extends ViewBase implements Observer {
 	private SongPad songPad;
 
 	private PImage background;
-	public Animator selectionAnimator;
+	private final SongViewHelper helper;
 
-	public PadView(PApplet applet, Pad pad) {
+	public PadView(PApplet applet, Pad pad, SongViewHelper helper) {
 		super(applet);
 		this.pad = pad;
+		this.helper = helper;
 
 	}
 
 	public void setSongPad(SongPad songPad) {
 		this.songPad = songPad;
-		selectionAnimator = new Animator((songPad.isActive() ? ACTIVE_ALPHA : INACTIVE_ALPHA),this);
+
 
 		LiveAPI.getClipName(songPad.track, songPad.scene, songPad);
 		// background = applet.createGraphics(80,80,PApplet.RGB);
@@ -52,7 +52,7 @@ public class PadView extends ViewBase implements Observer {
 	public void draw(){
 		if(songPad == null ) return;
 		// TODO: trigger animation when song selected / deselected
-		applet.tint(0xFF000000 + songPad.group.colour, selectionAnimator.currentValue);
+		applet.tint(0xFF000000 + songPad.group.colour, helper.getAlpha());
 		applet.image(texture, rect.x, rect.y);
 		if(songPad.isPlaying()) applet.image(playing, rect.x, rect.y);
 
@@ -60,6 +60,7 @@ public class PadView extends ViewBase implements Observer {
 	}
 
 	private void drawText() {
+		applet.fill(0xFFFFFFFF,helper.getTint());
 		applet.textFont(font, FONT_SIZE);
 		applet.text(songPad.clipName, rect.x + MARGIN, rect.y+ MARGIN, rect.width - 2* MARGIN, rect.height-2*MARGIN, 1);
 	}
