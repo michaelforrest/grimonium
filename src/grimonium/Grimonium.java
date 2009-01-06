@@ -106,7 +106,7 @@ public class Grimonium {
 		// minim = new Minim(applet);
 		// in = minim.getLineIn(Minim.STEREO, 512);
 		if (xml.getChild("ableton") != null)
-			Ableton.init(xml.getChild("ableton"));
+			Ableton.init(xml.getChild("ableton"),applet);
 		if (xml.getChild("live_api") != null)
 			LiveAPI.init(xml.getChild("live_api"));
 	}

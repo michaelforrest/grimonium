@@ -18,5 +18,7 @@
 		<fader channel="16" cc="51"/>
 		<fader channel="16" cc="52"/>
 		
+		<globalstop channel="16" cc="114" />
+		<globalplay channel="16" cc="115" />
 	</ableton>
 </config>

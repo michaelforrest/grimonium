@@ -27,6 +27,10 @@ public class Ableton extends MidiThing {
 			super(channel, null);
 			this.cc = cc;
 		}
+		public CC(XMLElement xml) {
+			super(xml.getIntAttribute("channel")-1, null);
+			cc = xml.getIntAttribute("cc");
+		}
 
 	}
 
@@ -40,8 +44,13 @@ public class Ableton extends MidiThing {
 	microkontrol.controls.Button playPause;
 	private MicroKontrol mk;
 	private boolean playing  =false;
+	private CC stop;
+	private CC play;
+	private final PApplet applet;
 
-	private Ableton(XMLElement xml) {
+	private Ableton(XMLElement xml, PApplet applet) {
+		this.applet = applet;
+		applet.registerDispose(this);
 		mk = MicroKontrol.getInstance();
 		from = getInput(xml.getStringAttribute("in"), this);
 		to = getOutput(xml.getStringAttribute("out"));
@@ -51,12 +60,21 @@ public class Ableton extends MidiThing {
 		addStopButtonMappings(xml.getChildren("stop"));
 		addFaderMappings(xml.getChildren("fader"));
 
+		stop = new CC(xml.getChild("globalstop"));
+		play = new CC(xml.getChild("globalplay"));
+
 		mk.plugKeyboard(new KeyboardProxy());
 
 		playPause = mk.buttons.get("ENTER");
 		playPause.listen("pressed", this, "togglePlaying");
 	}
+	public void dispose(){
+		sendCC(stop, 127);
+	}
 
+	private void sendCC(CC cc, int value) {
+		sendCC(cc.channel,cc.cc, value);
+	}
 	private void addFaderMappings(XMLElement[] children) {
 		if (children == null) return;
 		for (int i = 0; i < children.length; i++) {
@@ -144,8 +162,8 @@ public class Ableton extends MidiThing {
 
 	}
 
-	public static void init(XMLElement xml) {
-		instance = new Ableton(xml);
+	public static void init(XMLElement xml, PApplet applet) {
+		instance = new Ableton(xml, applet);
 	}
 
 	public static void sendCC(int channel, int cc, int value) {
