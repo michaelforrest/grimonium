@@ -110,11 +110,15 @@
 		<button id="SETTING" name="reverb" channel="2" cc="107" type="gate"/>
 		<button id="MESSAGE" name="delay" channel="2" cc="106" type="toggle"/>
 		
-		<button id="SCENE" name="beatrepeat" channel="1" cc="10" type="toggle"/>
-		<encoder id="6" name="beatrepeat" channel="1" cc="4"/>
+		<button id="SCENE" name="beatrepeat" channel="1" cc="10" type="gate">
+			<lcd id="5" text="grid" />
+		</button>
+		<encoder id="5" name="beatrepeat" channel="1" cc="4"/>
 		
-		<button id="EXIT" name="effectrix" channel="3" cc="1" type="toggle" />
-		<encoder id="5" name="effectrix" channel="3" cc="2"/>
+		<button id="EXIT" name="effectrix" channel="3" cc="1" type="gate">
+			<lcd id="6" text="pattern"/>
+		</button>
+		<encoder id="6" name="effectrix" channel="3" cc="2"/>
 	</common>
 	<!-- CONFIG -->
 	<colours>
