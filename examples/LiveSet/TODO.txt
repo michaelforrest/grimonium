@@ -1,0 +1,5 @@
+Knobs and faders with text labels (global ones stay in position)
+Keyboard span view
+Notes view and markup language
+Buttons view
+Shift mode for pads
