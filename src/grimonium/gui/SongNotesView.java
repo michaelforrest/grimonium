@@ -19,6 +19,7 @@ public class SongNotesView extends ViewBase {
 
 	public void draw() {
 		applet.pushMatrix();
+		applet.tint(0xFFFFFFFF,helper.getAlpha());
 		applet.translate(LEFT, 0);
 		if(notes.hasImage()) applet.image(notes.getImage(applet),0,0);
 		applet.textFont(font,16);
