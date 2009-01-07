@@ -49,6 +49,7 @@ public class SongView implements Observer {
 		applet.pushMatrix();
 		applet.translate(0, 0, helper.z);
 		livery.draw(applet.height * PADS_MARGIN);
+		applet.textAlign(PApplet.LEFT);
 		drawText();
 		drawPads();
 		keyboardView.draw();
