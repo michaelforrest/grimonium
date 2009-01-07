@@ -20,6 +20,7 @@ public class Song extends Observable{
 	private boolean active;
 	public int colour;
 	public GroupElement[] controls;
+	private String image;
 
 	public Song(XMLElement element) {
 		name = element.getStringAttribute("name");
@@ -27,7 +28,7 @@ public class Song extends Observable{
 		sceneOffset = element.getIntAttribute("sceneoffset");
 
 		colour = Colours.get(element.getAttribute("colour"));
-
+		image = element.getAttribute("pic","gramophone1.png");
 		addGroups(element.getChildren("group"));
 		addControls(element.getChild("controls"));
 	}
@@ -119,6 +120,10 @@ public class Song extends Observable{
 
 	public boolean isActive() {
 		return active;
+	}
+
+	public String getImage() {
+		return image;
 	}
 
 }

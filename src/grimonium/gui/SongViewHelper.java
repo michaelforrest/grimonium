@@ -59,4 +59,8 @@ public class SongViewHelper extends Observable implements Observer, MixerSource{
 		return 0xcc000000 + Colours.get("blue");
 	}
 
+	public String getImage() {
+		return song.getImage();
+	}
+
 }

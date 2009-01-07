@@ -17,10 +17,10 @@ public class LiveryView extends ViewBase implements Observer{
 	private PGraphics swoosh;
 	private final SongViewHelper helper;
 
-	public LiveryView(String file, PApplet applet, SongViewHelper helper) {
+	public LiveryView(PApplet applet, SongViewHelper helper) {
 		super(applet);
 		this.helper = helper;
-		image = loadOrRetrieveImage(file, applet);
+		image = loadOrRetrieveImage(helper.getImage(), applet);
 		swooshAnimator = new Animator(0, this);
 		swoosh = applet.createGraphics(image.width,image.height,PApplet.P2D);
 		helper.song.addObserver(this);

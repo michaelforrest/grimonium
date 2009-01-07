@@ -36,7 +36,7 @@ public class SongView implements Observer {
 
 	private void addChildren(PApplet applet, SongViewHelper helper) {
 		padsView = new PadsView(applet,helper);
-		livery = new LiveryView("gramophone1.png", applet, helper);
+		livery = new LiveryView(applet, helper);
 		keyboardView = new KeyboardView(applet, helper);
 		mixerView = new MixerView(applet, helper);
 	}

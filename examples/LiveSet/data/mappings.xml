@@ -2,7 +2,7 @@
 <set>
 	<songs>
 		<!-- BUMPY BOSBO -->
-		<song name="Bumpy Bosbo" colour="yellow" tempo="133" sceneoffset="0">
+		<song name="Bumpy Bosbo" colour="yellow" tempo="133" sceneoffset="0" pic="songs/cat.png">
 			<stage zoom="0" pan="0">
 				<layer id="bosbodrums"/>
 				<layer id="basscat"/>
