@@ -15,12 +15,11 @@ public class SongViewHelper extends Observable implements Observer, MixerSource{
 	final Song song;
 	public int z;
 	private Animator selectionAnimator;
-	private static final int INACTIVE_ALPHA = 0x00;
 	private static final int ACTIVE_ALPHA = 0xDD;
 	public SongViewHelper(Song song) {
 		this.song = song;
 		song.addObserver(this);
-		selectionAnimator = new Animator(INACTIVE_ALPHA,this);
+		selectionAnimator = new Animator(0,this);
 	}
 
 	public void update(Observable o, Object arg) {
@@ -36,7 +35,7 @@ public class SongViewHelper extends Observable implements Observer, MixerSource{
 	}
 
 	public int getAlpha() {
-		return (int) (INACTIVE_ALPHA + (float) selectionAnimator.currentValue * (float)(ACTIVE_ALPHA-INACTIVE_ALPHA));
+		return  (int)((float) selectionAnimator.currentValue * (float) ACTIVE_ALPHA);
 	}
 
 	public int getGroupColour() {
@@ -55,8 +54,8 @@ public class SongViewHelper extends Observable implements Observer, MixerSource{
 		return GroupElement.collectFaders(song.controls);
 	}
 
-	public int getOutlineColour() {
-		return 0xcc000000 + Colours.get("blue");
+	public int getColour() {
+		return Colours.get("blue") + ((1-getAlpha()) * 0xFF000000);
 	}
 
 	public String getImage() {

@@ -17,12 +17,11 @@ public class MixerView extends ViewBase {
 	public void draw(){
 		applet.pushMatrix();
 		applet.translate(800, GrimoniumView.TOP_MARGIN + 40);
-		applet.noFill();
-		applet.stroke(source.getOutlineColour());
-		applet.rect(0,0,40*8,180);
+		//applet.fill(source.getColour());
+		//applet.rect(0,0,40*8,180);
 		encodersView.draw();
 		applet.translate(0, 70);
-		fadersView.draw();
+		fadersView.draw(source.getColour());
 		applet.popMatrix();
 	}
 

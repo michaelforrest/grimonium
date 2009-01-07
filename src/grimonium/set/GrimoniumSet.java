@@ -69,8 +69,8 @@ public class GrimoniumSet extends CollectionWithSingleSelectedItem implements En
 	public ArrayList<GroupFader> getCommonFaders() {
 		return GroupElement.collectFaders(commonElements);
 	}
-	public int getOutlineColour() {
-		return 0x99000000 + Colours.get("blue");
+	public int getColour() {
+		return 0x22000000 + Colours.get("blue");
 	}
 
 

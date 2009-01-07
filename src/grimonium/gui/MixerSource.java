@@ -11,6 +11,6 @@ public interface MixerSource {
 
 	ArrayList<GroupFader> getCommonFaders();
 
-	int getOutlineColour();
+	int getColour();
 
 }

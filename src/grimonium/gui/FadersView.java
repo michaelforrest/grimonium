@@ -19,10 +19,11 @@ public class FadersView extends ViewBase {
 		this.faders = arrayList;
 	}
 
-	public void draw() {
+	public void draw(int background) {
 		applet.pushMatrix();
 		for (GroupFader fader : faders) {
 			int x = fader.id * WIDTH;
+			applet.fill(background);
 			drawFader(fader,x);
 		}
 		applet.popMatrix();
@@ -30,7 +31,6 @@ public class FadersView extends ViewBase {
 	}
 
 	private void drawFader(GroupFader fader, int x) {
-		applet.noFill();
 		applet.rect(x, 0, WIDTH, HEIGHT);
 		applet.fill(0xFF000000 + Colours.get("purple"));
 		applet.rect(x, (1-fader.value) * HEIGHT-THUMB_HEIGHT,WIDTH, THUMB_HEIGHT );
