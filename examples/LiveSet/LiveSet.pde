@@ -32,9 +32,9 @@ void keyPressed(){
   if(key == 'R' ){
     view = null;
     grimonium = null;
-    message("reloading...");
+
     load();
-    
+     
   }
 }
 void message(String m){

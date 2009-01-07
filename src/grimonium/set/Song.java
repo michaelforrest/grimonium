@@ -1,5 +1,7 @@
 package grimonium.set;
 
+import grimonium.GroupElement;
+
 import java.util.ArrayList;
 import java.util.Observable;
 
@@ -17,6 +19,7 @@ public class Song extends Observable{
 	private int sceneOffset;
 	private boolean active;
 	public int colour;
+	public GroupElement[] controls;
 
 	public Song(XMLElement element) {
 		name = element.getStringAttribute("name");
@@ -26,6 +29,20 @@ public class Song extends Observable{
 		colour = Colours.get(element.getAttribute("colour"));
 
 		addGroups(element.getChildren("group"));
+		addControls(element.getChild("controls"));
+	}
+
+	private void addControls(XMLElement child) {
+		if(child == null) {
+			controls = new GroupElement[0];
+			return;
+		}
+		XMLElement[] children = child.getChildren();
+		controls = new GroupElement[children.length];
+		for (int i = 0; i < children.length; i++) {
+			XMLElement element = children[i];
+			controls[i] = ElementFactory.create(element);
+		}
 	}
 
 	private void addGroups(XMLElement[] children) {
@@ -58,19 +75,17 @@ public class Song extends Observable{
 		LCD mainLCD = MicroKontrol.getInstance().lcds[8];
 		mainLCD.setText(name);
 		mainLCD.setColor("orange");
-		for (int i = 0; i < groups.length; i++) {
-			ClipGroup group = groups[i];
-			group.activate();
-		}
+
+		for (ClipGroup group : groups) group.activate();
+		for (GroupElement control : controls) control.activate();
+
 		setActive(true);
 		setChanged();
 		notifyObservers(ACTIVATED);
 	}
 	public void deactivate(){
-		for (int i = 0; i < groups.length; i++) {
-			ClipGroup group = groups[i];
-			group.deactivate();
-		}
+		for (ClipGroup group : groups) group.deactivate();
+		for (GroupElement control : controls) control.deactivate();
 		setActive(false);
 		setChanged();
 		notifyObservers(DEACTIVATED);

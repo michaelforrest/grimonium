@@ -9,10 +9,17 @@
 				<layer id="trancecat"/>
 				<layer id="leadcat"/>
 			</stage>
+			<controls>
+				<fader id="0" name="BEATS" max="110.0" track="0">
+					<lcd text="BEATS" />
+				</fader>
+				<encoder id="0" name="filter" channel="3" cc="5">
+					<lcd text="FILTER"/>
+				</encoder>
+			</controls>
 			<!-- should validate for repetition -->
 			<group id="beats" colour="red" track="0">
 				<freqbone low="kick" med="snare" high="hihat"/>
-				<fader id="0" max="110.0"/>
 				<clip pad="0" scene="0"/>
 				<clip pad="1" scene="1"/>
 				<clip pad="4" scene="2"/>
@@ -62,18 +69,18 @@
 			</group>
 			<group id="lead" colour="pink" track="8">
 				<noterangebone low="48" high="72" bone="horoskope"/>
-				<clip pad="3" scene="0"/>
-				<clip pad="7" scene="1"/>
+				<clip pad="3"  scene="0"/>
+				<clip pad="7"  scene="1"/>
 				<clip pad="11" scene="2"/>
 				<clip pad="15" scene="3"/>
 			</group>
 		</song>
 		<song name="Song Of Technology" colour="green" sceneoffset="10">
 			<group id="beats" colour="red" track="0">
-				<clip pad="0" scene="0"/>
-				<clip pad="4" scene="1"/>
+				<clip pad="0"  scene="0"/>
+				<clip pad="4"  scene="1"/>
 				<clip pad="12" scene="3"/>
-				<clip pad="7" scene="5"/>
+				<clip pad="7"  scene="5"/>
 			</group>
 			<group id="bass" colour="purple" track="1">
 				<clip pad="1" scene="0"/>

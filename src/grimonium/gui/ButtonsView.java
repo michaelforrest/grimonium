@@ -29,9 +29,9 @@ public class ButtonsView extends ViewBase{
 		}
 	}
 
-	public void draw(float z) {
+	public void draw() {
 		applet.pushMatrix();
-		applet.translate(applet.width-COLUMNS*80 - 40, 50, z);
+		applet.translate(applet.width-COLUMNS*80 - 40, 50, 0);
 		for (ButtonView view : views) {
 			view.draw();
 		}

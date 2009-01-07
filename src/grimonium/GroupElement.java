@@ -1,5 +1,10 @@
 package grimonium;
 
+import grimonium.set.CCEncoder;
+import grimonium.set.GroupFader;
+
+import java.util.ArrayList;
+
 import microkontrol.MicroKontrol;
 import microkontrol.controls.LCD;
 import processing.xml.XMLElement;
@@ -18,7 +23,8 @@ public class GroupElement{
 		active = false;
 	}
 
-	protected void addLCDs(XMLElement[] children, String colour) {
+	protected void addLCDs(XMLElement child, String colour) {
+		XMLElement[] children = child.getChildren("lcd");
 		lcds = new LCDHint[children.length];
 		for (int i = 0; i < children.length; i++) {
 			XMLElement element = children[i];
@@ -36,7 +42,7 @@ public class GroupElement{
 		public LCDHint(XMLElement element, String colour) {
 			this.colour = colour;
 			id = element.getIntAttribute("id");
-			text = element.getStringAttribute("text");
+			text = element.getStringAttribute("text", element.getParent().getStringAttribute("name"));
 			lcd = MicroKontrol.getInstance().lcds[id];
 		}
 
@@ -63,6 +69,24 @@ public class GroupElement{
 			lcd.activateHint();
 		}
 
+	}
+
+	public static ArrayList<CCEncoder> collectEncoders(GroupElement[] groupElements) {
+		ArrayList<CCEncoder> result = new ArrayList<CCEncoder>();
+		if(groupElements == null) return result;
+		for (GroupElement element : groupElements) {
+			if(element instanceof CCEncoder) result.add((CCEncoder)element);
+		}
+		return result;
+	}
+
+	public static ArrayList<GroupFader> collectFaders(GroupElement[] groupElements) {
+		ArrayList<GroupFader> result = new ArrayList<GroupFader>();
+		if(groupElements == null) return result;
+		for (GroupElement element : groupElements) {
+			if(element instanceof GroupFader) result.add((GroupFader)element);
+		}
+		return result;
 	}
 
 }

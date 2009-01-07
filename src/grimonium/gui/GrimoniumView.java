@@ -12,6 +12,7 @@ import processing.core.PApplet;
 
 public class GrimoniumView extends ViewBase implements Observer {
 	private static final int Z_SPACING = 200;
+	public static final float TOP_MARGIN = 50;
 	private final Grimonium grimonium;
 	private boolean clean = false;
 	private GuiController controller;
@@ -20,9 +21,7 @@ public class GrimoniumView extends ViewBase implements Observer {
 	private Animator zAnimator;
 	private SongViewHelper[] helpers;
 	private ButtonsView buttonsView;
-
-	// private PGraphicsOpenGL pGraphicsOpenGL;
-	// private GL gl;
+	private MixerView mixerView;
 
 	public GrimoniumView(PApplet applet, Grimonium grimonium) {
 		super(applet);
@@ -39,7 +38,7 @@ public class GrimoniumView extends ViewBase implements Observer {
 		createViewHelpers();
 		addSongViews();
 		buttonsView = new ButtonsView(applet, grimonium);
-
+		mixerView = new MixerView(applet,grimonium.set);
 		microKontrolLights = new MicroKontrolLights(applet, grimonium);
 
 		zAnimator = new Animator(0f, this);
@@ -69,17 +68,20 @@ public class GrimoniumView extends ViewBase implements Observer {
 	public void draw() {
 		if (clean) return;
 		applet.background(0);
-		// applet.lightFalloff(1,0,.015f);
-		// applet.pointLight(255, 255, 255, applet.width * .1f, applet.height *
-		// .1f, 100 );
-		// applet.pointLight(255, 255, 255, applet.width * .2f, applet.height *
-		// .1f, 100 );
 		applet.pushMatrix();
 		applet.translate(0, 0, zAnimator.currentValue);
-		buttonsView.draw(-zAnimator.currentValue);
+		drawCommonElements();
 		drawSongViews();
 		applet.popMatrix();
 		clean = true;
+	}
+
+	private void drawCommonElements() {
+		applet.pushMatrix();
+		applet.translate(0, 0, -zAnimator.currentValue);
+		buttonsView.draw();
+		mixerView.draw();
+		applet.popMatrix();
 	}
 
 	private void drawSongViews() {

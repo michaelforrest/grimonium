@@ -1,11 +1,16 @@
 package grimonium.gui;
 
+import grimonium.GroupElement;
+import grimonium.set.CCEncoder;
+import grimonium.set.Colours;
+import grimonium.set.GroupFader;
+import grimonium.set.Song;
+
+import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
-import grimonium.set.Song;
-
-public class SongViewHelper extends Observable implements Observer{
+public class SongViewHelper extends Observable implements Observer, MixerSource{
 
 	final Song song;
 	public int z;
@@ -40,6 +45,18 @@ public class SongViewHelper extends Observable implements Observer{
 
 	public int getSongColour() {
 		return song.colour;
+	}
+
+	public ArrayList<CCEncoder> getCommonEncoders() {
+		return GroupElement.collectEncoders(song.controls);
+	}
+
+	public ArrayList<GroupFader> getCommonFaders() {
+		return GroupElement.collectFaders(song.controls);
+	}
+
+	public int getOutlineColour() {
+		return 0xcc000000 + Colours.get("blue");
 	}
 
 }

@@ -36,7 +36,7 @@ public class CCButton extends GroupElement implements ButtonListener {
 		channel = element.getIntAttribute("channel") - 1;
 		cc = element.getIntAttribute("cc");
 
-		addLCDs(element.getChildren("lcd"),LCD.RED);
+		addLCDs(element,LCD.RED);
 
 
 		id = element.getStringAttribute("id");
@@ -50,6 +50,7 @@ public class CCButton extends GroupElement implements ButtonListener {
 
 
 	public void pressed() {
+		if(!active) return;
 		GuiController.update();
 		if(type.equals(TOGGLE)){
 			toggle();
@@ -77,6 +78,7 @@ public class CCButton extends GroupElement implements ButtonListener {
 	}
 
 	public void released() {
+		if(!active) return;
 		GuiController.update();
 		if(type.equals(GATE)){
 			Ableton.sendCC(channel,cc, 0);
