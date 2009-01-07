@@ -15,12 +15,12 @@ public class SongViewHelper extends Observable implements Observer, MixerSource{
 	final Song song;
 	public int z;
 	private Animator selectionAnimator;
-	private static final int INACTIVE_ALPHA = 0x66;
+	private static final int INACTIVE_ALPHA = 0x00;
 	private static final int ACTIVE_ALPHA = 0xDD;
 	public SongViewHelper(Song song) {
 		this.song = song;
 		song.addObserver(this);
-		selectionAnimator = new Animator(0,this);
+		selectionAnimator = new Animator(INACTIVE_ALPHA,this);
 	}
 
 	public void update(Observable o, Object arg) {
@@ -61,6 +61,11 @@ public class SongViewHelper extends Observable implements Observer, MixerSource{
 
 	public String getImage() {
 		return song.getImage();
+	}
+
+	public boolean isInvisible() {
+
+		return getAlpha() == 0;
 	}
 
 }

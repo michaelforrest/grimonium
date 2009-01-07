@@ -23,6 +23,7 @@ public class SongView implements Observer {
 	private EncodersView encodersView;
 	private FadersView fadersView;
 	private MixerView mixerView;
+	private SongNotesView songNotesView;
 
 	public SongView(PApplet applet, Song song, SongViewHelper helper) {
 		this.applet = applet;
@@ -39,9 +40,11 @@ public class SongView implements Observer {
 		livery = new LiveryView(applet, helper);
 		keyboardView = new KeyboardView(applet, helper);
 		mixerView = new MixerView(applet, helper);
+		songNotesView = new SongNotesView(applet,helper);
 	}
 
 	public void draw() {
+		if(helper.isInvisible()) return;
 		applet.tint(255,helper.getTint());
 		applet.pushMatrix();
 		applet.translate(0, 0, helper.z);
@@ -50,6 +53,7 @@ public class SongView implements Observer {
 		drawPads();
 		keyboardView.draw();
 		mixerView.draw();
+		songNotesView.draw();
 		applet.popMatrix();
 	}
 
