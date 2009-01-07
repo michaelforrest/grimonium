@@ -1,7 +1,6 @@
 package grimonium.set;
 
 import grimonium.GroupElement;
-import grimonium.gui.ControlStripsSource;
 import microkontrol.MicroKontrol;
 import microkontrol.controls.EncoderListener;
 import processing.core.PApplet;
@@ -12,7 +11,6 @@ public class GrimoniumSet extends CollectionWithSingleSelectedItem implements En
 	public Song[] songs;
 	private MicroKontrol mk;
 	private GroupElement[] commonElements;
-	private ControlStripsHelper controlStrips;
 	public GrimoniumSet(XMLElement child) {
 		if(!child.getName().equals("set")) return;
 		mk = MicroKontrol.getInstance();
@@ -28,7 +26,6 @@ public class GrimoniumSet extends CollectionWithSingleSelectedItem implements En
 			XMLElement element = child.getChildren()[i];
 			commonElements[i] = ElementFactory.create(element);
 		}
-		controlStrips = new ControlStripsHelper(commonElements);
 	}
 	private void activateSong(int index) {
 		select(songs[index]);
@@ -59,9 +56,6 @@ public class GrimoniumSet extends CollectionWithSingleSelectedItem implements En
 	public Song currentSong() {
 		return current();
 	}
-	public ControlStripsSource getCommonControlStrips() {
-		// TODO Auto-generated method stub
-		return controlStrips;
-	}
+
 
 }

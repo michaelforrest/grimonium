@@ -8,10 +8,7 @@ import grimonium.set.Song;
 import java.util.Observable;
 import java.util.Observer;
 
-import javax.media.opengl.GL;
-
 import processing.core.PApplet;
-import processing.opengl.PGraphicsOpenGL;
 
 public class GrimoniumView extends ViewBase implements Observer {
 	private static final int Z_SPACING = 200;
@@ -23,7 +20,6 @@ public class GrimoniumView extends ViewBase implements Observer {
 	private Animator zAnimator;
 	private SongViewHelper[] helpers;
 	private ButtonsView buttonsView;
-	private ControlStripsView controlStripsView;
 
 	// private PGraphicsOpenGL pGraphicsOpenGL;
 	// private GL gl;
@@ -43,7 +39,6 @@ public class GrimoniumView extends ViewBase implements Observer {
 		createViewHelpers();
 		addSongViews();
 		buttonsView = new ButtonsView(applet, grimonium);
-		controlStripsView = new ControlStripsView(applet,grimonium.getCommonControlStrips());
 
 		microKontrolLights = new MicroKontrolLights(applet, grimonium);
 
@@ -82,7 +77,6 @@ public class GrimoniumView extends ViewBase implements Observer {
 		applet.pushMatrix();
 		applet.translate(0, 0, zAnimator.currentValue);
 		buttonsView.draw(-zAnimator.currentValue);
-		controlStripsView.draw(-zAnimator.currentValue);
 		drawSongViews();
 		applet.popMatrix();
 		clean = true;
