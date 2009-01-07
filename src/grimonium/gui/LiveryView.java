@@ -28,7 +28,7 @@ public class LiveryView extends ViewBase implements Observer{
 
 	public void draw(float y) {
 
-		applet.tint(0xFF000000 + helper.getGroupColour(),helper.getAlpha());
+		applet.tint(0xFF000000 + helper.getSongColour(),helper.getAlpha());
 		applet.image(image, 0, y);
 
 	}

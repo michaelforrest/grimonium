@@ -19,16 +19,23 @@ public class SongView implements Observer {
 	private final PApplet applet;
 	private LiveryView livery;
 	private final SongViewHelper helper;
+	private KeyboardView keyboardView;
 
 	public SongView(PApplet applet, Song song, SongViewHelper helper) {
 		this.applet = applet;
 		this.song = song;
 		this.helper = helper;
 		if(TITLE==null) TITLE = applet.loadFont("Zapfino-40.vlw");
-		padsView = new PadsView(applet,helper);
-		livery = new LiveryView("gramophone1.png", applet, helper);
+		addChildren(applet, helper);
+
 		assignPads();
 		song.addObserver(this);
+	}
+
+	private void addChildren(PApplet applet, SongViewHelper helper) {
+		padsView = new PadsView(applet,helper);
+		livery = new LiveryView("gramophone1.png", applet, helper);
+		keyboardView = new KeyboardView(applet, helper);
 	}
 
 	public void draw() {
@@ -38,8 +45,10 @@ public class SongView implements Observer {
 		livery.draw(applet.height * PADS_MARGIN);
 		drawText();
 		drawPads();
+		keyboardView.draw();
 		applet.popMatrix();
 	}
+
 
 	private void drawText() {
 		applet.pushMatrix();

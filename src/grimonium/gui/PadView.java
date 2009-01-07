@@ -8,7 +8,6 @@ import grimonium.set.SongPad;
 import microkontrol.controls.LED;
 import microkontrol.controls.Pad;
 import processing.core.PApplet;
-import processing.core.PFont;
 import processing.core.PImage;
 
 public class PadView extends ViewBase implements Observer {
@@ -17,7 +16,6 @@ public class PadView extends ViewBase implements Observer {
 	private static final float MARGIN = 11;
 	private static final int OUTLINE_MARGIN = 2;
 
-	public static PFont font;
 	public static boolean initialised;
 	public static PImage texture;
 	private static PImage playing;
@@ -72,7 +70,7 @@ public class PadView extends ViewBase implements Observer {
 	}
 
 	public static void init(PApplet applet) {
-		font = applet.loadFont("HelveticaNeue-CondensedBlack-20.vlw");
+
 		texture = applet.loadImage("padtexture.png");
 		playing = applet.loadImage("padplaying.png");
 		initialised = true;

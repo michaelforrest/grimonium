@@ -5,17 +5,19 @@ import java.util.Hashtable;
 import javax.media.opengl.GL;
 
 import processing.core.PApplet;
+import processing.core.PFont;
 import processing.core.PImage;
 import processing.opengl.PGraphicsOpenGL;
 
 public class ViewBase {
 
 	protected static Hashtable<String, PImage> images = new Hashtable<String, PImage>();
+	public static PFont font;
 	protected final PApplet applet;
 
 	public ViewBase(PApplet applet) {
 		this.applet = applet;
-
+		if(font == null ) font = applet.loadFont("HelveticaNeue-CondensedBlack-20.vlw");
 	}
 
 	protected void setupLights() {
@@ -50,6 +52,10 @@ public class ViewBase {
 			images.put(file, image);
 		}
 		return image;
+	}
+
+	protected Point getGridPoint(Rectangle first, int i, int columns) {
+		return first.topLeft().add(new Point(first.width * (i % columns), first.height * (int) (i / (float) columns)));
 	}
 
 }

@@ -8,15 +8,9 @@ import grimonium.NoteBone;
 import processing.xml.XMLElement;
 
 public class ClipGroup {
-	public static Hashtable<String, Integer> COLOURS = new Hashtable<String, Integer>();
-	static {
-		COLOURS.put("beats", 0xf01229); // red
-		COLOURS.put("rhythm", 0xffdc06); // yellow
-		COLOURS.put("lead", 0xd707a5); // pink
-		COLOURS.put("bass", 0x9858e0); //purple
-		COLOURS.put("bits", 0x3c6a08); // green
-		COLOURS.put("neutral", 0x8a6636); //brown
-	}
+
+
+
 	private int track;
 	private GroupElement[] elements;
 	SongPad[] pads;
@@ -26,16 +20,13 @@ public class ClipGroup {
 	public ClipGroup(XMLElement element) {
 		id = element.getStringAttribute("id");
 		track = element.getIntAttribute("track");
-		try{
-			colour = COLOURS.get(id);
-		}catch(Exception e){
-			System.out.println("ERROR, for now you need to choose an 'id' from the set: beats,rhythm,lead,bass,bits");
-			colour = COLOURS.get("neutral");
-		}
+		colour = Colours.get(element.getStringAttribute("colour"));
 		addElements(element.getChildren());
 		createPadsArray();
 		validatePadsArray();
 	}
+
+
 
 	private void validatePadsArray() {
 		for (int i = 0; i < pads.length; i++) {

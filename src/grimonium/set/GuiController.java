@@ -17,5 +17,9 @@ public class GuiController extends Observable {
 
 		notifyObservers(UPDATE_VIEW);
 	}
+	public static void update() {
+		instance.updateView();
+
+	}
 
 }

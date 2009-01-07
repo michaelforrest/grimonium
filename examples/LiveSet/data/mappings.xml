@@ -2,7 +2,7 @@
 <set>
 	<songs>
 		<!-- BUMPY BOSBO -->
-		<song name="Bumpy Bosbo" tempo="133" sceneoffset="0">
+		<song name="Bumpy Bosbo" colour="yellow" tempo="133" sceneoffset="0">
 			<stage zoom="0" pan="0">
 				<layer id="bosbodrums"/>
 				<layer id="basscat"/>
@@ -10,7 +10,7 @@
 				<layer id="leadcat"/>
 			</stage>
 			<!-- should validate for repetition -->
-			<audio id="beats" track="0">
+			<group id="beats" colour="red" track="0">
 				<freqbone low="kick" med="snare" high="hihat"/>
 				<fader id="0" max="110.0"/>
 				<clip pad="0" scene="0"/>
@@ -18,58 +18,83 @@
 				<clip pad="4" scene="2"/>
 				<clip pad="5" scene="3"/>
 				<clip pad="12" scene="4"/>
-			</audio>
-			<audio id="rhythm" track="2">
+			</group>
+			<group id="rhythm" colour="yellow" track="2">
 				<freqbone mid="bosbotrance"/>
 				<clip pad="2" scene="0"/>
 				<clip pad="6" scene="1"/>
-			</audio>
-			<audio id="lead" track="3">
+			</group>
+			<group id="lead" colour="pink" track="3">
 				<freqbone high="bosbolead"/>
 				<clip pad="3" scene="0"/>
 				<clip pad="7" scene="1"/>
-			</audio>
-			<audio id="bass" track="1">
+			</group>
+			<group id="bass" colour="purple" track="1">
 				<freqbone low="bosbobass"/>
 				<clip pad="10" scene="0"/>
 				<clip pad="11" scene="1"/>
-			</audio>
-			<audio id="bits" track="3">
+			</group>
+			<group id="bits" colour="green" track="3">
 				<freqbone med="bosbobits" high="bosbohibits"/>
 				<clip pad="13" scene="3"/>
-			</audio>
+			</group>
 		</song>
 		<!-- HOROSKOPE -->
-		<song name="Horoskope" tempo="105" sceneoffset="6">
+		<song name="Horoskope" colour="red" tempo="105" sceneoffset="6">
 			<stage pan="0" zoom="0">
 				<layer id="gabbadrums"/>
 				<layer id="horoskope"/>
 			</stage>
-			<midi id="beats" track="4">
+			<group id="beats" colour="red" track="4">
 				<notebone note="A#3" bone="kick"/>
 				<notebone note="G2" bone="hat"/>
 				<notebone note="D#2" bone="snare"/>
 				<clip pad="0" scene="0"/>
-			</midi>
-			<midi id="bass" track="5">
+			</group>
+			<group id="bass" colour="purple" track="5">
 				<clip pad="12" scene="0"/>
-			</midi>
-			<midi id="bits" track="6">
+			</group>
+			<group id="bits" colour="green" track="6">
 				<clip pad="13" scene="0"/>
-			</midi>
-			<midi id="bits" track="7">
+			</group>
+			<group id="bits" colour="green" track="7">
 				<clip pad="14" scene="0"/>
-			</midi>
-			<midi id="lead" track="8">
+			</group>
+			<group id="lead" colour="pink" track="8">
 				<noterangebone low="48" high="72" bone="horoskope"/>
 				<clip pad="3" scene="0"/>
 				<clip pad="7" scene="1"/>
 				<clip pad="11" scene="2"/>
 				<clip pad="15" scene="3"/>
-			</midi>
+			</group>
+		</song>
+		<song name="Song Of Technology" colour="green" sceneoffset="10">
+			<group id="beats" colour="red" track="0">
+				<clip pad="0" scene="0"/>
+				<clip pad="4" scene="1"/>
+				<clip pad="12" scene="3"/>
+				<clip pad="7" scene="5"/>
+			</group>
+			<group id="bass" colour="purple" track="1">
+				<clip pad="1" scene="0"/>
+				<clip pad="5" scene="1"/>
+				<clip pad="9" scene="2"/>
+				<clip pad="13"scene="3" />
+				<clip pad="2" scene="4"/>
+				<clip pad="6" scene="5"/>
+			</group>
+			<group id="rhythm" colour="yellow" track="2">
+				<clip pad="14" scene="3"/>
+			</group>
+			<group id="lead" colour="pink" track="3">
+				<notebone note="C3" bone="ii"/>
+				<notebone note="D3" bone="oo" />
+				<notebone note="E3" bone="squint" />
+				<notebone note="F3" bone="frown"/>
+			</group>
 		</song>
 		<song name="Nothing" sceneoffset="0">
-			<midi id="beats" track="0">
+			<group id="beats" colour="red" track="0">
 				<clip pad="0" scene="0"/>
 				<clip pad="2" scene="1"/>
 				<clip pad="4" scene="2"/>
@@ -78,10 +103,10 @@
 				<clip pad="10" scene="5"/>
 				<clip pad="12" scene="6"/>
 				<clip pad="14" scene="7"/>
-			</midi>
+			</group>
 		</song>
 		<song name="Nothing" sceneoffset="0">
-			<midi id="beats" track="0">
+			<group id="beats" colour="red" track="0">
 				<clip pad="0" scene="0"/>
 				<clip pad="2" scene="1"/>
 				<clip pad="4" scene="2"/>
@@ -90,19 +115,7 @@
 				<clip pad="10" scene="5"/>
 				<clip pad="12" scene="6"/>
 				<clip pad="14" scene="7"/>
-			</midi>
-		</song>
-		<song name="Nothing" sceneoffset="0">
-			<midi id="beats" track="0">
-				<clip pad="0" scene="0"/>
-				<clip pad="2" scene="1"/>
-				<clip pad="4" scene="2"/>
-				<clip pad="6" scene="3"/>
-				<clip pad="8" scene="4"/>
-				<clip pad="10" scene="5"/>
-				<clip pad="12" scene="6"/>
-				<clip pad="14" scene="7"/>
-			</midi>
+			</group>
 		</song>
 	</songs>
 	<common>
@@ -122,14 +135,6 @@
 		</button>
 		<encoder id="6" name="effectrix" channel="3" cc="2"/>
 	</common>
-	<!-- CONFIG -->
-	<colours>
-		<colour id="beats" colour="red"/>
-		<colour id="rhythm" colour="green"/>
-		<colour id="lead" colour="yellow"/>
-		<colour id="bass" colour="blue"/>
-		<colour id="bits" colour="orange"/>
-	</colours>
 	<!--
 		PADS:
 		0  1  2  3

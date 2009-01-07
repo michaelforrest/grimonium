@@ -16,24 +16,24 @@ public class Song extends Observable{
 	public ClipGroup[] groups;
 	private int sceneOffset;
 	private boolean active;
+	public int colour;
 
 	public Song(XMLElement element) {
 		name = element.getStringAttribute("name");
 		stage = new Scene(element.getChild("stage"));
 		sceneOffset = element.getIntAttribute("sceneoffset");
 
-		XMLElement[] audios = element.getChildren("audio");
-		XMLElement[] midis = element.getChildren("midi");
-		groups = new ClipGroup[audios.length + midis.length];
+		colour = Colours.get(element.getAttribute("colour"));
 
-		addGroups(concat(audios,midis));
+		addGroups(element.getChildren("group"));
 	}
 
 	private void addGroups(XMLElement[] children) {
+		groups = new ClipGroup[children.length];
 		adjustSceneOffsets(children);
 		for (int i = 0; i < children.length; i++) {
 			XMLElement element = children[i];
-			ClipGroup group = createGroup(element);
+			ClipGroup group = new ClipGroup(element);
 			groups[i] = group;
 		}
 
@@ -52,14 +52,6 @@ public class Song extends Observable{
 			Integer newOffset = pad.getIntAttribute("scene") + sceneOffset;
 			pad.setAttribute("scene", newOffset.toString());
 		}
-	}
-
-	private ClipGroup createGroup(XMLElement element) {
-		String name = element.getName();
-		if (name.equals("audio")) return new AudioGroup(element);
-		if (name.equals("midi")) return new MidiGroup(element);
-		System.out.println("Error, only <audio> and <midi> elements are supported at the top level in a song - you tried "+ name);
-		return null;
 	}
 
 	public void activate() {
@@ -84,12 +76,6 @@ public class Song extends Observable{
 		notifyObservers(DEACTIVATED);
 	}
 
-	public static XMLElement[] concat(XMLElement[] A, XMLElement[] B) {
-		XMLElement[] C = new XMLElement[A.length + B.length];
-		System.arraycopy(A, 0, C, 0, A.length);
-		System.arraycopy(B, 0, C, A.length, B.length);
-		return C;
-	}
 	@Override
 	public String toString() {
 		return super.toString() + "[" + name + "]";

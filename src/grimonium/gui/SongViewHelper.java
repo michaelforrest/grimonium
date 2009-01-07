@@ -38,4 +38,8 @@ public class SongViewHelper extends Observable implements Observer{
 		return song.getSongPads().get(0).group.colour;
 	}
 
+	public int getSongColour() {
+		return song.colour;
+	}
+
 }

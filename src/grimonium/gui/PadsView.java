@@ -4,14 +4,13 @@ import processing.core.PApplet;
 import grimonium.set.SongPad;
 import microkontrol.MicroKontrol;
 
-public class PadsView {
+public class PadsView extends ViewBase{
 	private static final int SIZE = 80;
 	public PadView[] padViews;
-	private final PApplet applet;
 	private SongViewHelper helper;
 
 	public PadsView(PApplet applet, SongViewHelper helper) {
-		this.applet = applet;
+		super(applet);
 		this.helper = helper;
 		if(!PadView.initialised) PadView.init(applet);
 		addPadViews();
@@ -23,7 +22,7 @@ public class PadsView {
 		Rectangle first = new Rectangle(0, 0, SIZE, SIZE);
 		for (int i = 0; i < 16; i++) {
 			PadView view = new PadView(applet, mk.pads[i],helper);
-			Point p = first.topLeft().add(new Point(first.width * (i % 4), first.height * (int) (i / 4.0)));
+			Point p = getGridPoint(first, i, 4);
 			view.rect = new Rectangle(p.x, p.y, first.width, first.height);
 			padViews[i] = view;
 		}

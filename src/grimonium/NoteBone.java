@@ -13,6 +13,7 @@ public class NoteBone extends GroupElement implements Observer {
 	int note;
 	String bone;
 	Ableton.MidiTrack model;
+	private final float range;
 
 	public NoteBone(XMLElement xml) {
 		channel = 0;//xml.getIntAttribute("channel");
@@ -23,13 +24,16 @@ public class NoteBone extends GroupElement implements Observer {
 			PApplet.println(e.getMessage());
 		}
 		bone = xml.getStringAttribute("bone");
+		range = xml.getFloatAttribute("range",1f);
+
 		model = Ableton.midiTracks[channel];
 		model.addObserver(this);
 	}
 
 	public void update(Observable o, Object e) {
 		if (model.lastNote.getPitch() != note) return;
-		float value = (e.equals("note_on")) ? (float) model.lastNote.getVelocity() / 127.0f : 0.0f;
+		float value = (e.equals("note_on")) ? (float) model.lastNote.getVelocity() / 64.0f : 0.0f;
+		value = value * range;
 		PApplet.println("sending notebone " + bone + ": " + value);
 		Animata.setBone(bone, value);
 	}
