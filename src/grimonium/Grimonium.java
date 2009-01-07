@@ -24,6 +24,7 @@ package grimonium;
 // import ddf.minim.AudioInput;
 // import ddf.minim.Minim;
 import grimonium.gui.Animator;
+import grimonium.gui.ControlStripsSource;
 import grimonium.set.GrimoniumSet;
 import microkontrol.MicroKontrol;
 import netP5.NetAddress;
@@ -113,6 +114,11 @@ public class Grimonium {
 
 	public String version() {
 		return VERSION;
+	}
+
+	public ControlStripsSource getCommonControlStrips() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

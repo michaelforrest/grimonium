@@ -23,6 +23,7 @@ public class GrimoniumView extends ViewBase implements Observer {
 	private Animator zAnimator;
 	private SongViewHelper[] helpers;
 	private ButtonsView buttonsView;
+	private ControlStripsView controlStripsView;
 
 	// private PGraphicsOpenGL pGraphicsOpenGL;
 	// private GL gl;
@@ -41,15 +42,12 @@ public class GrimoniumView extends ViewBase implements Observer {
 
 		createViewHelpers();
 		addSongViews();
-		addButtonsView();
+		buttonsView = new ButtonsView(applet, grimonium);
+		controlStripsView = new ControlStripsView(applet,grimonium.getCommonControlStrips());
 
 		microKontrolLights = new MicroKontrolLights(applet, grimonium);
 
 		zAnimator = new Animator(0f, this);
-	}
-
-	private void addButtonsView() {
-		buttonsView = new ButtonsView(applet, grimonium);
 	}
 
 	private void createViewHelpers() {
@@ -84,6 +82,7 @@ public class GrimoniumView extends ViewBase implements Observer {
 		applet.pushMatrix();
 		applet.translate(0, 0, zAnimator.currentValue);
 		buttonsView.draw(-zAnimator.currentValue);
+		controlStripsView.draw(-zAnimator.currentValue);
 		drawSongViews();
 		applet.popMatrix();
 		clean = true;
