@@ -9,9 +9,16 @@
 				<layer id="trancecat"/>
 				<layer id="leadcat"/>
 			</stage>
+			<notes>
+				<text>This one goes around G
+					Play bendy synth.</text>
+			</notes>
 			<controls>
 				<fader id="0" name="BEATS" max="110.0" track="0">
-					<lcd text="BEATS" />
+					<lcd id="0" text="BEATS" />
+				</fader>
+				<fader id="1" name="FILTER" channel="3" cc="5">
+					<lcd id="1" text="FILTER"/>
 				</fader>
 				<encoder id="0" name="filter" channel="3" cc="5">
 					<lcd text="FILTER"/>
@@ -52,6 +59,10 @@
 				<layer id="gabbadrums"/>
 				<layer id="horoskope"/>
 			</stage>
+			<notes>
+				<image source="songs/violet_sky_score.png"/>
+				<text>Horoskope</text>
+			</notes>
 			<group id="beats" colour="red" track="4">
 				<notebone note="A#3" bone="kick"/>
 				<notebone note="G2" bone="hat"/>
@@ -76,6 +87,9 @@
 			</group>
 		</song>
 		<song name="Song Of Technology" colour="green" sceneoffset="10">
+			<notes>
+				<text>Lorem ipsum dolor sit amet.</text>
+			</notes>
 			<group id="beats" colour="red" track="0">
 				<clip pad="0"  scene="0"/>
 				<clip pad="4"  scene="1"/>
@@ -101,6 +115,16 @@
 			</group>
 		</song>
 		<song name="Nothing" sceneoffset="0">
+			<notes>
+				<text>Lorem ipsum dolor sit amet, consectetur adipisicing elit, 
+					sed do eiusmod tempor incididunt ut labore et dolore magna 
+					aliqua. Ut enim ad minim veniam, quis nostrud exercitation 
+					ullamco laboris nisi ut aliquip ex ea commodo consequat. 
+					Duis aute irure dolor in reprehenderit in voluptate velit
+					esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+					occaecat cupidatat non proident, sunt in culpa qui officia
+					 deserunt mollit anim id est laborum.</text>
+			</notes>
 			<group id="beats" colour="red" track="0">
 				<clip pad="0" scene="0"/>
 				<clip pad="2" scene="1"/>
@@ -113,6 +137,9 @@
 			</group>
 		</song>
 		<song name="Nothing" sceneoffset="0">
+			<notes>
+				<text>Lorem ipsum dolor sit amet</text>
+			</notes>
 			<group id="beats" colour="red" track="0">
 				<clip pad="0" scene="0"/>
 				<clip pad="2" scene="1"/>

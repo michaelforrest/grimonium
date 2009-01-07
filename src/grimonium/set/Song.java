@@ -21,6 +21,7 @@ public class Song extends Observable{
 	public int colour;
 	public GroupElement[] controls;
 	private String image;
+	private SongNotes notes;
 
 	public Song(XMLElement element) {
 		name = element.getStringAttribute("name");
@@ -31,7 +32,9 @@ public class Song extends Observable{
 		image = element.getAttribute("pic","gramophone1.png");
 		addGroups(element.getChildren("group"));
 		addControls(element.getChild("controls"));
+		notes = new SongNotes(element.getChild("notes"));
 	}
+
 
 	private void addControls(XMLElement child) {
 		if(child == null) {
@@ -124,6 +127,11 @@ public class Song extends Observable{
 
 	public String getImage() {
 		return image;
+	}
+
+
+	public SongNotes getSongNotes() {
+		return notes;
 	}
 
 }

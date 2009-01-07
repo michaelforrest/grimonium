@@ -16,9 +16,13 @@ public class GroupFader extends GroupElement implements FaderListener {
 	public int id;
 	public float value;
 	private String name;
+	private int channel;
+	private int cc;
 
 	public GroupFader(XMLElement element) {
-		track = element.getIntAttribute("track");
+		track = element.getIntAttribute("track", -1);
+		cc = element.getIntAttribute("cc", -1);
+		channel = element.getIntAttribute("channel",-1) + -1;
 		max = element.getFloatAttribute("max");
 		id = element.getIntAttribute("id", element.getParent().getIntAttribute("id"));
 		name = element.getStringAttribute("name");
@@ -33,7 +37,8 @@ public class GroupFader extends GroupElement implements FaderListener {
 		this.value = value;
 		turnOnLCDHints();
 		GuiController.update();
-		Ableton.fadeTrack(track, (int)(value * max));
+		if(track > -1) Ableton.fadeTrack(track, (int)(value * max));
+		if(cc >-1 && channel >- 1 ) Ableton.sendCC(channel,cc, fader.getValue());
  	}
 
 	public String getLabel() {
