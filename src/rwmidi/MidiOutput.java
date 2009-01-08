@@ -33,7 +33,7 @@ import javax.sound.midi.ShortMessage;
 public class MidiOutput {
 	Receiver receiver;
 	javax.sound.midi.MidiDevice device;
-	
+
 	MidiOutput(javax.sound.midi.MidiDevice device) throws MidiUnavailableException {
 		this.device = device;
 		if (!device.isOpen())
@@ -41,7 +41,7 @@ public class MidiOutput {
 		receiver = device.getReceiver();
 
 	}
-	
+
 	MidiOutput(Receiver _receiver) {
 		receiver = _receiver;
 	}
@@ -54,7 +54,7 @@ public class MidiOutput {
 		javax.sound.midi.MidiDevice.Info info = device.getDeviceInfo();
 		return info.getName() + " " + info.getVendor();
 	}
-	
+
 
 	/**
 	 * Send a NOTE ON message on this output.
@@ -75,7 +75,7 @@ public class MidiOutput {
 			return 0;
 		}
 	}
-	
+
 	/**
 	 * Send a NOTE OFF message on this output.
 	 * @param channel Channel on which to send the message
@@ -95,7 +95,7 @@ public class MidiOutput {
 			return 0;
 		}
 	}
-	
+
 	/**
 	 * Send a Controller change message on this output.
 	 * @param channel Channel on which to send the message
@@ -115,7 +115,7 @@ public class MidiOutput {
 			return 0;
 		}
 	}
-	
+
 	/**
 	 * Send a Program Change on this output
 	 * @param channel Channel on which to send the message
@@ -134,7 +134,7 @@ public class MidiOutput {
 			return 0;
 		}
 	}
-	
+
 	/**
 	 * Send a SYSEX MIDI message on this output
 	 * @param msg Bytes of the sysex message, have to contain 0xF0 at the beginning and 0xF7 at the end
@@ -155,6 +155,18 @@ public class MidiOutput {
 
 	public int sendSysex(SysexMessage msg) {
 		return sendSysex(msg.getMessage());
+	}
+
+	public int sendPitchBend(int channel, PitchBend pb){
+		ShortMessage msg = new ShortMessage();
+		try{
+			msg.setMessage(MidiEvent.PITCH_BEND, channel, pb.midiData1, pb.midiData2);
+			receiver.send(msg, -1);
+			return 1;
+		}catch(InvalidMidiDataException e){
+			e.printStackTrace();
+			return 0;
+		}
 	}
 
 
