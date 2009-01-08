@@ -124,10 +124,9 @@ public class MidiEvent extends ShortMessage{
 				return new Controller(midiChannel, midiData1, midiData2);
 			} else if (midiCommand == MidiEvent.PROGRAM_CHANGE) {
 				return new ProgramChange(midiData1);
+			}else if (midiCommand == MidiEvent.PITCH_BEND){
+				return new PitchBend(midiChannel,midiData1, midiData2);
 			}
-//			else if (midiCommand == MidiEvent.PITCH_BEND){
-//				return new PitchBend(midiChannel, midiData1, midiData2);
-//			}
 		}
 		return null;
 	}

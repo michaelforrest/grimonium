@@ -91,6 +91,7 @@ class Plug{
 	}
 
 	void callPlug(MidiInput _input, final MidiMessage msg){
+		
 		try{
 			if ((msg.getStatus() & 0xF0) != getStatus() && getStatus() != -1)
 				return;

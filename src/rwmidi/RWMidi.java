@@ -142,21 +142,21 @@ public class RWMidi {
 	public static void main(String args[]) {
 		class Foobar {
 			Foobar() {
-
+				System.out.println("Made a foobar");
 			}
 
-			void noteOnReceived(Note note) {
+			public void noteOnReceived(Note note) {
 				System.out.println("note on " + note);
 			}
 
-			void noteOffReceived(Note note) {
+			public void noteOffReceived(Note note) {
 				System.out.println("note off " + note);
 			}
 
-			void sysexReceived(SysexMessage msg) {
+			public void sysexReceived(SysexMessage msg) {
 				System.out.println("sysex " + msg);
 			}
-			void pitchBendReceived(PitchBend msg){
+			public void pitchBendReceived(PitchBend msg){
 				System.out.println("pitch bend " + msg.getValue());
 			}
 		}
@@ -174,7 +174,7 @@ public class RWMidi {
 		}
 
 		Foobar foo = new Foobar();
-		MidiInput input = RWMidi.getInputDevices()[5].createInput(foo);
+		MidiInput input = RWMidi.getInputDevices()[6].createInput(foo);
 		MidiOutput output = RWMidi.getOutputDevices()[1].createOutput();
 
 		JFrame frame = new JFrame();
