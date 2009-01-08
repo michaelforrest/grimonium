@@ -17,7 +17,7 @@ public class NoteBoneTest extends TestCase {
 	}
 	public void testThrowsErrorForInvalidFormat(){
 		try {
-			NoteParser.convertStringToNoteNumber("foo");
+			NoteParser.getNote("foo");
 			fail("should throw exception for bad number format");
 		} catch (BadNoteFormatException e) {
 			//expected
@@ -26,7 +26,7 @@ public class NoteBoneTest extends TestCase {
 
 	private int convert(String string) {
 		try {
-			return NoteParser.convertStringToNoteNumber(string);
+			return NoteParser.getNote(string);
 		} catch (BadNoteFormatException e) {
 			fail(e.getMessage());
 			return -1;
