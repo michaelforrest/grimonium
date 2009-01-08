@@ -1,12 +1,12 @@
 package grimonium.set;
 
-import java.util.ArrayList;
-
 import grimonium.GroupElement;
 import grimonium.gui.MixerSource;
+
+import java.util.ArrayList;
+
 import microkontrol.MicroKontrol;
 import microkontrol.controls.EncoderListener;
-import processing.core.PApplet;
 import processing.xml.XMLElement;
 
 public class GrimoniumSet extends CollectionWithSingleSelectedItem implements EncoderListener, MixerSource{
@@ -30,7 +30,6 @@ public class GrimoniumSet extends CollectionWithSingleSelectedItem implements En
 			GroupElement control = ElementFactory.create(element);
 			control.activate();
 			commonElements[i] = control;
-
 		}
 	}
 	private void activateSong(int index) {
@@ -38,10 +37,8 @@ public class GrimoniumSet extends CollectionWithSingleSelectedItem implements En
 	}
 	@Override
 	public void select(Object object) {
-//		System.out.println("running select method in GrimoniumSet class: current=" + current());
 		if(current() != null) current().deactivate();
 		super.select(object);
-//		System.out.println("Now activate " + current());
 		current().activate();
 	}
 	public Song current() {
@@ -51,7 +48,6 @@ public class GrimoniumSet extends CollectionWithSingleSelectedItem implements En
 		songs = new Song[children.length];
 		for (int i = 0; i < children.length; i++) {
 			XMLElement element = children[i];
-//			PApplet.println(element.getStringAttribute("name"));
 			Song song = new Song(element);
 			songs[i] = song;
 		}
@@ -71,6 +67,13 @@ public class GrimoniumSet extends CollectionWithSingleSelectedItem implements En
 	}
 	public int getColour() {
 		return 0x22000000 + Colours.get("blue");
+	}
+	public void previousSong() {
+		changeSelectionByOffset(-1);
+	}
+	public void nextSong() {
+		changeSelectionByOffset(1);
+
 	}
 
 

@@ -37,6 +37,7 @@ public class KeyboardMap extends GroupElement{
 		}
 
 		public void noteOffReceived(Note n) {
+			if(!active) return;
 			Ableton.sendNoteOff(channel,n.getPitch() + transpose,n.getVelocity());
 		}
 

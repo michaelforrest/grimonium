@@ -14,7 +14,7 @@
 					Play bendy synth.</text>
 			</notes>
 			<controls>
-				<!--><keyboard channel="2" transpose="0" low="0" high="120" />-->
+				<keyboard channel="2" transpose="0" low="0" high="120" />
 				<fader id="0" name="BEATS" max="110.0" track="0">
 					<lcd id="0" text="BEATS" />
 				</fader>

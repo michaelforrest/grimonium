@@ -34,7 +34,6 @@ void keyPressed(){
     grimonium = null;
  
     load();
-     
   }
 }
 void message(String m){
