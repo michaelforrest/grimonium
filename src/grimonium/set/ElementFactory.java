@@ -16,6 +16,7 @@ public class ElementFactory {
 		if(name.equals("encoder")) return new CCEncoder(element);
 		if(name.equals("button")) return new CCButton(element);
 		if(name.equals("faderbone")) return new FaderBone(element);
+		if(name.equals("keyboard")) return new KeyboardMap(element);
 		System.out.println("Error parsing element " + name);
 		return null;
 	}

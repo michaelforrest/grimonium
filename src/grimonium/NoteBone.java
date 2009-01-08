@@ -16,7 +16,7 @@ public class NoteBone extends GroupElement implements Observer {
 	private final float range;
 
 	public NoteBone(XMLElement xml) {
-		channel = 0;//xml.getIntAttribute("channel");
+		channel = xml.getIntAttribute("channel", 1) - 1;
 
 		try {
 			note = NoteParser.getNote(xml);
@@ -34,7 +34,7 @@ public class NoteBone extends GroupElement implements Observer {
 		if (model.lastNote.getPitch() != note) return;
 		float value = (e.equals("note_on")) ? (float) model.lastNote.getVelocity() / 64.0f : 0.0f;
 		value = value * range;
-		PApplet.println("sending notebone " + bone + ": " + value);
+		//PApplet.println("sending notebone " + bone + ": " + value);
 		Animata.setBone(bone, value);
 	}
 }

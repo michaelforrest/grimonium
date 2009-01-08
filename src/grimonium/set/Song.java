@@ -32,6 +32,7 @@ public class Song extends Observable{
 		image = element.getAttribute("pic","gramophone1.png");
 		addGroups(element.getChildren("group"));
 		addControls(element.getChild("controls"));
+
 		notes = new SongNotes(element.getChild("notes"));
 	}
 

@@ -63,7 +63,7 @@ public class Ableton extends MidiThing {
 		stop = new CC(xml.getChild("globalstop"));
 		play = new CC(xml.getChild("globalplay"));
 
-		mk.plugKeyboard(new KeyboardProxy());
+		//mk.plugKeyboard(new KeyboardProxy());
 
 		playPause = mk.buttons.get("ENTER");
 		playPause.listen("pressed", this, "togglePlaying");
@@ -89,7 +89,7 @@ public class Ableton extends MidiThing {
 			XMLElement element = children[i];
 			try {
 				midiTracks[i].stop = new Message(element.getIntAttribute("channel") - 1,
-											NoteParser.convertStringToNoteNumber(element.getStringAttribute("note")));
+											NoteParser.getNote(element.getStringAttribute("note")));
 			} catch (BadNoteFormatException e) {
 				System.out.println(e.toString());
 			}
@@ -118,15 +118,15 @@ public class Ableton extends MidiThing {
 	}
 
 	// TO ABLETON
-	public class KeyboardProxy {
-		public void noteOnReceived(Note n) {
-			to.sendNoteOn(0, n.getPitch(), n.getVelocity());
-		}
-
-		public void noteOffReceived(Note n) {
-			to.sendNoteOff(0, n.getPitch(), n.getVelocity());
-		}
-	}
+//	public class KeyboardProxy {
+//		public void noteOnReceived(Note n) {
+//			to.sendNoteOn(0, n.getPitch(), n.getVelocity());
+//		}
+//
+//		public void noteOffReceived(Note n) {
+//			to.sendNoteOff(0, n.getPitch(), n.getVelocity());
+//		}
+//	}
 
 	public class MidiTrack extends Observable {
 		public CC fader;
@@ -176,10 +176,13 @@ public class Ableton extends MidiThing {
 
 	}
 
-	private void sendNoteOn(int channel, Integer note, int velocity) {
-		to.sendNoteOn(channel, note, velocity);
+	public static void sendNoteOn(int channel, Integer pitch, int velocity) {
+		getInstance().to.sendNoteOn(channel, pitch, velocity);
 	}
 
+	public static void sendNoteOff(int channel, int pitch, int velocity) {
+		getInstance().to.sendNoteOff(channel, pitch, velocity);
+	}
 	public static void fadeTrack(int track, int value) {
 		CC fader = midiTracks[track].fader;
 		sendCC(fader.channel, fader.cc,value);

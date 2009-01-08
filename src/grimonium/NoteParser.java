@@ -25,6 +25,10 @@ public class NoteParser {
 	}
 	public static Integer getNote(XMLElement xml) throws BadNoteFormatException{
 		String noteName = xml.getStringAttribute("note");
+		return getNote(noteName);
+	}
+
+	public static Integer getNote(String noteName) throws BadNoteFormatException{
 		try {
 			return Integer.parseInt(noteName);
 
@@ -32,7 +36,6 @@ public class NoteParser {
 			return convertStringToNoteNumber(noteName);
 		}
 	}
-
 	/*
 	 * C0 = 0
 	 * C1 = 12
@@ -48,7 +51,7 @@ public class NoteParser {
 		<stop channel="13" note="C#4"/>
 		<stop channel="13" note="A4"/>
 	 */
-	public static Integer convertStringToNoteNumber(String string) throws BadNoteFormatException{
+	private static Integer convertStringToNoteNumber(String string) throws BadNoteFormatException{
 		try {
 			String[] matches = PApplet.match(string,"([^\\d-]*)(.*)");
 			Integer octave = Integer.parseInt( matches[2]);
