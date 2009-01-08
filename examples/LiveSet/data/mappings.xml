@@ -14,13 +14,13 @@
 					Play bendy synth.</text>
 			</notes>
 			<controls>
-				<keyboard channel="2" transpose="0" low="0" high="120" />
+				<keyboard>
+					<range channel="2" transpose="24" low="0" high="62">BASS</range>
+					<range channel="3" transpose="-12" low="63" high="120">STRINGS</range>
+				</keyboard>
 				<fader id="0" name="BEATS" max="110.0" track="0">
-					<lcd id="0" text="BEATS" />
+					<lcd id="0" text="BEATS"/>
 				</fader>
-				<encoder id="0" name="filter" channel="3" cc="5">
-					<lcd text="FILTER"/>
-				</encoder>
 			</controls>
 			<!-- should validate for repetition -->
 			<group id="beats" colour="red" track="0">
@@ -58,7 +58,6 @@
 				<layer id="horoskope"/>
 			</stage>
 			<notes>
-				<image source="songs/violet_sky_score.png"/>
 				<text/>
 			</notes>
 			<group id="beats" colour="red" track="4">
@@ -78,30 +77,41 @@
 			</group>
 			<group id="lead" colour="pink" track="8">
 				<noterangebone low="48" high="72" bone="horoskope"/>
-				<clip pad="3"  scene="0"/>
-				<clip pad="7"  scene="1"/>
+				<clip pad="3" scene="0"/>
+				<clip pad="7" scene="1"/>
 				<clip pad="11" scene="2"/>
 				<clip pad="15" scene="3"/>
 			</group>
 		</song>
+		<!--
+			*
+			SONG OF TECHNOLOGY
+			*
+		-->
 		<song name="Song Of Technology" colour="green" sceneoffset="10">
 			<notes>
 				<text>Lorem ipsum dolor sit amet.</text>
 			</notes>
 			<controls>
-				<keyboard channel="16" low="48" high="59" />
+				<keyboard channel="16" low="48" high="59">
+					stretch/phaser
+					loop/filter
+					xloop/crush
+					stutter/chorus
+					tonal/scratchloop
+					vinyl</keyboard>
 			</controls>
 			<group id="beats" colour="red" track="0">
-				<clip pad="0"  scene="0"/>
-				<clip pad="4"  scene="1"/>
+				<clip pad="0" scene="0"/>
+				<clip pad="4" scene="1"/>
 				<clip pad="12" scene="3"/>
-				<clip pad="7"  scene="5"/>
+				<clip pad="7" scene="5"/>
 			</group>
 			<group id="bass" colour="purple" track="1">
 				<clip pad="1" scene="0"/>
 				<clip pad="5" scene="1"/>
 				<clip pad="9" scene="2"/>
-				<clip pad="13"scene="3" />
+				<clip pad="13" scene="3"/>
 				<clip pad="2" scene="4"/>
 				<clip pad="6" scene="5"/>
 			</group>
@@ -110,46 +120,39 @@
 			</group>
 			<group id="lead" colour="pink" track="3">
 				<notebone note="C3" bone="ii"/>
-				<notebone note="D3" bone="oo" />
-				<notebone note="E3" bone="squint" />
+				<notebone note="D3" bone="oo"/>
+				<notebone note="E3" bone="squint"/>
 				<notebone note="F3" bone="frown"/>
 			</group>
 		</song>
-		<song name="Nothing" sceneoffset="0">
+		<!-- 
+			*
+			VIOLET SKY
+			*
+		-->
+		<song name="Violet Sky" sceneoffset="18" colour="purple">
 			<notes>
-				<text>Lorem ipsum dolor sit amet, consectetur adipisicing elit, 
-					sed do eiusmod tempor incididunt ut labore et dolore magna 
-					aliqua. Ut enim ad minim veniam, quis nostrud exercitation 
-					ullamco laboris nisi ut aliquip ex ea commodo consequat. 
-					Duis aute irure dolor in reprehenderit in voluptate velit
-					esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-					occaecat cupidatat non proident, sunt in culpa qui officia
-					 deserunt mollit anim id est laborum.</text>
+				<image source="songs/violet_sky_score.png"/>
+				<text/>
 			</notes>
-			<group id="beats" colour="red" track="0">
+			<controls>
+				<keyboard channel="3">piano</keyboard>
+				<fader id="0" name="strings" channel="3" cc="71">
+					<lcd text="strings"/>
+				</fader>
+			</controls>
+			<group id="beats" colour="purple" track="0">
 				<clip pad="0" scene="0"/>
-				<clip pad="2" scene="1"/>
-				<clip pad="4" scene="2"/>
-				<clip pad="6" scene="3"/>
-				<clip pad="8" scene="4"/>
-				<clip pad="10" scene="5"/>
-				<clip pad="12" scene="6"/>
-				<clip pad="14" scene="7"/>
+				<clip pad="4" scene="1"/>
+				<clip pad="8" scene="2"/>
 			</group>
-		</song>
-		<song name="Nothing" sceneoffset="0">
-			<notes>
-				<text>Lorem ipsum dolor sit amet</text>
-			</notes>
-			<group id="beats" colour="red" track="0">
-				<clip pad="0" scene="0"/>
-				<clip pad="2" scene="1"/>
-				<clip pad="4" scene="2"/>
-				<clip pad="6" scene="3"/>
-				<clip pad="8" scene="4"/>
-				<clip pad="10" scene="5"/>
-				<clip pad="12" scene="6"/>
-				<clip pad="14" scene="7"/>
+			<group id="bass" colour="blue" track="1">
+				<clip pad="1" scene="0"/>
+				<clip pad="5" scene="1"/>
+			</group>
+			<group id="trumpets" colour="orange" track="2">
+				<clip pad="6" scene="1"/>
+				<clip pad="10" scene="2"/>
 			</group>
 		</song>
 	</songs>
@@ -159,16 +162,15 @@
 		</encoder>
 		<button id="SETTING" name="reverb" channel="2" cc="107" type="gate"/>
 		<button id="MESSAGE" name="delay" channel="2" cc="106" type="toggle"/>
-		
 		<button id="SCENE" name="beatrepeat" channel="1" cc="10" type="gate">
-			<lcd id="5" text="GRID" />
+			<lcd id="5" text="GRID"/>
+			<lcd id="6" text="PITCH"/>
 		</button>
 		<encoder id="5" name="beatrepeat" channel="1" cc="4"/>
-		
+		<encoder id="6" name="pitch" channel="1" cc="5"/>
 		<button id="EXIT" name="effectrix" channel="16" note="C3">
 			<lcd id="6" text="PATTERN"/>
 		</button>
-		<encoder id="6" name="effectrix" channel="3" cc="2"/>
 		<fader id="7" name="FILTER" channel="3" cc="5">
 			<lcd id="7" text="FILTER"/>
 		</fader>

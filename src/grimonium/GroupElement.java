@@ -2,15 +2,17 @@ package grimonium;
 
 import grimonium.set.CCEncoder;
 import grimonium.set.GroupFader;
+import grimonium.set.KeyboardMap;
 
 import java.util.ArrayList;
+import java.util.Observable;
 
 import microkontrol.MicroKontrol;
 import microkontrol.controls.LCD;
 import processing.xml.XMLElement;
 
 
-public class GroupElement{
+public class GroupElement  {
 
 	protected boolean active = false;
 	public LCDHint[] lcds;
@@ -87,6 +89,13 @@ public class GroupElement{
 			if(element instanceof GroupFader) result.add((GroupFader)element);
 		}
 		return result;
+	}
+
+	public static KeyboardMap findKeyboard(GroupElement[] controls) {
+		for (GroupElement element : controls) {
+			if(element instanceof KeyboardMap) return (KeyboardMap) element;
+		}
+		return null;
 	}
 
 }

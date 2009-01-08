@@ -9,6 +9,7 @@ import processing.xml.XMLElement;
 import rwmidi.Note;
 
 public class KeyboardMap extends GroupElement{
+	public boolean[] noteList = new boolean[100];
 
 	public class KeyboardRange {
 
@@ -16,7 +17,11 @@ public class KeyboardMap extends GroupElement{
 		private int transpose;
 		private Integer low;
 		private Integer high;
+		private String label;
 
+		/*
+		 * octave numbers start at -1 - i.e. C0 = 0
+		 */
 		public KeyboardRange(XMLElement child) {
 			channel = child.getIntAttribute("channel") - 1;
 			transpose = child.getIntAttribute("transpose", 0);
@@ -26,6 +31,7 @@ public class KeyboardMap extends GroupElement{
 			} catch (BadNoteFormatException e) {
 				System.out.println(e.getMessage());
 			}
+			label = child.getContent();
 			MicroKontrol.getInstance().plugKeyboard(this);
 		}
 		public void noteOnReceived(Note n) {
@@ -34,11 +40,24 @@ public class KeyboardMap extends GroupElement{
 			if(pitch < low ) return;
 			if(pitch > high) return;
 			Ableton.sendNoteOn(channel, pitch + transpose,n.getVelocity());
+			noteList[pitch] = true;
+			GuiController.update();
 		}
 
 		public void noteOffReceived(Note n) {
 			if(!active) return;
-			Ableton.sendNoteOff(channel,n.getPitch() + transpose,n.getVelocity());
+			int pitch = n.getPitch();
+			Ableton.sendNoteOff(channel,pitch + transpose,n.getVelocity());
+			noteList[pitch] = false;
+			GuiController.update();
+
+		}
+		public boolean covers(int octaveNumber) {
+			// minusing 1 to normalise and then adding one back on to get the next octave:
+			int bottom = (octaveNumber + 1) * 12;
+			int top = bottom + 11;
+			return (bottom >= low && top <= high );
+
 		}
 
 	}
@@ -67,5 +86,15 @@ public class KeyboardMap extends GroupElement{
 		}
 
 	}
+
+	public String findOctaveLabel(int octaveNumber) {
+		for (KeyboardRange range : ranges) {
+			if(range.covers(octaveNumber)){
+				return range.label;
+			}
+		}
+		return "";
+	}
+
 
 }

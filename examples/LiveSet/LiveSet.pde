@@ -34,12 +34,13 @@ void keyPressed(){
   if(key == 'R' ){
     view = null;
     grimonium = null;
- 
+
     load();
   }
 }
 void message(String m){
-   textFont(font, 10);
-   fill(0xFF00CC00);
-   text(m, 0,10);
+  textFont(font, 10);
+  fill(0xFF00CC00);
+  text(m, 0,10);
 }
+

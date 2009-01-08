@@ -4,6 +4,7 @@ import grimonium.GroupElement;
 import grimonium.set.CCEncoder;
 import grimonium.set.Colours;
 import grimonium.set.GroupFader;
+import grimonium.set.KeyboardMap;
 import grimonium.set.Song;
 
 import java.util.ArrayList;
@@ -46,11 +47,11 @@ public class SongViewHelper extends Observable implements Observer, MixerSource{
 		return song.colour;
 	}
 
-	public ArrayList<CCEncoder> getCommonEncoders() {
+	public ArrayList<CCEncoder> getEncoders() {
 		return GroupElement.collectEncoders(song.controls);
 	}
 
-	public ArrayList<GroupFader> getCommonFaders() {
+	public ArrayList<GroupFader> getFaders() {
 		return GroupElement.collectFaders(song.controls);
 	}
 
@@ -70,6 +71,10 @@ public class SongViewHelper extends Observable implements Observer, MixerSource{
 	}
 	public int getColour() {
 		return Colours.get("blue") + ((1-getAlpha()) * 0xFF000000);
+	}
+
+	public KeyboardMap getKeyboardMap() {
+		return GroupElement.findKeyboard(song.controls);
 	}
 
 }

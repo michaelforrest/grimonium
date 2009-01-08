@@ -7,9 +7,9 @@ import java.util.ArrayList;
 
 public interface MixerSource {
 
-	ArrayList<CCEncoder> getCommonEncoders();
+	ArrayList<CCEncoder> getEncoders();
 
-	ArrayList<GroupFader> getCommonFaders();
+	ArrayList<GroupFader> getFaders();
 
 	int getColour();
 

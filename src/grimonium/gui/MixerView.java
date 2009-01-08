@@ -11,8 +11,8 @@ public class MixerView extends ViewBase {
 	public MixerView(PApplet applet, MixerSource source) {
 		super(applet);
 		this.source = source;
-		encodersView = new EncodersView(applet, source.getCommonEncoders());
-		fadersView = new FadersView(applet, source.getCommonFaders());
+		encodersView = new EncodersView(applet, source.getEncoders());
+		fadersView = new FadersView(applet, source.getFaders());
 	}
 	public void draw(){
 		applet.pushMatrix();

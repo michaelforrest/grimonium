@@ -58,11 +58,11 @@ public class GrimoniumSet extends CollectionWithSingleSelectedItem implements En
 	public Song currentSong() {
 		return current();
 	}
-	public ArrayList<CCEncoder> getCommonEncoders() {
+	public ArrayList<CCEncoder> getEncoders() {
 		return GroupElement.collectEncoders(commonElements);
 
 	}
-	public ArrayList<GroupFader> getCommonFaders() {
+	public ArrayList<GroupFader> getFaders() {
 		return GroupElement.collectFaders(commonElements);
 	}
 	public int getColour() {
