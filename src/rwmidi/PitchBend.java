@@ -10,11 +10,8 @@ public class PitchBend extends MidiEvent {
 		this.midiData1 = midiData1;
 		this.midiData2 = midiData2;
 // to 8192
-		System.out.println(midiData1 + "|" + midiData2);
-
+//		System.out.println(midiData1 + "|" + midiData2);
 		value =  (midiData1 + 128 * midiData2) - 0x2000;
-
-
 
 	}
 	public int getValue(){

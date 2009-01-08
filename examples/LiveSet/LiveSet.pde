@@ -8,7 +8,6 @@ import netP5.*;
 
 import grimonium.*;
 import grimonium.gui.*;
-import rwmidi.*;
 
 
 PFont font;

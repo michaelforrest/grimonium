@@ -8,7 +8,7 @@ import microkontrol.MicroKontrol;
 import processing.xml.XMLElement;
 import rwmidi.Note;
 
-public class KeyboardMap extends ControlMap{
+public class KeyboardMap extends MapBase{
 	public boolean[] noteList = new boolean[100];
 
 	public class KeyboardRange {

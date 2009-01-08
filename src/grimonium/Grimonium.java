@@ -31,6 +31,7 @@ import netP5.NetInfo;
 import oscP5.OscP5;
 import processing.core.PApplet;
 import processing.xml.XMLElement;
+import rwmidi.RWMidi;
 
 /**
  * @author Michael Forrest gonna use midi channel 4 for controller messages

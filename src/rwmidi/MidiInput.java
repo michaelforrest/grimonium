@@ -169,14 +169,15 @@ public class MidiInput implements Receiver {
 	 * @param channel Channel of the message, -1 for all channels
 	 * @param value MIDI status byte, -1 for all messages
 	 */
-	public void plug(final Object _object,
+	public boolean plug(final Object _object,
 			  final String _methodName,
 			  final int channel,
 			  final int value) {
 		if (Plug.objectHasMethod(_object, _methodName)) {
 			Plug plug = new Plug(_object, _methodName, channel, value);
 			plugList.add(plug);
-		}
+			return true;
+		}else{return false;}
 	}
 
 	/**
@@ -184,10 +185,10 @@ public class MidiInput implements Receiver {
 	 * @param object Callback object
 	 * @param methodName Name of the method of the callback object that will be called by the input
 	 */
-	public void plug(
+	public boolean plug(
 			final Object object,
 			final String methodName) {
-		plug(object, methodName, -1, -1);
+		return plug(object, methodName, -1, -1);
 	}
 
 	/**

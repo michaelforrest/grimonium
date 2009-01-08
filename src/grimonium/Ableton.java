@@ -1,6 +1,7 @@
 package grimonium;
 
 import grimonium.NoteParser.BadNoteFormatException;
+import grimonium.maps.JoystickMap;
 
 import java.util.Observable;
 
@@ -11,6 +12,7 @@ import processing.xml.XMLElement;
 import rwmidi.MidiInput;
 import rwmidi.MidiOutput;
 import rwmidi.Note;
+import rwmidi.PitchBend;
 
 public class Ableton extends MidiThing {
 	public class Message {
@@ -33,12 +35,9 @@ public class Ableton extends MidiThing {
 		}
 
 	}
-
-	private static final int CHANNEL = 4; // always 4 for this thing. just by
-											// convention.
 	private static Ableton instance;
-	MidiInput from;
-	MidiOutput to;
+	public MidiInput from;
+	public MidiOutput to;
 
 	public static MidiTrack[] midiTracks = new MidiTrack[16];
 	microkontrol.controls.Button playPause;
@@ -151,10 +150,6 @@ public class Ableton extends MidiThing {
 		}
 	}
 
-	public static void sendCC(int cc, int value) {
-		getInstance().sendController(CHANNEL, cc, value);
-	}
-
 	public static Ableton getInstance() {
 		if (instance == null) PApplet.println("error - you need to call Ableton.init(xml) before using getInstance()");
 		return instance;
@@ -172,7 +167,7 @@ public class Ableton extends MidiThing {
 	public static void stopTrack(int trackIndex) {
 		MidiTrack track = midiTracks[trackIndex];
 		System.out.println("stopping track " + trackIndex + " = " + track.stop.channel + ":" + track.stop.note);
-		instance.sendNoteOn(track.stop.channel,track.stop.note, 127);
+		sendNoteOn(track.stop.channel,track.stop.note, 127);
 
 	}
 
@@ -186,6 +181,10 @@ public class Ableton extends MidiThing {
 	public static void fadeTrack(int track, int value) {
 		CC fader = midiTracks[track].fader;
 		sendCC(fader.channel, fader.cc,value);
+
+	}
+	public static void sendPitchBend(int track, int value) {
+		//getInstance().to.send
 
 	}
 }

@@ -1,15 +1,54 @@
 package grimonium.maps;
 
 
+import grimonium.Ableton;
+
 import java.util.ArrayList;
 import java.util.Observable;
+import java.util.Observer;
 
 import microkontrol.MicroKontrol;
 import microkontrol.controls.LCD;
 import processing.xml.XMLElement;
 
 
-public class ControlMap  {
+public class MapBase  {
+	public class Message {
+		public final int channel;
+		public Message(int channel) {
+			this.channel = channel-1;
+		}
+	}
+	public class NoteMessage extends Message{
+		public final Integer note;
+		public int velocity = 64;
+		NoteMessage(int channel,int note){
+			super(channel);
+			this.note = note;
+		}
+		NoteMessage(int channel,int note, int velocity){
+			super(channel);
+			this.note = note;
+			this.velocity = velocity;
+		}
+
+	}
+	public class CC extends Message {
+		public final int cc;
+		public CC(int channel, int cc) {
+			super(channel);
+			this.cc = cc;
+		}
+		public CC(XMLElement xml) {
+			super(xml.getIntAttribute("channel"));
+			cc = xml.getIntAttribute("cc");
+		}
+
+		public void send(int value) {
+			Ableton.sendCC(channel, cc, value);
+		}
+
+	}
 
 	protected boolean active = false;
 	public LCDHint[] lcds;
@@ -70,26 +109,26 @@ public class ControlMap  {
 
 	}
 
-	public static ArrayList<EncoderMap> collectEncoders(ControlMap[] groupElements) {
+	public static ArrayList<EncoderMap> collectEncoders(MapBase[] groupElements) {
 		ArrayList<EncoderMap> result = new ArrayList<EncoderMap>();
 		if(groupElements == null) return result;
-		for (ControlMap element : groupElements) {
+		for (MapBase element : groupElements) {
 			if(element instanceof EncoderMap) result.add((EncoderMap)element);
 		}
 		return result;
 	}
 
-	public static ArrayList<FaderMap> collectFaders(ControlMap[] groupElements) {
+	public static ArrayList<FaderMap> collectFaders(MapBase[] groupElements) {
 		ArrayList<FaderMap> result = new ArrayList<FaderMap>();
 		if(groupElements == null) return result;
-		for (ControlMap element : groupElements) {
+		for (MapBase element : groupElements) {
 			if(element instanceof FaderMap) result.add((FaderMap)element);
 		}
 		return result;
 	}
 
-	public static KeyboardMap findKeyboard(ControlMap[] controls) {
-		for (ControlMap element : controls) {
+	public static KeyboardMap findKeyboard(MapBase[] controls) {
+		for (MapBase element : controls) {
 			if(element instanceof KeyboardMap) return (KeyboardMap) element;
 		}
 		return null;

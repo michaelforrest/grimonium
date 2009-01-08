@@ -12,7 +12,7 @@ import java.util.Observer;
 import processing.core.PApplet;
 import processing.xml.XMLElement;
 
-public class NoteBone extends ControlMap implements Observer {
+public class NoteBone extends MapBase implements Observer {
 
 
 	int channel;

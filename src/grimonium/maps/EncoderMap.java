@@ -8,7 +8,7 @@ import microkontrol.controls.LCD;
 import processing.core.PFont;
 import processing.xml.XMLElement;
 
-public class EncoderMap extends ControlMap implements EncoderListener {
+public class EncoderMap extends MapBase implements EncoderListener {
 	public Encoder encoder;
 	private int cc;
 	private int channel;

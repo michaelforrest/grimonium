@@ -24,6 +24,14 @@
 				<fader id="0" name="strings" channel="3" cc="71">
 					<lcd text="strings"/>
 				</fader>
+				<fader id="2" name="bassfreq" channel="2" cc="71">
+					<lcd text="bassfreq"/>
+				</fader>
+				<joystick>
+					<pitchbend channel="2"/>
+					<up name="mod wheel" channel="2" cc="1"/>
+				</joystick>
+				
 			</controls>
 			<!-- should validate for repetition -->
 			<group id="beats" colour="red" track="0">

@@ -6,7 +6,7 @@ import microkontrol.controls.FaderListener;
 import processing.xml.XMLElement;
 import grimonium.Animata;
 
-public class FaderBone extends ControlMap implements FaderListener {
+public class FaderBone extends MapBase implements FaderListener {
 
 	private int faderID;
 	private String bone;

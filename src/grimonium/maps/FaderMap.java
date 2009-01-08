@@ -8,7 +8,7 @@ import microkontrol.controls.FaderListener;
 import microkontrol.controls.LCD;
 import processing.xml.XMLElement;
 
-public class FaderMap extends ControlMap implements FaderListener {
+public class FaderMap extends MapBase implements FaderListener {
 
 	public Fader fader;
 	private int track;

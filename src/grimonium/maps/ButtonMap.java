@@ -13,7 +13,7 @@ import microkontrol.controls.LCD;
 import microkontrol.controls.LED;
 import processing.xml.XMLElement;
 
-public class ButtonMap extends ControlMap implements ButtonListener {
+public class ButtonMap extends MapBase implements ButtonListener {
 
 	private static final String GATE = "gate";
 	private static final String TOGGLE = "toggle";

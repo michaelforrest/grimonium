@@ -14,13 +14,13 @@ public class PitchShiftTrack extends ChromaticTrack{
 	}
 	public void pressed() {
 		super.pressed();
-		Ableton.sendCC(cc, 0);
+		Ableton.sendCC(4,cc, 0);
 	}
 	public void noteOnReceived(Note n) {
 		if(disabled) return;
 		int transpose = n.getPitch() - root;
         if(transpose < 0 || transpose > range) return;
-		Ableton.sendCC(cc, transpose);
+		Ableton.sendCC(4,cc, transpose);
 		LiveAPI.trigger(track, 0);
 	}
 }

@@ -1,7 +1,7 @@
 package grimonium.gui;
 
 import grimonium.maps.EncoderMap;
-import grimonium.maps.ControlMap;
+import grimonium.maps.MapBase;
 import grimonium.maps.FaderMap;
 import grimonium.maps.KeyboardMap;
 import grimonium.set.Song;
@@ -47,11 +47,11 @@ public class SongViewHelper extends Observable implements Observer, MixerSource{
 	}
 
 	public ArrayList<EncoderMap> getEncoders() {
-		return ControlMap.collectEncoders(song.controls);
+		return MapBase.collectEncoders(song.controls);
 	}
 
 	public ArrayList<FaderMap> getFaders() {
-		return ControlMap.collectFaders(song.controls);
+		return MapBase.collectFaders(song.controls);
 	}
 
 
@@ -73,7 +73,7 @@ public class SongViewHelper extends Observable implements Observer, MixerSource{
 	}
 
 	public KeyboardMap getKeyboardMap() {
-		return ControlMap.findKeyboard(song.controls);
+		return MapBase.findKeyboard(song.controls);
 	}
 
 }

@@ -4,7 +4,7 @@ import processing.xml.XMLElement;
 
 public class ElementFactory {
 
-	public static ControlMap create(XMLElement element) {
+	public static MapBase create(XMLElement element) {
 		String name = element.getName();
 		if(name.equals("notebone")) return new NoteBone(element);
 		if(name.equals("freqbone")) return new FreqBone(element);
