@@ -62,7 +62,7 @@
 			</stage>
 			<notes>
 				<image source="songs/violet_sky_score.png"/>
-				<text> </text>
+				<text/>
 			</notes>
 			<group id="beats" colour="red" track="4">
 				<notebone note="A#3" bone="kick"/>

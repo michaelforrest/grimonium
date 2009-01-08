@@ -14,6 +14,7 @@ public class SongNotes {
 
 	public SongNotes(XMLElement xml) {
 		text = xml.getChild("text").getContent();
+		if(text == null) text = "";
 		if(xml.getChild("image")!=null) imageSource = xml.getChild("image").getStringAttribute("source");
 	}
 
