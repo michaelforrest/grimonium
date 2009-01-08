@@ -1,8 +1,5 @@
-package grimonium;
+package grimonium.maps;
 
-import grimonium.set.CCEncoder;
-import grimonium.set.GroupFader;
-import grimonium.set.KeyboardMap;
 
 import java.util.ArrayList;
 import java.util.Observable;
@@ -12,7 +9,7 @@ import microkontrol.controls.LCD;
 import processing.xml.XMLElement;
 
 
-public class GroupElement  {
+public class ControlMap  {
 
 	protected boolean active = false;
 	public LCDHint[] lcds;
@@ -73,26 +70,26 @@ public class GroupElement  {
 
 	}
 
-	public static ArrayList<CCEncoder> collectEncoders(GroupElement[] groupElements) {
-		ArrayList<CCEncoder> result = new ArrayList<CCEncoder>();
+	public static ArrayList<EncoderMap> collectEncoders(ControlMap[] groupElements) {
+		ArrayList<EncoderMap> result = new ArrayList<EncoderMap>();
 		if(groupElements == null) return result;
-		for (GroupElement element : groupElements) {
-			if(element instanceof CCEncoder) result.add((CCEncoder)element);
+		for (ControlMap element : groupElements) {
+			if(element instanceof EncoderMap) result.add((EncoderMap)element);
 		}
 		return result;
 	}
 
-	public static ArrayList<GroupFader> collectFaders(GroupElement[] groupElements) {
-		ArrayList<GroupFader> result = new ArrayList<GroupFader>();
+	public static ArrayList<FaderMap> collectFaders(ControlMap[] groupElements) {
+		ArrayList<FaderMap> result = new ArrayList<FaderMap>();
 		if(groupElements == null) return result;
-		for (GroupElement element : groupElements) {
-			if(element instanceof GroupFader) result.add((GroupFader)element);
+		for (ControlMap element : groupElements) {
+			if(element instanceof FaderMap) result.add((FaderMap)element);
 		}
 		return result;
 	}
 
-	public static KeyboardMap findKeyboard(GroupElement[] controls) {
-		for (GroupElement element : controls) {
+	public static KeyboardMap findKeyboard(ControlMap[] controls) {
+		for (ControlMap element : controls) {
 			if(element instanceof KeyboardMap) return (KeyboardMap) element;
 		}
 		return null;

@@ -1,4 +1,4 @@
-package grimonium.set;
+package grimonium.gui;
 
 import java.util.Hashtable;
 

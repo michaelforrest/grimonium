@@ -1,4 +1,10 @@
-package grimonium;
+package grimonium.maps;
+
+import grimonium.Ableton;
+import grimonium.Animata;
+import grimonium.NoteParser;
+import grimonium.Ableton.MidiTrack;
+import grimonium.NoteParser.BadNoteFormatException;
 
 import java.util.Observable;
 import java.util.Observer;
@@ -6,7 +12,7 @@ import java.util.Observer;
 import processing.core.PApplet;
 import processing.xml.XMLElement;
 
-public class NoteBone extends GroupElement implements Observer {
+public class NoteBone extends ControlMap implements Observer {
 
 
 	int channel;

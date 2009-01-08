@@ -1,22 +1,20 @@
-package grimonium.set;
+package grimonium.maps;
 
-import grimonium.FreqBone;
-import grimonium.GroupElement;
-import grimonium.NoteBone;
 import processing.xml.XMLElement;
 
 public class ElementFactory {
 
-	public static GroupElement create(XMLElement element) {
+	public static ControlMap create(XMLElement element) {
 		String name = element.getName();
 		if(name.equals("notebone")) return new NoteBone(element);
 		if(name.equals("freqbone")) return new FreqBone(element);
 		if(name.equals("noterangebone")) return new NoteRangeBone(element);
-		if(name.equals("fader")) return new GroupFader(element);
-		if(name.equals("encoder")) return new CCEncoder(element);
-		if(name.equals("button")) return new CCButton(element);
+		if(name.equals("fader")) return new FaderMap(element);
+		if(name.equals("encoder")) return new EncoderMap(element);
+		if(name.equals("button")) return new ButtonMap(element);
 		if(name.equals("faderbone")) return new FaderBone(element);
 		if(name.equals("keyboard")) return new KeyboardMap(element);
+		if(name.equals("joystick")) return new JoystickMap(element);
 		System.out.println("Error parsing element " + name);
 		return null;
 	}

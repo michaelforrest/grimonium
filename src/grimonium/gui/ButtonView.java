@@ -1,8 +1,7 @@
 package grimonium.gui;
 
 import grimonium.Grimonium;
-import grimonium.set.CCButton;
-import grimonium.set.Colours;
+import grimonium.maps.ButtonMap;
 import microkontrol.controls.Button;
 import processing.core.PApplet;
 import processing.core.PImage;
@@ -13,7 +12,7 @@ public class ButtonView extends ViewBase{
 	private final Button button;
 	private Point position;
 	private String name;
-	private CCButton ccButton;
+	private ButtonMap ccButton;
 	private static PImage background;
 	private static PImage highlight;
 	private static PImage power;
@@ -22,7 +21,7 @@ public class ButtonView extends ViewBase{
 		super(applet);
 		this.button = button;
 		this.name = id;
-		this.ccButton = CCButton.findByButtonName(id);
+		this.ccButton = ButtonMap.findByButtonName(id);
 		if(background == null) initGraphics();
 	}
 

@@ -9,6 +9,7 @@ import java.util.Observable;
 import java.util.Observer;
 
 import processing.core.PApplet;
+import processing.core.PImage;
 
 public class GrimoniumView extends ViewBase implements Observer {
 	private static final int Z_SPACING = 200;
@@ -22,6 +23,7 @@ public class GrimoniumView extends ViewBase implements Observer {
 	private SongViewHelper[] helpers;
 	private ButtonsView buttonsView;
 	private MixerView mixerView;
+	private PImage branding;
 
 	public GrimoniumView(PApplet applet, Grimonium grimonium) {
 		super(applet);
@@ -34,6 +36,8 @@ public class GrimoniumView extends ViewBase implements Observer {
 
 		this.grimonium = grimonium;
 		grimonium.set.addObserver(this);
+
+		branding = applet.loadImage("branding.png");
 
 		createViewHelpers();
 		addSongViews();
@@ -73,6 +77,8 @@ public class GrimoniumView extends ViewBase implements Observer {
 		drawCommonElements();
 		drawSongViews();
 		applet.popMatrix();
+		applet.tint(255);
+		applet.image(branding, 0, 0);
 		clean = true;
 	}
 

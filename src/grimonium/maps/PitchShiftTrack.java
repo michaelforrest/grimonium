@@ -1,5 +1,7 @@
-package grimonium;
+package grimonium.maps;
 
+import grimonium.Ableton;
+import grimonium.LiveAPI;
 import processing.xml.XMLElement;
 import rwmidi.Note;
 

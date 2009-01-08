@@ -1,9 +1,8 @@
-package grimonium.set;
+package grimonium.maps;
 
 import processing.xml.XMLElement;
-import grimonium.GroupElement;
 
-public class NoteRangeBone extends GroupElement {
+public class NoteRangeBone extends ControlMap {
 
 	public NoteRangeBone(XMLElement element) {
 		// TODO Auto-generated constructor stub

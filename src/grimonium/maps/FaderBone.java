@@ -1,13 +1,12 @@
-package grimonium.set;
+package grimonium.maps;
 
 import microkontrol.MicroKontrol;
 import microkontrol.controls.Fader;
 import microkontrol.controls.FaderListener;
 import processing.xml.XMLElement;
 import grimonium.Animata;
-import grimonium.GroupElement;
 
-public class FaderBone extends GroupElement implements FaderListener {
+public class FaderBone extends ControlMap implements FaderListener {
 
 	private int faderID;
 	private String bone;

@@ -1,15 +1,15 @@
 package grimonium.gui;
 
-import grimonium.set.CCEncoder;
-import grimonium.set.GroupFader;
+import grimonium.maps.EncoderMap;
+import grimonium.maps.FaderMap;
 
 import java.util.ArrayList;
 
 public interface MixerSource {
 
-	ArrayList<CCEncoder> getEncoders();
+	ArrayList<EncoderMap> getEncoders();
 
-	ArrayList<GroupFader> getFaders();
+	ArrayList<FaderMap> getFaders();
 
 	int getColour();
 

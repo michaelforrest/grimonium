@@ -1,6 +1,9 @@
 package grimonium.set;
 
-import grimonium.GroupElement;
+import grimonium.gui.Colours;
+import grimonium.maps.ElementFactory;
+import grimonium.maps.ControlMap;
+import grimonium.maps.SongNotes;
 
 import java.util.ArrayList;
 import java.util.Observable;
@@ -19,7 +22,7 @@ public class Song extends Observable{
 	private int sceneOffset;
 	private boolean active;
 	public int colour;
-	public GroupElement[] controls;
+	public ControlMap[] controls;
 	private String image;
 	private SongNotes notes;
 
@@ -39,11 +42,11 @@ public class Song extends Observable{
 
 	private void addControls(XMLElement child) {
 		if(child == null) {
-			controls = new GroupElement[0];
+			controls = new ControlMap[0];
 			return;
 		}
 		XMLElement[] children = child.getChildren();
-		controls = new GroupElement[children.length];
+		controls = new ControlMap[children.length];
 		for (int i = 0; i < children.length; i++) {
 			XMLElement element = children[i];
 			controls[i] = ElementFactory.create(element);
@@ -82,7 +85,7 @@ public class Song extends Observable{
 		mainLCD.setColor("orange");
 
 		for (ClipGroup group : groups) group.activate();
-		for (GroupElement control : controls) control.activate();
+		for (ControlMap control : controls) control.activate();
 
 		setActive(true);
 		setChanged();
@@ -90,7 +93,7 @@ public class Song extends Observable{
 	}
 	public void deactivate(){
 		for (ClipGroup group : groups) group.deactivate();
-		for (GroupElement control : controls) control.deactivate();
+		for (ControlMap control : controls) control.deactivate();
 		setActive(false);
 		setChanged();
 		notifyObservers(DEACTIVATED);

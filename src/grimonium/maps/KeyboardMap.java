@@ -1,14 +1,14 @@
-package grimonium.set;
+package grimonium.maps;
 
 import grimonium.Ableton;
-import grimonium.GroupElement;
 import grimonium.NoteParser;
 import grimonium.NoteParser.BadNoteFormatException;
+import grimonium.set.GuiController;
 import microkontrol.MicroKontrol;
 import processing.xml.XMLElement;
 import rwmidi.Note;
 
-public class KeyboardMap extends GroupElement{
+public class KeyboardMap extends ControlMap{
 	public boolean[] noteList = new boolean[100];
 
 	public class KeyboardRange {

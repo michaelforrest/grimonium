@@ -1,7 +1,11 @@
 package grimonium.set;
 
-import grimonium.GroupElement;
+import grimonium.gui.Colours;
 import grimonium.gui.MixerSource;
+import grimonium.maps.EncoderMap;
+import grimonium.maps.ElementFactory;
+import grimonium.maps.ControlMap;
+import grimonium.maps.FaderMap;
 
 import java.util.ArrayList;
 
@@ -13,7 +17,7 @@ public class GrimoniumSet extends CollectionWithSingleSelectedItem implements En
 
 	public Song[] songs;
 	private MicroKontrol mk;
-	private GroupElement[] commonElements;
+	private ControlMap[] commonElements;
 	public GrimoniumSet(XMLElement child) {
 		if(!child.getName().equals("set")) return;
 		mk = MicroKontrol.getInstance();
@@ -24,10 +28,10 @@ public class GrimoniumSet extends CollectionWithSingleSelectedItem implements En
 		mk.encoders[8].listen(this);
 	}
 	private void addCommon(XMLElement child) {
-		commonElements = new GroupElement[child.getChildren().length];
+		commonElements = new ControlMap[child.getChildren().length];
 		for (int i = 0; i < child.getChildren().length; i++) {
 			XMLElement element = child.getChildren()[i];
-			GroupElement control = ElementFactory.create(element);
+			ControlMap control = ElementFactory.create(element);
 			control.activate();
 			commonElements[i] = control;
 		}
@@ -58,12 +62,12 @@ public class GrimoniumSet extends CollectionWithSingleSelectedItem implements En
 	public Song currentSong() {
 		return current();
 	}
-	public ArrayList<CCEncoder> getEncoders() {
-		return GroupElement.collectEncoders(commonElements);
+	public ArrayList<EncoderMap> getEncoders() {
+		return ControlMap.collectEncoders(commonElements);
 
 	}
-	public ArrayList<GroupFader> getFaders() {
-		return GroupElement.collectFaders(commonElements);
+	public ArrayList<FaderMap> getFaders() {
+		return ControlMap.collectFaders(commonElements);
 	}
 	public int getColour() {
 		return 0x22000000 + Colours.get("blue");

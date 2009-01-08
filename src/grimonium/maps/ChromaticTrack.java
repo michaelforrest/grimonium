@@ -1,5 +1,7 @@
-package grimonium;
+package grimonium.maps;
 
+import grimonium.Ableton;
+import grimonium.LiveAPI;
 import microkontrol.MicroKontrol;
 import microkontrol.controls.ButtonListener;
 import microkontrol.controls.FaderListener;

@@ -1,6 +1,6 @@
 package grimonium.gui;
 
-import grimonium.set.SongNotes;
+import grimonium.maps.SongNotes;
 import processing.core.PApplet;
 
 public class SongNotesView extends ViewBase {

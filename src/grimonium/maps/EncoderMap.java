@@ -1,7 +1,6 @@
-package grimonium.set;
+package grimonium.maps;
 
 import grimonium.Ableton;
-import grimonium.GroupElement;
 import microkontrol.MicroKontrol;
 import microkontrol.controls.Encoder;
 import microkontrol.controls.EncoderListener;
@@ -9,7 +8,7 @@ import microkontrol.controls.LCD;
 import processing.core.PFont;
 import processing.xml.XMLElement;
 
-public class CCEncoder extends GroupElement implements EncoderListener {
+public class EncoderMap extends ControlMap implements EncoderListener {
 	public Encoder encoder;
 	private int cc;
 	private int channel;
@@ -17,7 +16,7 @@ public class CCEncoder extends GroupElement implements EncoderListener {
 	private final String name;
 
 	//<encoder id="7" name="tempo" channel="1" cc="2"/>
-	public CCEncoder(XMLElement element) {
+	public EncoderMap(XMLElement element) {
 		addLCDs(element,LCD.ORANGE);
 		turnOnLCDHints();
 		cc = element.getIntAttribute("cc");

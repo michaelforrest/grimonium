@@ -1,7 +1,6 @@
 package grimonium.gui;
 
-import grimonium.set.Colours;
-import grimonium.set.GroupFader;
+import grimonium.maps.FaderMap;
 
 import java.util.ArrayList;
 
@@ -12,16 +11,16 @@ public class FadersView extends ViewBase {
 	private static final int WIDTH = 40;
 	private static final float HEIGHT = 100;
 	private static final float THUMB_HEIGHT = 5;
-	private final ArrayList<GroupFader> faders;
+	private final ArrayList<FaderMap> faders;
 
-	public FadersView(PApplet applet, ArrayList<GroupFader> arrayList) {
+	public FadersView(PApplet applet, ArrayList<FaderMap> arrayList) {
 		super(applet);
 		this.faders = arrayList;
 	}
 
 	public void draw(int background) {
 		applet.pushMatrix();
-		for (GroupFader fader : faders) {
+		for (FaderMap fader : faders) {
 			int x = fader.id * WIDTH;
 			applet.fill(background);
 			drawFader(fader,x);
@@ -30,7 +29,7 @@ public class FadersView extends ViewBase {
 
 	}
 
-	private void drawFader(GroupFader fader, int x) {
+	private void drawFader(FaderMap fader, int x) {
 		applet.rect(x, 0, WIDTH, HEIGHT);
 		applet.fill(0xFF000000 + Colours.get("purple"));
 		applet.rect(x, (1-fader.value) * HEIGHT-THUMB_HEIGHT,WIDTH, THUMB_HEIGHT );

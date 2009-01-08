@@ -131,7 +131,7 @@ public class Ableton extends MidiThing {
 	public class MidiTrack extends Observable {
 		public CC fader;
 		public Message stop;
-		Note lastNote;
+		public Note lastNote;
 		int channel;
 
 		MidiTrack(int channel) {

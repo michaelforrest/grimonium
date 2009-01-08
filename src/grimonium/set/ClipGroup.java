@@ -1,10 +1,8 @@
 package grimonium.set;
 
-import java.util.Hashtable;
-
-import grimonium.FreqBone;
-import grimonium.GroupElement;
-import grimonium.NoteBone;
+import grimonium.gui.Colours;
+import grimonium.maps.ElementFactory;
+import grimonium.maps.ControlMap;
 import processing.xml.XMLElement;
 
 public class ClipGroup {
@@ -12,7 +10,7 @@ public class ClipGroup {
 
 
 	private int track;
-	private GroupElement[] elements;
+	private ControlMap[] elements;
 	SongPad[] pads;
 	private String id;
 	public int colour;
@@ -51,7 +49,7 @@ public class ClipGroup {
 		pads = new SongPad[length];
 		int index = 0;
 		for (int i = 0; i < elements.length; i++) {
-			GroupElement element = elements[i];
+			ControlMap element = elements[i];
 			if(element instanceof SongPad ){
 				pads[index] = (SongPad) element;
 				index ++;
@@ -62,14 +60,14 @@ public class ClipGroup {
 	private int countPads() {
 		int length = 0;
 		for (int i = 0; i < elements.length; i++) {
-			GroupElement element = elements[i];
+			ControlMap element = elements[i];
 			if (element instanceof SongPad) length ++;
 		}
 		return length;
 	}
 
 	private void addElements(XMLElement[] children) {
-		elements = new GroupElement[children.length];
+		elements = new ControlMap[children.length];
 		for (int i = 0; i < children.length; i++) {
 			XMLElement element = children[i];
 			element.setAttribute("track", Integer.toString(track));
@@ -79,7 +77,7 @@ public class ClipGroup {
 
 	}
 
-	private GroupElement createElement(XMLElement element) {
+	private ControlMap createElement(XMLElement element) {
 		String name = element.getName();
 		if(name.equals("clip")) return new SongPad(element, this);
 		return ElementFactory.create(element);
@@ -87,14 +85,14 @@ public class ClipGroup {
 
 	public void activate() {
 		for (int i = 0; i < elements.length; i++) {
-			GroupElement element = elements[i];
+			ControlMap element = elements[i];
 			element.activate();
 		}
 	}
 
 	public void deactivate() {
 		for (int i = 0; i < elements.length; i++) {
-			GroupElement element = elements[i];
+			ControlMap element = elements[i];
 			element.deactivate();
 		}
 

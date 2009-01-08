@@ -1,11 +1,11 @@
-package grimonium.set;
+package grimonium.maps;
 
 import java.util.Hashtable;
 
 import grimonium.Ableton;
-import grimonium.GroupElement;
 import grimonium.NoteParser;
 import grimonium.NoteParser.BadNoteFormatException;
+import grimonium.set.GuiController;
 import microkontrol.MicroKontrol;
 import microkontrol.controls.Button;
 import microkontrol.controls.ButtonListener;
@@ -13,12 +13,12 @@ import microkontrol.controls.LCD;
 import microkontrol.controls.LED;
 import processing.xml.XMLElement;
 
-public class CCButton extends GroupElement implements ButtonListener {
+public class ButtonMap extends ControlMap implements ButtonListener {
 
 	private static final String GATE = "gate";
 	private static final String TOGGLE = "toggle";
 
-	private static Hashtable<String, CCButton> buttons = new Hashtable<String, CCButton>();
+	private static Hashtable<String, ButtonMap> buttons = new Hashtable<String, ButtonMap>();
 
 	private boolean on;
 	private Button button;
@@ -32,7 +32,7 @@ public class CCButton extends GroupElement implements ButtonListener {
 	 * 	<button id="SETTING" name="reverb" channel="2" cc="107" type="gate"/>
 	 *	<button id="EXIT" name="delay" channel="2" cc="106" type="toggle"/>
 	 */
-	public CCButton(XMLElement element) {
+	public ButtonMap(XMLElement element) {
 		// TODO: refactor my approach to CC / note entities  throughout the application
 		on = false;
 		type = element.getStringAttribute("type", "gate");
@@ -119,7 +119,7 @@ public class CCButton extends GroupElement implements ButtonListener {
 
 
 
-	public static CCButton findByButtonName(String id) {
+	public static ButtonMap findByButtonName(String id) {
 		return buttons.get(id);
 	}
 

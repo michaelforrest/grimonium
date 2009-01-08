@@ -6,11 +6,11 @@ import microkontrol.controls.LED;
 import microkontrol.controls.Pad;
 import grimonium.Ableton;
 import grimonium.ClipDataResponder;
-import grimonium.GroupElement;
 import grimonium.LiveAPI;
+import grimonium.maps.ControlMap;
 import processing.xml.XMLElement;
 
-public class SongPad extends GroupElement implements ClipDataResponder, ButtonListener{
+public class SongPad extends ControlMap implements ClipDataResponder, ButtonListener{
 	public static final String CHANGED = "changed";
 	public int pad_id ;
 	public int scene;

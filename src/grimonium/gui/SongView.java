@@ -63,8 +63,9 @@ public class SongView implements Observer {
 		applet.pushMatrix();
 		applet.rotate(-PApplet.PI * .5f);
 		applet.fill(0xFFFFFFFF,helper.getTint());
-		applet.textFont(TITLE,40);
+		applet.textFont(TITLE,24);
 		applet.textLeading(50);
+		//applet.textAlign(PApplet.CENTER)l
 		applet.text(song.name,-applet.height, 0.11f*applet.width);
 		applet.popMatrix();
 	}

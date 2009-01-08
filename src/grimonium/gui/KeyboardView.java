@@ -1,6 +1,6 @@
 package grimonium.gui;
 
-import grimonium.set.KeyboardMap;
+import grimonium.maps.KeyboardMap;
 import processing.core.PApplet;
 import processing.core.PImage;
 
