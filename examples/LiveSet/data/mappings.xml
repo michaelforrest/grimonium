@@ -10,16 +10,13 @@
 				<layer id="leadcat"/>
 			</stage>
 			<notes>
-				<text>This one goes around G
+				<text>This one goes around G and D
 					Play bendy synth.</text>
 			</notes>
 			<controls>
 				<keyboard channel="2" transpose="0" low="0" high="120" />
 				<fader id="0" name="BEATS" max="110.0" track="0">
 					<lcd id="0" text="BEATS" />
-				</fader>
-				<fader id="1" name="FILTER" channel="3" cc="5">
-					<lcd id="1" text="FILTER"/>
 				</fader>
 				<encoder id="0" name="filter" channel="3" cc="5">
 					<lcd text="FILTER"/>
@@ -91,6 +88,9 @@
 			<notes>
 				<text>Lorem ipsum dolor sit amet.</text>
 			</notes>
+			<controls>
+				<keyboard channel="16" low="48" high="59" />
+			</controls>
 			<group id="beats" colour="red" track="0">
 				<clip pad="0"  scene="0"/>
 				<clip pad="4"  scene="1"/>
@@ -165,10 +165,13 @@
 		</button>
 		<encoder id="5" name="beatrepeat" channel="1" cc="4"/>
 		
-		<button id="EXIT" name="effectrix" channel="3" cc="1" type="gate">
+		<button id="EXIT" name="effectrix" channel="16" note="C3">
 			<lcd id="6" text="PATTERN"/>
 		</button>
 		<encoder id="6" name="effectrix" channel="3" cc="2"/>
+		<fader id="7" name="FILTER" channel="3" cc="5">
+			<lcd id="7" text="FILTER"/>
+		</fader>
 	</common>
 	<!--
 		PADS:
