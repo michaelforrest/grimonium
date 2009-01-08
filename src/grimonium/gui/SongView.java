@@ -91,7 +91,7 @@ public class SongView implements Observer {
 	}
 
 	public void update(Observable o, Object arg) {
-		if(arg == Song.ACTIVATED) assignPads();
+		//if(arg == Song.ACTIVATED) assignPads();
 	}
 
 }

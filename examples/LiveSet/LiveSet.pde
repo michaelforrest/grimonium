@@ -29,6 +29,8 @@ void draw(){
 
 }  
 void keyPressed(){
+  if(key  == UP) grimonium.set.previousSong();
+  if(key == DOWN) grimonium.set.nextSong();
   if(key == 'R' ){
     view = null;
     grimonium = null;

@@ -59,39 +59,13 @@ public class Grimonium {
 
 		XMLElement mapping = new XMLElement(applet, mapping_xml);
 		loadSet(mapping);
-		addChromaticTracks(mapping.getChildren("chromatic_track"));
-		addMidiEffectChromaticTracks(mapping.getChildren("pitch_shift_track"));
-		addNoteBones(mapping.getChildren("notebone"));
+
 	}
 
 	private void loadSet(XMLElement child) {
 		PApplet.println("name:" + child.getName());
 		set = new GrimoniumSet(child);
 
-
-	}
-
-
-	private void addNoteBones(XMLElement[] children) {
-		for (int i = 0; i < children.length; i++) {
-			XMLElement element = children[i];
-			new NoteBone(element);
-		}
-	}
-
-	private void addMidiEffectChromaticTracks(XMLElement[] children) {
-		for (int i = 0; i < children.length; i++) {
-			XMLElement trackXml = children[i];
-			new PitchShiftTrack(trackXml);
-		}
-
-	}
-
-	private void addChromaticTracks(XMLElement[] chromaticTracks) {
-		for (int i = 0; i < chromaticTracks.length; i++) {
-			XMLElement trackXml = chromaticTracks[i];
-			new ChromaticTrack(trackXml);
-		}
 
 	}
 

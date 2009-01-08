@@ -54,9 +54,6 @@ public class SongViewHelper extends Observable implements Observer, MixerSource{
 		return GroupElement.collectFaders(song.controls);
 	}
 
-	public int getColour() {
-		return Colours.get("blue") + ((1-getAlpha()) * 0xFF000000);
-	}
 
 	public String getImage() {
 		return song.getImage();
@@ -65,6 +62,14 @@ public class SongViewHelper extends Observable implements Observer, MixerSource{
 	public boolean isInvisible() {
 
 		return getAlpha() == 0;
+	}
+	// TODO: work out wtf is going on with these minus numbers...
+	public int getColourWithAlpha(int colour) {
+		return (1-getAlpha()) * 0xFF000000 + colour;
+
+	}
+	public int getColour() {
+		return Colours.get("blue") + ((1-getAlpha()) * 0xFF000000);
 	}
 
 }

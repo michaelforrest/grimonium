@@ -76,7 +76,6 @@ public class SongPad extends GroupElement implements ClipDataResponder, ButtonLi
 	}
 	public void updateHardwareView() {
 		if(playing) {
-			System.out.println("Setting " + this + " to blink!");
 			pad.led.set(LED.BLINK);
 		}else{
 			pad.led.set(LED.ON);

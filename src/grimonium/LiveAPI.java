@@ -61,16 +61,12 @@ public class LiveAPI extends MidiThing {
 	}
 
 	private static void sendCC(int message, int track, int scene) {
-		getInstance().out.sendController(message, track,scene);
+		getInstance().out.sendController(message, track, scene);
 	}
 
 	private static LiveAPI getInstance() {
 		if(instance == null) PApplet.println("Error! You need to call LiveAPI.init()");
 		return instance;
-	}
-
-	public void stop(int track) {
-		out.sendController(TRIGGER_TRACK, track, 20);
 	}
 
 	public static void init(XMLElement xml) {
