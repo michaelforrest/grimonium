@@ -3,3 +3,7 @@ bin
 build
 distribution
 reference
+applet
+application.windows
+application.linux
+application.macosx
