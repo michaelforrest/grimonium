@@ -32,7 +32,7 @@ public class Song extends Observable{
 		sceneOffset = element.getIntAttribute("sceneoffset");
 
 		colour = Colours.get(element.getAttribute("colour"));
-		image = element.getAttribute("pic","gramophone1.png");
+		image = element.getAttribute("pic","app/gramophone1.png");
 		addGroups(element.getChildren("group"));
 		addControls(element.getChild("controls"));
 

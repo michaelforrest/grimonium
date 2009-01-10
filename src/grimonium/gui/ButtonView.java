@@ -26,9 +26,9 @@ public class ButtonView extends ViewBase{
 	}
 
 	private void initGraphics() {
-		background = applet.loadImage("button/background.png");
-		highlight = applet.loadImage("button/highlight.png");
-		power = applet.loadImage("button/power.png");
+		background = applet.loadImage("app/button/background.png");
+		highlight = applet.loadImage("app/button/highlight.png");
+		power = applet.loadImage("app/button/power.png");
 	}
 
 	public void draw() {

@@ -7,10 +7,8 @@
 	<classpathentry kind="lib" path="/Users/michaelforrest/Documents/Processing/libraries/MicroKontrol/library/MicroKontrol.jar"/>
 	<classpathentry kind="lib" path="/Applications/Processing.app/Contents/Resources/Java/libraries/minim/library/minim.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/3"/>
-	<classpathentry kind="lib" path="/Applications/Processing.app/Contents/Resources/Java/libraries/opengl/library/jogl.jar"/>
-	<classpathentry kind="lib" path="/Applications/Processing.app/Contents/Resources/Java/libraries/opengl/library/jogl-natives-macosx-universal.jar"/>
-	<classpathentry kind="lib" path="/Applications/Processing.app/Contents/Resources/Java/libraries/opengl/library/gluegen-rt-natives-macosx-universal.jar"/>
-	<classpathentry kind="lib" path="/Applications/Processing.app/Contents/Resources/Java/libraries/opengl/library/gluegen-rt.jar"/>
 	<classpathentry kind="lib" path="/Applications/Processing.app/Contents/Resources/Java/libraries/opengl/library/opengl.jar"/>
+	<classpathentry kind="lib" path="/Applications/Processing.app/Contents/Resources/Java/libraries/opengl/library/gluegen-rt.jar"/>
+	<classpathentry kind="lib" path="/Applications/Processing.app/Contents/Resources/Java/libraries/opengl/library/jogl.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

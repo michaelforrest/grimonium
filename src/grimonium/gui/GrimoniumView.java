@@ -37,7 +37,7 @@ public class GrimoniumView extends ViewBase implements Observer {
 		this.grimonium = grimonium;
 		grimonium.set.addObserver(this);
 
-		branding = applet.loadImage("branding.png");
+		branding = applet.loadImage("app/branding.png");
 
 		createViewHelpers();
 		addSongViews();

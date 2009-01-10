@@ -71,8 +71,8 @@ public class PadView extends ViewBase implements Observer {
 
 	public static void init(PApplet applet) {
 
-		texture = applet.loadImage("padtexture.png");
-		playing = applet.loadImage("padplaying.png");
+		texture = applet.loadImage("app/padtexture.png");
+		playing = applet.loadImage("app/padplaying.png");
 		initialised = true;
 
 	}

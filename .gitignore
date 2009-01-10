@@ -6,4 +6,5 @@ reference
 applet
 application.windows
 application.linux
-application.macosx
+application.macosx	
+.settings

@@ -18,7 +18,7 @@ public class KeyboardView extends ViewBase{
 		super(applet);
 		this.helper = helper;
 		map = helper.getKeyboardMap();
-		if(octave ==null) octave = applet.loadImage("octave.png");
+		if(octave ==null) octave = applet.loadImage("app/octave.png");
 	}
 
 	public void draw() {

@@ -29,7 +29,7 @@ public class SongView implements Observer {
 		this.applet = applet;
 		this.song = song;
 		this.helper = helper;
-		if(TITLE == null) TITLE = applet.loadFont("Zapfino-40.vlw");
+		if(TITLE == null) TITLE = applet.loadFont("app/Zapfino-40.vlw");
 		addChildren(applet, helper);
 		assignPads();
 		song.addObserver(this);
