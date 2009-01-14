@@ -46,6 +46,7 @@ public class Ableton extends MidiThing {
 	private CC stop;
 	private CC play;
 	private final PApplet applet;
+	private int visualsTrack;
 
 	private Ableton(XMLElement xml, PApplet applet) {
 		this.applet = applet;
@@ -61,6 +62,8 @@ public class Ableton extends MidiThing {
 
 		stop = new CC(xml.getChild("globalstop"));
 		play = new CC(xml.getChild("globalplay"));
+
+		visualsTrack = xml.getIntAttribute("visuals_track");
 
 		//mk.plugKeyboard(new KeyboardProxy());
 
@@ -186,5 +189,8 @@ public class Ableton extends MidiThing {
 	public static void sendPitchBend(int track, int value) {
 		//getInstance().to.send
 
+	}
+	public static int getVisualsTrack() {
+		return getInstance().visualsTrack;
 	}
 }

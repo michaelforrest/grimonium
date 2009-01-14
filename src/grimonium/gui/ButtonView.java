@@ -8,6 +8,7 @@ import processing.core.PImage;
 
 public class ButtonView extends ViewBase{
 	public static final float SIZE = 80;
+	public static final float HEIGHT= 45;
 	private static final int WHITE = 0xFFFFFFFF;
 	private final Button button;
 	private Point position;
@@ -47,7 +48,7 @@ public class ButtonView extends ViewBase{
 		applet.text(ccButton.getLabel(), 0,5,SIZE,12);
 
 		applet.textFont(font,12);
-		applet.text(ccButton.getName(), 0, 62, SIZE, 15);
+		applet.text(ccButton.getName(), 0, 33, SIZE, 15);
 
 	}
 
@@ -55,7 +56,7 @@ public class ButtonView extends ViewBase{
 		applet.tint(Colours.get("green") + 0xFF000000);
 		applet.image(background, 0, 0);
 		highlightIfOn();
-		applet.image(power, 0, 0);
+		//applet.image(power, 0, 0);
 	}
 
 	private void highlightIfOn() {

@@ -8,29 +8,30 @@ import processing.core.PApplet;
 
 public class EncodersView extends ViewBase{
 
-	private static final int WIDTH = 40;
+	static final int WIDTH = 40;
 	private final ArrayList<EncoderMap> ccEncoders;
+	private EncoderView[] views = new EncoderView[8];
 
-	public EncodersView(PApplet applet, ArrayList<EncoderMap> arrayList) {
+	public EncodersView(PApplet applet, ArrayList<EncoderMap> arrayList, MixerSource source) {
 		super(applet);
 		this.ccEncoders = arrayList;
+		for (int i = 0; i < views.length; i++) {
+			views[i] = new EncoderView(applet, source);
+			views[i].x = i * WIDTH;
+		}
+		for (EncoderMap ccEncoder : ccEncoders) {
+			views[ccEncoder.id].ccEncoder = ccEncoder;
+		}
+
 	}
 
 	public void draw() {
 		applet.pushMatrix();
-		for (EncoderMap ccEncoder : ccEncoders) {
-			int x = ccEncoder.id * WIDTH;
-			drawEncoder(ccEncoder, x);
+		for (EncoderView view : views) {
+			view.draw();
 		}
 		applet.popMatrix();
 	}
 
-	private void drawEncoder(EncoderMap ccEncoder, int x) {
-		applet.fill(0xFF000000 + Colours.get("green"));
-		applet.ellipseMode( PApplet.CORNER);
-		applet.ellipse(x, 0, 40, 40);
-		applet.textFont(font, 12);
-		applet.text(ccEncoder.getLabel(), x, 40, WIDTH, 30);
-	}
 
 }

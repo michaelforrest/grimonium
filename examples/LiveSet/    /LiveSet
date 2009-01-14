@@ -1,0 +1,4 @@
+#!/bin/sh
+
+APPDIR=$(dirname "$0")
+java  -Djava.library.path="$APPDIR" -cp "$APPDIR/lib/LiveSet.jar:$APPDIR/lib/core.jar:$APPDIR/lib/opengl.jar:$APPDIR/lib/jogl.jar:$APPDIR/lib/gluegen-rt.jar:$APPDIR/lib/MicroKontrol.jar:$APPDIR/lib/MicroKontrol.jar:$APPDIR/lib/oscP5.jar:$APPDIR/lib/oscP5.jar:$APPDIR/lib/Grimonium.jar:$APPDIR/lib/Grimonium.jar" LiveSet

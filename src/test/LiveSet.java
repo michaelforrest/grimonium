@@ -23,6 +23,7 @@ public class LiveSet extends PApplet {
 	public void load() {
 		grimonium = new Grimonium(this, "config.xml", "mappings.xml");
 		view = new GrimoniumView(this, grimonium);
+		grimonium.set.previousSong();
 	}
 
 	public void draw() {

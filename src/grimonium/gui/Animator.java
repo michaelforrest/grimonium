@@ -13,7 +13,7 @@ public class Animator extends Observable implements Observer {
 	float initialValue;
 	float difference;
 	float frameIncrement;
-	float currentValue = 0;
+	public float currentValue = 0;
 	float frame = 0;
 	boolean isComplete = false;
 

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <set>
 	<songs>
-		<!-- BUMPY BOSBO -->
+
 		<song name="Bumpy Bosbo" colour="yellow" tempo="133" sceneoffset="0" pic="songs/cat.png">
 			<stage zoom="0" pan="0">
 				<layer id="bosbodrums"/>
@@ -27,20 +27,32 @@
 				<fader id="2" name="bassfreq" channel="2" cc="71">
 					<lcd text="bassfreq"/>
 				</fader>
-				<joystick>
+				<joystick camera="true">
 					<pitchbend channel="2"/>
 					<up name="mod wheel" channel="2" cc="1"/>
 				</joystick>
-				
 			</controls>
 			<!-- should validate for repetition -->
 			<group id="beats" colour="red" track="0">
 				<freqbone low="kick" med="snare" high="hihat"/>
-				<clip pad="0" scene="0"/>
-				<clip pad="1" scene="1"/>
-				<clip pad="4" scene="2"/>
-				<clip pad="5" scene="3"/>
-				<clip pad="12" scene="4"/>
+				<clip pad="0" scene="0">
+					<visual scene="0" />
+				</clip>
+				<clip pad="1" scene="1">
+					<visual scene="1" />
+				</clip>
+				<clip pad="4" scene="2">
+					<visual scene="2" />
+				</clip>
+				<clip pad="5" scene="3">
+					<visual scene="3" />
+				</clip>
+				<clip pad="12" scene="4">
+					<visual scene="4" />
+				</clip>
+			</group>
+			<group id="notebones" track="9">
+				<notebone note="C0" bone="bosbo"/>
 			</group>
 			<group id="rhythm" colour="yellow" track="2">
 				<freqbone mid="bosbotrance"/>
@@ -62,7 +74,7 @@
 				<clip pad="13" scene="3"/>
 			</group>
 		</song>
-		<!-- HOROSKOPE -->
+
 		<song name="Horoskope" colour="red" tempo="105" sceneoffset="6">
 			<stage pan="0" zoom="0">
 				<layer id="gabbadrums"/>
@@ -94,11 +106,6 @@
 				<clip pad="15" scene="3"/>
 			</group>
 		</song>
-		<!--
-			*
-			SONG OF TECHNOLOGY
-			*
-		-->
 		<song name="Song Of Technology" colour="green" sceneoffset="10">
 			<notes>
 				<text>Lorem ipsum dolor sit amet.</text>
@@ -111,12 +118,40 @@
 					stutter/chorus
 					tonal/scratchloop
 					vinyl</keyboard>
+				<encoder id="0" name="SOMETHING" channel="5" cc="15"/>
 			</controls>
+			<group id="notebones" track="9">
+				<notebone note="C3" bone="ii"/>
+				<notebone note="D3" bone="oo"/>
+				<notebone note="E3" bone="squint"/>
+				<notebone note="F3" bone="frown"/>
+			</group>
+			<group id="fxbones" track="16">
+				<notebone note="48" bone="fx1"/>
+				<notebone note="54" bone="fx2"/>
+				<notebone note="51" bone="fx3"/>
+				<notebone note="55" bone="fx4"/>
+			</group>
+			<group id="vocals" colour="pink" track="3">
+				<clip pad="10" scene="1" >
+					<visual scene="1" />
+				</clip>
+				<clip pad="11" scene="2" >
+					<visual scene="2" />
+				</clip>
+				<clip pad="15" scene="3" >
+					<visual scene="3" />
+				</clip>
+			</group>
 			<group id="beats" colour="red" track="0">
 				<clip pad="0" scene="0"/>
 				<clip pad="4" scene="1"/>
-				<clip pad="12" scene="3"/>
-				<clip pad="7" scene="5"/>
+				<clip pad="12" scene="3">
+					<visual scene="0"/>
+				</clip>
+				<clip pad="7" scene="5">
+					<visual scene="0"/>
+				</clip>
 			</group>
 			<group id="bass" colour="purple" track="1">
 				<clip pad="1" scene="0"/>
@@ -126,21 +161,14 @@
 				<clip pad="2" scene="4"/>
 				<clip pad="6" scene="5"/>
 			</group>
-			<group id="rhythm" colour="yellow" track="2">
-				<clip pad="14" scene="3"/>
+			<group id="trumpet" colour="yellow" track="2">
+				<clip pad="14" scene="3">
+					<visual scene="0"/>
+				</clip>
 			</group>
-			<group id="lead" colour="pink" track="3">
-				<notebone note="C3" bone="ii"/>
-				<notebone note="D3" bone="oo"/>
-				<notebone note="E3" bone="squint"/>
-				<notebone note="F3" bone="frown"/>
-			</group>
+
+
 		</song>
-		<!-- 
-			*
-			VIOLET SKY
-			*
-		-->
 		<song name="Violet Sky" sceneoffset="18" colour="purple">
 			<notes>
 				<image source="songs/violet_sky_score.png"/>
@@ -148,9 +176,18 @@
 			</notes>
 			<controls>
 				<keyboard channel="3">piano</keyboard>
-				<fader id="0" name="strings" channel="3" cc="71">
+				<fader id="0" name="strings"  channel="3" cc="71">
 					<lcd text="strings"/>
 				</fader>
+				<multilayerfader id="0">
+					<range from="0" to="0.25" layer="strings1"/>
+					<range from="0.25" to="0.5" layer="strings2"/>
+					<range from="0.5" to="0.75" layer="strings3"/>
+					<range from="0.75" to="1" layer="strings4"/>
+				</multilayerfader>
+				<bonetempokeys tempo="0.2" low="40" high="70" bone="cello"/>
+				<bonetempokeys tempo="0.2" low="60" high="100" bone="viola"/>
+				<bonetempokeys tempo="0.2" low="70" high="100" bone="violin"/>
 			</controls>
 			<group id="beats" colour="red" track="0">
 				<clip pad="0" scene="0"/>
@@ -166,7 +203,42 @@
 				<clip pad="10" scene="2"/>
 			</group>
 		</song>
+
+		<song name="Falling Leaves" tempo="120" sceneoffset="21">
+			<controls>
+				<keyboard channel="3">piano</keyboard>
+			</controls>
+			<notes><text></text></notes>
+			<group id="drone" track="0" colour="red">
+				<clip pad="0" scene="1"/>
+			</group>
+			<group id="electronic" track="1" colour="green">
+				<clip pad="4" scene="0"/>
+				<clip pad="8" scene="1"/>
+				<clip pad="12" scene="2"/>
+			</group>
+			<group id="drums" track="4" colour="blue">
+				<clip pad="13" scene="1"/>
+			</group>
+			<group id="bass" track="5" colour="purple">
+				<clip pad="14" scene="1"/>
+			</group>
+			<group id="piano" track="6" colour="orange">
+				<clip pad="15" scene="1"/>
+			</group>
+		</song>
+
+		<song name="Utility" tempo="100" colour="" sceneoffset="0">
+			<controls>
+				<keyboard channel="9">midi</keyboard>
+			</controls>
+			<notes>
+				<text />
+			</notes>
+			
+		</song>
 	</songs>
+
 	<common>
 		<encoder id="7" name="tempo" channel="1" cc="2">
 			<lcd id="7" text="TEMPO"/>
@@ -185,6 +257,7 @@
 		<fader id="7" name="FILTER" channel="3" cc="5">
 			<lcd id="7" text="FILTER"/>
 		</fader>
+	
 	</common>
 	<!--
 		PADS:

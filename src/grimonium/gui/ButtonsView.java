@@ -7,6 +7,7 @@ import processing.core.PApplet;
 public class ButtonsView extends ViewBase{
 
 	private static final int COLUMNS = 2;
+	private static final float LEFT = 790;
 	private final Grimonium grimonium;
 	private String[] BUTTONS = {"SETTING","MESSAGE","SCENE","EXIT"};
 	private ButtonView[] views;
@@ -19,7 +20,7 @@ public class ButtonsView extends ViewBase{
 	}
 
 	private void addViews() {
-		Rectangle first = new Rectangle(0, 0, ButtonView.SIZE, ButtonView.SIZE);
+		Rectangle first = new Rectangle(0, 0, ButtonView.SIZE, ButtonView.HEIGHT);
 		views = new ButtonView[BUTTONS.length];
 		for (int i = 0; i < BUTTONS.length; i++) {
 			String id = BUTTONS[i];
@@ -31,7 +32,7 @@ public class ButtonsView extends ViewBase{
 
 	public void draw() {
 		applet.pushMatrix();
-		applet.translate(applet.width-COLUMNS*80 - 40, 50, 0);
+		applet.translate(LEFT, 50, 0);
 		for (ButtonView view : views) {
 			view.draw();
 		}

@@ -22,7 +22,7 @@ public class NoteBone extends MapBase implements Observer {
 	private final float range;
 
 	public NoteBone(XMLElement xml) {
-		channel = xml.getIntAttribute("channel", 1) - 1;
+		channel = 10; // xml.getIntAttribute("channel", 1) - 1;
 
 		try {
 			note = NoteParser.getNote(xml);

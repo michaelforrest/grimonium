@@ -2,6 +2,7 @@ package grimonium.set;
 
 import grimonium.gui.Colours;
 import grimonium.gui.MixerSource;
+import grimonium.gui.SongViewHelper;
 import grimonium.maps.EncoderMap;
 import grimonium.maps.ElementFactory;
 import grimonium.maps.MapBase;
@@ -79,6 +80,14 @@ public class GrimoniumSet extends CollectionWithSingleSelectedItem implements En
 		changeSelectionByOffset(1);
 
 	}
+	public int getAlpha() {
+		return 0xFF;
+	}
+	public float getTint() {
+		return 255;
+	}
+
+
 
 
 }

@@ -50,7 +50,7 @@ public class PadView extends ViewBase implements Observer {
 	public void draw(){
 		if(songPad == null ) return;
 		// TODO: trigger animation when song selected / deselected
-		applet.tint(0xFF000000 + songPad.group.colour, helper.getAlpha());
+		applet.tint(0xFF000000 + songPad.group.colour, helper.getTint());
 		applet.image(texture, rect.x, rect.y);
 		if(songPad.isPlaying()) applet.image(playing, rect.x, rect.y);
 

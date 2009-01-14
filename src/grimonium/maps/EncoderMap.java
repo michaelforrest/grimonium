@@ -1,6 +1,7 @@
 package grimonium.maps;
 
 import grimonium.Ableton;
+import grimonium.set.GuiController;
 import microkontrol.MicroKontrol;
 import microkontrol.controls.Encoder;
 import microkontrol.controls.EncoderListener;
@@ -14,6 +15,7 @@ public class EncoderMap extends MapBase implements EncoderListener {
 	private int channel;
 	public int id;
 	private final String name;
+	private float value = 0;
 
 	//<encoder id="7" name="tempo" channel="1" cc="2"/>
 	public EncoderMap(XMLElement element) {
@@ -30,12 +32,18 @@ public class EncoderMap extends MapBase implements EncoderListener {
 	public void moved(Integer change) {
 		if(!active) return;
 		int message = (change > 0) ? change : 64 - change;
+		value += change / 127f;
 		Ableton.sendCC(channel,cc,message);
 		turnOnLCDHints();
+		GuiController.update();
 	}
 
 	public String getLabel() {
 		return name.toUpperCase();
+	}
+
+	public float getValue() {
+		return value;
 	}
 
 }

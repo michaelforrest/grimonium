@@ -15,6 +15,8 @@ public class ElementFactory {
 		if(name.equals("faderbone")) return new FaderBone(element);
 		if(name.equals("keyboard")) return new KeyboardMap(element);
 		if(name.equals("joystick")) return new JoystickMap(element);
+		if(name.equals("bonetempokeys")) return new BoneTempoKeys(element);
+		if(name.equals("multilayerfader")) return new MultiLayerFader(element);
 		System.out.println("Error parsing element " + name);
 		return null;
 	}

@@ -10,24 +10,26 @@ public class Animata {
 	public static NetAddress net;
 	public static OscP5 oscP5;
 
-	public static void zoomCamera(Integer delta){
+	public static void zoomCamera(Float delta){
 		  OscMessage message = new OscMessage("/cameradeltazoom");
 		  message.add(delta);
 		  oscP5.send(message, net);
+		  System.out.println("message:" +message + " to  " + net);
 		}
 
-	public static void panLayer(float deltaX) {
+	public static void panLayer(Float deltaX) {
 		OscMessage message = new OscMessage("/cameradeltapan");
 		message.add(deltaX);
-		message.add(0.0);
+		message.add(0.0f);
 		oscP5.send(message, net);
+		System.out.println("message:" +message + " to  " + net);
 	}
 
-	public static void setBone(String name, float n) {
+	public static void setBone(String name, Float n) {
 		if(net == null) PApplet.println("need to call init() with valid settings on Animata");
 		OscMessage message = new OscMessage("/anibone");
 		message.add(name);
-		message.add(n);
+		message.add((float)n);
 		PApplet.println("trying to send to " + net.address() + " = " + n + " to bone " + name);
 		oscP5.send(message, net);
 	}

@@ -11,6 +11,8 @@ public interface MixerSource {
 
 	ArrayList<FaderMap> getFaders();
 
-	int getColour();
+	int getAlpha();
+
+	float getTint();
 
 }

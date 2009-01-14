@@ -1,6 +1,7 @@
 package grimonium.maps;
 
 import grimonium.Ableton;
+import grimonium.Animata;
 
 import java.util.Observable;
 import java.util.Observer;
@@ -19,10 +20,13 @@ public class JoystickMap extends MapBase implements Observer {
 	private CC[] up;
 	private CC[] down;
 	private CC[] left;
+	private boolean camera;
 
 	public JoystickMap(XMLElement element) {
 		joystick = MicroKontrol.getInstance().joystick;
 		joystick.addObserver(this);
+//		camera = element.getStringAttribute("camera","false").equals("true");
+		
 		addPitchBend(element.getChildren("pitchbend"));
 		addRight(element.getChildren("right"));
 		addUp(element.getChildren("up"));
@@ -78,6 +82,7 @@ public class JoystickMap extends MapBase implements Observer {
 		for (CC y : down) {
 			y.send((int)(-PApplet.constrain(joystick.getY(), -1, 0) * 127));
 		}
+
 	}
 
 	private void addPitchBend(XMLElement[] children) {

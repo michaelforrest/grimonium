@@ -15,7 +15,7 @@ public class SongViewHelper extends Observable implements Observer, MixerSource{
 	final Song song;
 	public int z;
 	private Animator selectionAnimator;
-	private static final int ACTIVE_ALPHA = 0xDD;
+	private static final float ACTIVE_ALPHA = 0xDD000000;
 	public SongViewHelper(Song song) {
 		this.song = song;
 		song.addObserver(this);
@@ -31,11 +31,13 @@ public class SongViewHelper extends Observable implements Observer, MixerSource{
 	}
 
 	public float getTint() {
-		return getAlpha();
+		return selectionAnimator.currentValue * (float)0xFF;
 	}
 
 	public int getAlpha() {
-		return  (int)((float) selectionAnimator.currentValue * (float) ACTIVE_ALPHA);
+		if(ACTIVE_ALPHA != 0xDD000000) System.out.println("WTF? ACTIV EALPHA is " + ACTIVE_ALPHA);
+		int alpha = (int)( selectionAnimator.currentValue * ACTIVE_ALPHA);
+		return  alpha;
 	}
 
 	public int getGroupColour() {
@@ -60,20 +62,17 @@ public class SongViewHelper extends Observable implements Observer, MixerSource{
 	}
 
 	public boolean isInvisible() {
-
 		return getAlpha() == 0;
 	}
 	// TODO: work out wtf is going on with these minus numbers...
 	public int getColourWithAlpha(int colour) {
-		return (1-getAlpha()) * 0xFF000000 + colour;
+		return getAlpha() + colour;
 
-	}
-	public int getColour() {
-		return Colours.get("blue") + ((1-getAlpha()) * 0xFF000000);
 	}
 
 	public KeyboardMap getKeyboardMap() {
 		return MapBase.findKeyboard(song.controls);
 	}
+
 
 }

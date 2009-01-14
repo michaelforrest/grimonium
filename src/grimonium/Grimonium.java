@@ -23,9 +23,12 @@ package grimonium;
 
 // import ddf.minim.AudioInput;
 // import ddf.minim.Minim;
+import java.awt.Component;
+
 import grimonium.gui.Animator;
 import grimonium.set.GrimoniumSet;
 import microkontrol.MicroKontrol;
+import microkontrol.controls.Joystick;
 import netP5.NetAddress;
 import netP5.NetInfo;
 import oscP5.OscP5;
@@ -46,6 +49,8 @@ public class Grimonium {
 
 	public GrimoniumSet set;
 
+	private Joystick joystick;
+
 	// private Minim minim;
 
 	// private AudioInput in;
@@ -60,9 +65,14 @@ public class Grimonium {
 
 		XMLElement mapping = new XMLElement(applet, mapping_xml);
 		loadSet(mapping);
+		joystick = MicroKontrol.getInstance().joystick;
+		applet.registerDraw(this);
 
 	}
-
+	public void draw()	{
+		if(joystick.getX() != 0) Animata.panLayer(joystick.getX() * 20f);
+		if(joystick.getY() != 0)Animata.zoomCamera( ((float)joystick.getY() * 20.0f));
+	}
 	private void loadSet(XMLElement child) {
 		PApplet.println("name:" + child.getName());
 		set = new GrimoniumSet(child);

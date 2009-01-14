@@ -2,6 +2,7 @@ package grimonium.maps;
 
 
 import grimonium.Ableton;
+import grimonium.LiveAPI;
 
 import java.util.ArrayList;
 import java.util.Observable;
@@ -13,6 +14,21 @@ import processing.xml.XMLElement;
 
 
 public class MapBase  {
+	public class ClipMap {
+		private int track = Ableton.getVisualsTrack();
+		private int scene;
+		public ClipMap(XMLElement element) {
+			scene = element.getIntAttribute("scene") + element.getParent().getParent().getParent().getIntAttribute("sceneoffset");
+		}
+		public void stop() {
+			Ableton.stopTrack(track);
+		}
+		public void play() {
+			System.out.println("triggering clip map " + track + " , " + scene);
+			LiveAPI.trigger(track, scene);
+		}
+
+	}
 	public class Message {
 		public final int channel;
 		public Message(int channel) {

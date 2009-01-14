@@ -1,13 +1,13 @@
 package grimonium.set;
 
-import microkontrol.MicroKontrol;
-import microkontrol.controls.ButtonListener;
-import microkontrol.controls.LED;
-import microkontrol.controls.Pad;
 import grimonium.Ableton;
 import grimonium.ClipDataResponder;
 import grimonium.LiveAPI;
 import grimonium.maps.MapBase;
+import microkontrol.MicroKontrol;
+import microkontrol.controls.ButtonListener;
+import microkontrol.controls.LED;
+import microkontrol.controls.Pad;
 import processing.xml.XMLElement;
 
 public class SongPad extends MapBase implements ClipDataResponder, ButtonListener{
@@ -20,6 +20,7 @@ public class SongPad extends MapBase implements ClipDataResponder, ButtonListene
 	// TODO: playing should come from the clipdata
 	private boolean playing =  false;
 	public final ClipGroup group;
+	private ClipMap[] visuals;
 	public SongPad(XMLElement element, ClipGroup group) {
 
 		this.group = group;
@@ -28,7 +29,18 @@ public class SongPad extends MapBase implements ClipDataResponder, ButtonListene
 		track = element.getIntAttribute("track"); //added automatically by parent class
 		pad = MicroKontrol.getInstance().pads[pad_id];
 
+		addVisuals(element.getChildren("visual"));
+
 		pad.listen(this);
+	}
+
+	private void addVisuals(XMLElement[] children) {
+		visuals = new ClipMap[children.length];
+		for (int i = 0; i < children.length; i++) {
+			XMLElement element = children[i];
+			ClipMap clipMap = new ClipMap(element);
+			visuals[i] = clipMap;
+		}
 	}
 
 	public void setClipName(String string) {
@@ -45,13 +57,31 @@ public class SongPad extends MapBase implements ClipDataResponder, ButtonListene
 
 	private void toggle() {
 		if(playing){
-			Ableton.stopTrack(track);
+			stopClips();
 		}else{
-			group.clearAllPlaying();
-			LiveAPI.trigger(track, scene);
+			playClips();
 		}
 		playing = !playing;
 		updateHardwareView();
+	}
+
+	private void playClips() {
+		group.clearAllPlaying();
+		LiveAPI.trigger(track, scene);
+		for (ClipMap visual : visuals) {
+			visual.play();
+		}
+	}
+
+	private void stopClips() {
+		Ableton.stopTrack(track);
+		stopVisuals();
+	}
+
+	private void stopVisuals() {
+		for (ClipMap visual : visuals) {
+			visual.stop();
+		}
 	}
 
 
@@ -68,7 +98,7 @@ public class SongPad extends MapBase implements ClipDataResponder, ButtonListene
 	public String toString() {
 		return super.toString() + "[" + clipName +"]";
 	}
-
+	
 	@Override
 	public void activate() {
 		super.activate();
@@ -84,6 +114,7 @@ public class SongPad extends MapBase implements ClipDataResponder, ButtonListene
 
 	public void clearPlaying() {
 		playing = false;
+		stopVisuals();
 		updateHardwareView();
 
 	}
