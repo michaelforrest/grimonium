@@ -185,9 +185,9 @@
 					<range from="0.5" to="0.75" layer="strings3"/>
 					<range from="0.75" to="1" layer="strings4"/>
 				</multilayerfader>
-				<bonetempokeys tempo="0.2" low="40" high="70" bone="cello"/>
-				<bonetempokeys tempo="0.2" low="60" high="100" bone="viola"/>
-				<bonetempokeys tempo="0.2" low="70" high="100" bone="violin"/>
+				<bonetempokeys tempo="0.15" low="40" high="70" bone="cello"/>
+				<bonetempokeys tempo="0.1" low="60" high="100" bone="viola"/>
+				<bonetempokeys tempo="0.2" low="70" high="100" bone="viola"/>
 			</controls>
 			<group id="beats" colour="red" track="0">
 				<clip pad="0" scene="0"/>

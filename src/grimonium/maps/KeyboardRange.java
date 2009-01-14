@@ -9,7 +9,7 @@ import processing.xml.XMLElement;
 import rwmidi.Note;
 
 public class KeyboardRange extends MapBase{
-	
+
 	private int channel;
 	private int transpose;
 	private Integer low;
@@ -20,7 +20,7 @@ public class KeyboardRange extends MapBase{
 	 * octave numbers start at -1 - i.e. C0 = 0
 	 */
 	public KeyboardRange(XMLElement child) {
-		channel = child.getIntAttribute("channel") - 1;
+		channel = child.getIntAttribute("channel",16) - 1;
 		transpose = child.getIntAttribute("transpose", 0);
 		try {
 			low = NoteParser.getNote(child.getStringAttribute("low", "1"));
@@ -36,6 +36,9 @@ public class KeyboardRange extends MapBase{
 		int pitch = n.getPitch();
 		if(pitch < low ) return;
 		if(pitch > high) return;
+		doNoteOn(n, pitch);
+	}
+	protected void doNoteOn(Note n, int pitch) {
 		Ableton.sendNoteOn(channel, pitch + transpose,adjustVelocityCurve(n));
 	}
 	private int adjustVelocityCurve(Note n) {
@@ -47,9 +50,12 @@ public class KeyboardRange extends MapBase{
 	public void noteOffReceived(Note n) {
 		if(!active) return;
 		int pitch = n.getPitch();
+		if(pitch < low ) return;
+		if(pitch > high) return;
+		doNoteOff(n, pitch);
+	}
+	protected void doNoteOff(Note n, int pitch) {
 		Ableton.sendNoteOff(channel,pitch + transpose,adjustVelocityCurve(n));
-
-
 	}
 	public boolean covers(int octaveNumber) {
 		// minusing 1 to normalise and then adding one back on to get the next octave:
