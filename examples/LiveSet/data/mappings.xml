@@ -185,9 +185,20 @@
 					<range from="0.5" to="0.75" layer="strings3"/>
 					<range from="0.75" to="1" layer="strings4"/>
 				</multilayerfader>
-				<bonetempokeys tempo="0.15" low="40" high="70" bone="cello"/>
-				<bonetempokeys tempo="0.1" low="60" high="100" bone="viola"/>
-				<bonetempokeys tempo="0.2" low="70" high="100" bone="viola"/>
+				<!-- TODO: work out how to do overlapping ranges --> 
+				<bonetempokeys tempo="0.15" low="40" high="F3" bone="cello"/>
+				<bonetempokeys tempo="0.2" low="F#3" high="100" bone="viola"/>
+				<noterangebone low="40" high="F3" bone="cellopitch"/> 
+				<noterangebone low="F#3" high="100" bone="violapitch"/>
+<!--				<bonetempokeys channel="3" tempo="0.15" low="A#1" high="F5" bone="cello"/>
+				<bonetempokeys channel="3" tempo="0.2" low="F#5" high="D6" bone="viola"/>
+				<noterangebone channel="3" low="A#1" high="D6" bone="cellopitch"/> 
+				<noterangebone channel="3" low="A#1" high="D6" bone="violapitch"/>  -->
+				
+				<!-- piano...-->
+				<bonetempokeyranges tempo="1" low="48" high="84" bone="piano" bonecount="23" channel="3"/>
+		<!--		<bonetempokeyranges tempo="1" low="A#1" high="D6" bone="piano" bonecount="23" channel="3"/>-->
+				
 			</controls>
 			<group id="beats" colour="red" track="0">
 				<clip pad="0" scene="0"/>

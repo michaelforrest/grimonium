@@ -3,7 +3,6 @@ package grimonium.maps;
 import grimonium.Ableton;
 import grimonium.NoteParser;
 import grimonium.NoteParser.BadNoteFormatException;
-import grimonium.set.GuiController;
 import microkontrol.MicroKontrol;
 import processing.xml.XMLElement;
 import rwmidi.Note;
@@ -12,15 +11,15 @@ public class KeyboardRange extends MapBase{
 
 	private int channel;
 	private int transpose;
-	private Integer low;
-	private Integer high;
+	protected Integer low;
+	protected Integer high;
 	String label;
 
 	/*
 	 * octave numbers start at -1 - i.e. C0 = 0
 	 */
 	public KeyboardRange(XMLElement child) {
-		channel = child.getIntAttribute("channel",16) - 1;
+		this.channel = child.getIntAttribute("channel",16) - 1;
 		transpose = child.getIntAttribute("transpose", 0);
 		try {
 			low = NoteParser.getNote(child.getStringAttribute("low", "1"));
@@ -29,7 +28,14 @@ public class KeyboardRange extends MapBase{
 			System.out.println(e.getMessage());
 		}
 		label = child.getContent();
+		listenToMicroKontrol();
+
+	}
+	protected void listenToMicroKontrol() {
 		MicroKontrol.getInstance().plugKeyboard(this);
+	}
+	public KeyboardRange() {
+
 	}
 	public void noteOnReceived(Note n) {
 		if(!active) return;

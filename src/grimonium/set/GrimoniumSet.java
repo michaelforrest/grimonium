@@ -2,11 +2,10 @@ package grimonium.set;
 
 import grimonium.gui.Colours;
 import grimonium.gui.MixerSource;
-import grimonium.gui.SongViewHelper;
-import grimonium.maps.EncoderMap;
 import grimonium.maps.ElementFactory;
-import grimonium.maps.MapBase;
+import grimonium.maps.EncoderMap;
 import grimonium.maps.FaderMap;
+import grimonium.maps.MapBase;
 
 import java.util.ArrayList;
 

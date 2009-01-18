@@ -1,7 +1,6 @@
 package grimonium;
 
 import grimonium.NoteParser.BadNoteFormatException;
-import grimonium.maps.JoystickMap;
 
 import java.util.Observable;
 
@@ -12,7 +11,6 @@ import processing.xml.XMLElement;
 import rwmidi.MidiInput;
 import rwmidi.MidiOutput;
 import rwmidi.Note;
-import rwmidi.PitchBend;
 
 public class Ableton extends MidiThing {
 	public class Message {
@@ -131,6 +129,9 @@ public class Ableton extends MidiThing {
 //	}
 
 	public class MidiTrack extends Observable {
+
+		public static final String NOTE_OFF = "note_off";
+		public static final String NOTE_ON = "note_on";
 		public CC fader;
 		public Message stop;
 		public Note lastNote;
@@ -143,13 +144,13 @@ public class Ableton extends MidiThing {
 		public void noteOnReceived(Note n) {
 			lastNote = n;
 			setChanged();
-			notifyObservers("note_on");
+			notifyObservers(NOTE_ON);
 		}
 
 		public void noteOffReceived(Note n) {
 			lastNote = n;
 			setChanged();
-			notifyObservers("note_off");
+			notifyObservers(NOTE_OFF);
 		}
 	}
 

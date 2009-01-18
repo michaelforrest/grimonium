@@ -1,0 +1,17 @@
+On the PC you will need Midi Yoke installed, Mac users are lucky because it has built-in interapplication midi routing.
+
+Installing
+
+Put the APIMidi folder into your MIDI Remote Scripts folder :
+
+PC : LIVE_INSTALL_DIR\Resources\MIDI Remote Scripts
+
+MAC : /Applications/Live 7.0.2 OS X/Live.app/Contents/App-Resources/MIDI Remote Scripts
+
+On the MAC you'll have to navigate to /Applications/Live 7.0.2 OS X, right click on the Live app icon and 'Show Package Contents'. You can drag a shortcut from the MIDI Remote Scripts folder to the sidebar of Finder for easy access.
+
+Next setup the midi ports in max (File -> Midi Setup..)
+
+PC : Set 'In from Midi Yoke 1' to use 'm' in the 'abbrev' column, and 'In from Midi Yoke 2' to use 'n'. Then use the same letters for the output ports.
+
+MAC : 'to MaxMSP 1' and 'from MaxMSP 1' to 'm' and 'to MaxMSP 2' and 'from MaxMSP 2' to 'n'
