@@ -113,20 +113,10 @@ public class Ableton extends MidiThing {
 	}
 
 	public void sendController(int channel, int cc, int value) {
-		PApplet.println("should send " + channel + "," + cc + "," + value);
+		//PApplet.println("should send " + channel + "," + cc + "," + value);
 		to.sendController(channel, cc, value);
 	}
 
-	// TO ABLETON
-//	public class KeyboardProxy {
-//		public void noteOnReceived(Note n) {
-//			to.sendNoteOn(0, n.getPitch(), n.getVelocity());
-//		}
-//
-//		public void noteOffReceived(Note n) {
-//			to.sendNoteOff(0, n.getPitch(), n.getVelocity());
-//		}
-//	}
 
 	public class MidiTrack extends Observable {
 

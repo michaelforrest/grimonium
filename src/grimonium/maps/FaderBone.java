@@ -14,11 +14,22 @@ public class FaderBone extends MapBase implements FaderListener {
 
 	public FaderBone(XMLElement element) {
 		faderID = element.getIntAttribute("fader");
-		fader = MicroKontrol.getInstance().faders[faderID];
 		bone = element.getStringAttribute("bone");
-		fader.listen(this);
+		setup(faderID, bone);
 	}
 
+	private void setup(int id, String bone) {
+		faderID = id;
+		this.bone = bone;
+		fader = MicroKontrol.getInstance().faders[faderID];
+		fader.listen(this);
+
+	}
+
+	public FaderBone(int id, String bone){
+		setup(id,bone);
+	}
+	
 	public void moved(Float value) {
 		if(!active) return;
 		Animata.setBone(bone, value);

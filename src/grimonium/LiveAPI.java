@@ -108,7 +108,7 @@ public class LiveAPI extends MidiThing {
 			int track = m[TRACK_FIELD];
 			int scene = m[SCENE_FIELD];
 			if(track == this.track && scene == this.scene){
-				System.out.println(message.toString() + "received by " + this);
+//				System.out.println(message.toString() + "received by " + this);
 				parseMessage(m);
 				parseClipState(m);
 //				System.out.println("DELETING SYSDATA RESPONDER FOR " + track + "::" + scene);

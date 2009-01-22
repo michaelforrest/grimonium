@@ -25,12 +25,13 @@ public class Song extends Observable{
 	public MapBase[] controls;
 	private String image;
 	private SongNotes notes;
+	public int tempo;
 
 	public Song(XMLElement element) {
 		name = element.getStringAttribute("name");
 		stage = new Scene(element.getChild("stage"));
 		sceneOffset = element.getIntAttribute("sceneoffset");
-
+		tempo = element.getIntAttribute("tempo");
 		colour = Colours.get(element.getAttribute("colour"));
 		image = element.getAttribute("pic","app/gramophone1.png");
 		addGroups(element.getChildren("group"));

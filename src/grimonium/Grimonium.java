@@ -21,20 +21,14 @@
 
 package grimonium;
 
-// import ddf.minim.AudioInput;
-// import ddf.minim.Minim;
-import java.awt.Component;
-
 import grimonium.gui.Animator;
 import grimonium.set.GrimoniumSet;
 import microkontrol.MicroKontrol;
-import microkontrol.controls.Joystick;
 import netP5.NetAddress;
 import netP5.NetInfo;
 import oscP5.OscP5;
 import processing.core.PApplet;
 import processing.xml.XMLElement;
-import rwmidi.RWMidi;
 
 /**
  * @author Michael Forrest gonna use midi channel 4 for controller messages
@@ -43,63 +37,35 @@ public class Grimonium {
 
 	PApplet applet;
 
-	public final String VERSION = "0.1.0";
-
-	private OscP5 oscP5;
-
+	private static OscP5 oscP5;
 	public GrimoniumSet set;
-
-	private Joystick joystick;
-
-	// private Minim minim;
-
-	// private AudioInput in;
 
 	public Grimonium(PApplet applet, String config_xml, String mapping_xml) {
 		this.applet = applet;
 		XMLElement xml = new XMLElement(applet, config_xml);
-		if (xml == null)
-			PApplet.println("Please supply a config xml file path.");
-
 		boot(applet, xml);
-
 		XMLElement mapping = new XMLElement(applet, mapping_xml);
-		loadSet(mapping);
-		joystick = MicroKontrol.getInstance().joystick;
-		applet.registerDraw(this);
-
-	}
-	public void draw()	{
-		if(joystick.getX() != 0) Animata.panLayer(joystick.getX() * 20f);
-		if(joystick.getY() != 0)Animata.zoomCamera( ((float)joystick.getY() * 20.0f));
-	}
-	private void loadSet(XMLElement child) {
-		PApplet.println("name:" + child.getName());
-		set = new GrimoniumSet(child);
-
+		set = new GrimoniumSet(mapping);
 
 	}
 
-	private void boot(PApplet applet, XMLElement xml) {
+	private static void boot(PApplet applet, XMLElement xml) {
+		boot(applet);
+		Ableton.init(xml.getChild("ableton"), applet);
+		LiveAPI.init(xml.getChild("live_api"));
+	}
+
+	public static void boot(PApplet applet) {
 		oscP5 = new OscP5(applet, 12000);
 		MicroKontrol.init(applet);
+		Animator.init(applet);
+	}
 
+	public static void startAnimataOSC() {
 		NetAddress netAddress = new NetAddress(NetInfo.getHostAddress(), 7110);
 		PApplet.println("Sending Animata stuff to " + netAddress.address());
 		Animata.init(netAddress, oscP5);
-		Animator.init(applet);
-		// minim = new Minim(applet);
-		// in = minim.getLineIn(Minim.STEREO, 512);
-		if (xml.getChild("ableton") != null)
-			Ableton.init(xml.getChild("ableton"),applet);
-		if (xml.getChild("live_api") != null)
-			LiveAPI.init(xml.getChild("live_api"));
 	}
-
-	public String version() {
-		return VERSION;
-	}
-
 
 
 }

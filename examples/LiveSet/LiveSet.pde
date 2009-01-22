@@ -16,7 +16,6 @@ GrimoniumView view;
 boolean isSetUp;
 void setup() {
   size(1870, 380, OPENGL);
-  hint(ENABLE_OPENGL_4X_SMOOTH) ;
   frameRate(30);
   background(0);
  
@@ -24,7 +23,6 @@ void setup() {
   font = loadFont("app/HelveticaNeue-CondensedBlack-20.vlw");
    image(loadImage("app/cake.png"),0,0);
    textFont(font, 24);
-
    text("Starting up...",40 ,340);
 }
 void load(){
@@ -39,19 +37,4 @@ void draw(){
     isSetUp = true;
   }
 }  
-void keyPressed(){
-  if(key  == UP) grimonium.set.previousSong();
-  if(key == DOWN) grimonium.set.nextSong();
-  if(key == 'R' ){
-    view = null;
-    grimonium = null;
-
-    load();
-  }
-}
-void message(String m){
-  textFont(font, 10);
-  fill(0xFF00CC00);
-  text(m, 0,10);
-}
 

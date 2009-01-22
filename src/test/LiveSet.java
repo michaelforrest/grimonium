@@ -13,7 +13,6 @@ public class LiveSet extends PApplet {
 	GrimoniumView view;
 
 	public void setup() {
-		System.out.println(System.getProperty("java.class.path"));
 		size(1870, 380, OPENGL);
 		frameRate(30);
 		load();

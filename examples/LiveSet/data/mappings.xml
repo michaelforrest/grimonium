@@ -1,14 +1,84 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <set>
 	<songs>
+		<song name="Falling Leaves" tempo="120" sceneoffset="21">
+			<controls>
+				<keyboard channel="3">piano</keyboard>
+			</controls>
+			<notes><text></text></notes>
+			<group id="drone" track="0" colour="red">
+				<clip pad="0" scene="1"/>
+			</group>
+			<group id="electronic" track="1" colour="green">
+				<clip pad="4" scene="0"/>
+				<clip pad="8" scene="1"/>
+				<clip pad="12" scene="2"/>
+			</group>
+			<group id="drums" track="4" colour="blue">
+				<clip pad="13" scene="1"/>
+			</group>
+			<group id="bass" track="5" colour="purple">
+				<clip pad="14" scene="1"/>
+			</group>
+			<group id="piano" track="6" colour="orange">
+				<clip pad="15" scene="1"/>
+			</group>
+		</song>
+		
+		<song name="Horoskope" colour="red" tempo="105" sceneoffset="6">
+			<notes>
+				<text/>
+			</notes>
+			<group id="beats" colour="red" track="4" >
+				<clip pad="0" scene="0"/>
+			</group>
+			<group id="bass" colour="purple" track="5">
+				<clip pad="12" scene="0"/>
+			</group>
+			<group id="bits" colour="green" track="6">
+				<clip pad="13" scene="0"/>
+			</group>
+			<group id="bits" colour="green" track="7">
+				<clip pad="14" scene="0"/>
+			</group>
+			<group id="lead" colour="pink" track="8">
+				<clip pad="3" scene="0"/>
+				<clip pad="7" scene="1"/>
+				<clip pad="11" scene="2"/>
+				<clip pad="15" scene="3"/>
+			</group>
+		</song>
+
+		<song name="Some Day" tempo="140" sceneoffset="43">
+			<controls>
+				<keyboard channel="3">piano</keyboard>
+			</controls>
+			<notes><text></text></notes>
+			<group id="beats" track="1" colour="red">
+				<clip pad="0" scene="0"/>
+				<clip pad="1" scene="1"/>
+				<clip pad="2" scene="2"/>
+				<clip pad="3" scene="3"/>
+				<clip pad="4" scene="4"/>
+				<clip pad="5" scene="5"/>
+			</group>
+			<group id="bass" track="2" colour="green">
+				<clip pad="6" scene="1"/>
+				<clip pad="7" scene="2"/>
+				<clip pad="8" scene="3"/>
+				<clip pad="9" scene="4"/>
+				<clip pad="10" scene="5"/>
+			</group>
+			<group id="music" track="3" colour="blue">
+				<clip pad="11" scene="0"/>
+				<clip pad="12" scene="1"/>
+				<clip pad="13" scene="3"/>
+				<clip pad="14" scene="4"/>
+				<clip pad="15" scene="5"/>
+			</group>
+		</song>
 
 		<song name="Bumpy Bosbo" colour="yellow" tempo="133" sceneoffset="0" pic="songs/cat.png">
-			<stage zoom="0" pan="0">
-				<layer id="bosbodrums"/>
-				<layer id="basscat"/>
-				<layer id="trancecat"/>
-				<layer id="leadcat"/>
-			</stage>
 			<notes>
 				<text>This one goes around G and D
 					Play bendy synth.</text>
@@ -18,9 +88,6 @@
 					<range channel="2" transpose="24" low="0" high="62">BASS</range>
 					<range channel="3" transpose="-12" low="63" high="120">STRINGS</range>
 				</keyboard>
-				<fader id="1" name="BEATS" max="110.0" track="0">
-					<lcd id="1" text="BEATS"/>
-				</fader>
 				<fader id="0" name="strings" channel="3" cc="71">
 					<lcd text="strings"/>
 				</fader>
@@ -75,37 +142,6 @@
 			</group>
 		</song>
 
-		<song name="Horoskope" colour="red" tempo="105" sceneoffset="6">
-			<stage pan="0" zoom="0">
-				<layer id="gabbadrums"/>
-				<layer id="horoskope"/>
-			</stage>
-			<notes>
-				<text/>
-			</notes>
-			<group id="beats" colour="red" track="4">
-				<notebone note="A#3" bone="kick"/>
-				<notebone note="G2" bone="hat"/>
-				<notebone note="D#2" bone="snare"/>
-				<clip pad="0" scene="0"/>
-			</group>
-			<group id="bass" colour="purple" track="5">
-				<clip pad="12" scene="0"/>
-			</group>
-			<group id="bits" colour="green" track="6">
-				<clip pad="13" scene="0"/>
-			</group>
-			<group id="bits" colour="green" track="7">
-				<clip pad="14" scene="0"/>
-			</group>
-			<group id="lead" colour="pink" track="8">
-				<noterangebone low="48" high="72" bone="horoskope"/>
-				<clip pad="3" scene="0"/>
-				<clip pad="7" scene="1"/>
-				<clip pad="11" scene="2"/>
-				<clip pad="15" scene="3"/>
-			</group>
-		</song>
 		<song name="Song Of Technology" colour="green" sceneoffset="10">
 			<notes>
 				<text>Lorem ipsum dolor sit amet.</text>
@@ -215,33 +251,20 @@
 			</group>
 		</song>
 
-		<song name="Falling Leaves" tempo="120" sceneoffset="21">
-			<controls>
-				<keyboard channel="3">piano</keyboard>
-			</controls>
-			<notes><text></text></notes>
-			<group id="drone" track="0" colour="red">
-				<clip pad="0" scene="1"/>
-			</group>
-			<group id="electronic" track="1" colour="green">
-				<clip pad="4" scene="0"/>
-				<clip pad="8" scene="1"/>
-				<clip pad="12" scene="2"/>
-			</group>
-			<group id="drums" track="4" colour="blue">
-				<clip pad="13" scene="1"/>
-			</group>
-			<group id="bass" track="5" colour="purple">
-				<clip pad="14" scene="1"/>
-			</group>
-			<group id="piano" track="6" colour="orange">
-				<clip pad="15" scene="1"/>
-			</group>
-		</song>
 
-		<song name="Utility" tempo="100" colour="" sceneoffset="0">
+		<song name="Shift" tempo="100" colour="" sceneoffset="0">
 			<controls>
-				<keyboard channel="9">midi</keyboard>
+				<keyboard channel="16" low="48" high="59">
+					stretch/phaser
+					loop/filter
+					xloop/crush
+					stutter/chorus
+					tonal/scratchloop
+					vinyl</keyboard>
+					<fader id="0" name="Beats" max="127.0" track="0"/>
+					<fader id="1" name="Bass"  max="127.0" track="1"/>
+					<fader id="2" name="Music" max="127.0" track="2"/>
+					<fader id="3" name="Music" max="127.0" track="3"/>
 			</controls>
 			<notes>
 				<text />
@@ -270,6 +293,7 @@
 		</fader>
 	
 	</common>
+
 	<!--
 		PADS:
 		0  1  2  3

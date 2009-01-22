@@ -1,14 +1,14 @@
 package grimonium.gui;
 
+import grimonium.set.ClipGroup;
+import grimonium.set.Song;
+import grimonium.set.SongPad;
+
 import java.util.Observable;
 import java.util.Observer;
 
 import processing.core.PApplet;
 import processing.core.PFont;
-import sun.misc.Cleaner;
-import grimonium.set.ClipGroup;
-import grimonium.set.Song;
-import grimonium.set.SongPad;
 
 public class SongView implements Observer {
 
@@ -66,7 +66,7 @@ public class SongView implements Observer {
 		applet.textFont(TITLE,24);
 		applet.textLeading(50);
 		//applet.textAlign(PApplet.CENTER)l
-		applet.text(song.name,-applet.height, 0.11f*applet.width);
+		applet.text(song.name + "(" + song.tempo + ")",-applet.height, 0.11f*applet.width);
 		applet.popMatrix();
 	}
 

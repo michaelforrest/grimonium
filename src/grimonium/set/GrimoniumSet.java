@@ -10,6 +10,7 @@ import grimonium.maps.MapBase;
 import java.util.ArrayList;
 
 import microkontrol.MicroKontrol;
+import microkontrol.controls.Button;
 import microkontrol.controls.EncoderListener;
 import processing.xml.XMLElement;
 
@@ -18,6 +19,7 @@ public class GrimoniumSet extends CollectionWithSingleSelectedItem implements En
 	public Song[] songs;
 	private MicroKontrol mk;
 	private MapBase[] commonElements;
+	private Song beforeShiftPressed;
 	public GrimoniumSet(XMLElement child) {
 		if(!child.getName().equals("set")) return;
 		mk = MicroKontrol.getInstance();
@@ -26,6 +28,18 @@ public class GrimoniumSet extends CollectionWithSingleSelectedItem implements En
 		setCollection(songs);
 		activateSong(0);
 		mk.encoders[8].listen(this);
+		mk.buttons.get("HEX LOCK").listen(Button.PRESSED,this,"onShiftPressed" );
+		mk.buttons.get("HEX LOCK").listen(Button.RELEASED,this,"onShiftReleased" );
+
+	}
+	public void onShiftPressed(){
+		beforeShiftPressed = current();
+		select(songs[songs.length-1]);
+		GuiController.update();
+	}
+	public void onShiftReleased(){
+		select(beforeShiftPressed);
+		GuiController.update();
 	}
 	private void addCommon(XMLElement child) {
 		commonElements = new MapBase[child.getChildren().length];
