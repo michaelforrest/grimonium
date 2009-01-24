@@ -59,7 +59,7 @@ public class Song extends Observable {
 		int[] order = {0, 4, 8, 12, 1, 5, 9, 13, 2, 6, 10, 14, 3, 7, 11, 15};
 		int id = 0;
 		for (ClipGroup group : groups) {
-			for (SongPad pad : group.pads) {
+			for (Clip pad : group.pads) {
 				pad.setPad(order[id++]);
 			}
 		}
@@ -124,8 +124,8 @@ public class Song extends Observable {
 		return super.toString() + "[" + name + "]";
 	}
 
-	public ArrayList<SongPad> getSongPads() {
-		ArrayList<SongPad> result = new ArrayList<SongPad>();
+	public ArrayList<Clip> getSongPads() {
+		ArrayList<Clip> result = new ArrayList<Clip>();
 		for (int i = 0; i < groups.length; i++) {
 			ClipGroup group = groups[i];
 			addPadsTo(result, group.pads);
@@ -133,9 +133,9 @@ public class Song extends Observable {
 		return result;
 	}
 
-	private void addPadsTo(ArrayList<SongPad> result, SongPad[] pads) {
+	private void addPadsTo(ArrayList<Clip> result, Clip[] pads) {
 		for (int i = 0; i < pads.length; i++) {
-			SongPad songPad = pads[i];
+			Clip songPad = pads[i];
 			result.add(songPad);
 		}
 

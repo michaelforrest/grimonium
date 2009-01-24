@@ -1,7 +1,7 @@
 package grimonium.gui;
 
 import processing.core.PApplet;
-import grimonium.set.SongPad;
+import grimonium.set.Clip;
 import microkontrol.MicroKontrol;
 
 public class PadsView extends ViewBase{
@@ -28,7 +28,7 @@ public class PadsView extends ViewBase{
 		}
 	}
 
-	public void assignPad(SongPad pad) {
+	public void assignPad(Clip pad) {
 		padViews[pad.pad_id].setSongPad(pad);
 	}
 

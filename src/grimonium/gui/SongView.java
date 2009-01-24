@@ -2,7 +2,7 @@ package grimonium.gui;
 
 import grimonium.set.ClipGroup;
 import grimonium.set.Song;
-import grimonium.set.SongPad;
+import grimonium.set.Clip;
 
 import java.util.Observable;
 import java.util.Observer;
@@ -84,9 +84,9 @@ public class SongView implements Observer {
 		}
 	}
 
-	private void assignPads(SongPad[] pads) {
+	private void assignPads(Clip[] pads) {
 		for (int i = 0; i < pads.length; i++) {
-			SongPad pad = pads[i];
+			Clip pad = pads[i];
 			padsView.assignPad(pad);
 		}
 	}

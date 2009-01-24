@@ -4,7 +4,7 @@ import java.util.Observable;
 import java.util.Observer;
 
 import grimonium.LiveAPI;
-import grimonium.set.SongPad;
+import grimonium.set.Clip;
 import microkontrol.controls.LED;
 import microkontrol.controls.Pad;
 import processing.core.PApplet;
@@ -24,7 +24,7 @@ public class PadView extends ViewBase implements Observer {
 	//
 
 	private final Pad pad;
-	private SongPad songPad;
+	private Clip songPad;
 
 	private PImage background;
 	private final SongViewHelper helper;
@@ -36,7 +36,7 @@ public class PadView extends ViewBase implements Observer {
 
 	}
 
-	public void setSongPad(SongPad songPad) {
+	public void setSongPad(Clip songPad) {
 		this.songPad = songPad;
 
 

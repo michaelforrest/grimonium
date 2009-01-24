@@ -45,7 +45,7 @@ public class KeyboardRange extends MapBase{
 		doNoteOn(n, pitch);
 	}
 	protected void doNoteOn(Note n, int pitch) {
-		Ableton.sendNoteOn(channel, pitch + transpose,adjustVelocityCurve(n));
+		Ableton.sendNoteOn(channel, pitch + transpose,n.getVelocity());//adjustVelocityCurve(n));
 	}
 	private int adjustVelocityCurve(Note n) {
 		return (int) (easeOutQuad((float)n.getVelocity() / 127f) * 127f);
@@ -61,7 +61,7 @@ public class KeyboardRange extends MapBase{
 		doNoteOff(n, pitch);
 	}
 	protected void doNoteOff(Note n, int pitch) {
-		Ableton.sendNoteOff(channel,pitch + transpose,adjustVelocityCurve(n));
+		Ableton.sendNoteOff(channel,pitch + transpose,n.getVelocity());
 	}
 	public boolean covers(int octaveNumber) {
 		// minusing 1 to normalise and then adding one back on to get the next octave:

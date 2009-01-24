@@ -1,5 +1,7 @@
 package grimonium;
 
+import grimonium.set.Clip;
+
 import java.util.Hashtable;
 
 import com.sun.corba.se.impl.protocol.giopmsgheaders.Message;
@@ -50,11 +52,11 @@ public class LiveAPI extends MidiThing {
 		STATUS_BYTES.put(60, "Song data");
 	}
 
-	static int TRIGGER_TRACK = 0;
 	private static LiveAPI instance;
-	static int GET_CLIP_DATA = 1;
-	static int MONITOR_CLIP = 2;
-	int STOP_CLIP_MONITOR = 3;
+	static int TRIGGER_TRACK = 0;
+	public static int GET_CLIP_DATA = 1;
+	public static int MONITOR_CLIP = 2;
+	public static int STOP_CLIP_MONITOR = 3;
 
 	public static void trigger(int track, int scene) {
 		sendCC(TRIGGER_TRACK, track, scene);
@@ -83,11 +85,11 @@ public class LiveAPI extends MidiThing {
 
 		private final int track;
 		private final int scene;
-		private final ClipDataResponder target;
-		private boolean disabled;
+		private final Clip target;
 
 
-		public ClipDataRequester(int track, int scene, ClipDataResponder target) {
+
+		public ClipDataRequester(int track, int scene, Clip target) {
 //			System.out.println("CREATED SYSDATA RESPONDER FOR " + track + "::" + scene);
 
 			this.track = track;
@@ -95,14 +97,11 @@ public class LiveAPI extends MidiThing {
 			this.target = target;
 			instance.in.plug(this,"sysexReceived");
 			sendCC(GET_CLIP_DATA,track,scene);
+			sendCC(MONITOR_CLIP,track,scene);
+
 		}
 
 		public void sysexReceived(SysexMessage message){
-
-			if(disabled) {
-//				System.out.println("returning cos " + this + " is disabled");
-				return;
-			}
 			byte[] m = message.getMessage();
 			if(m[HEADER_FIELD] != CLIP_DATA_HEADER) return;
 			int track = m[TRACK_FIELD];
@@ -113,7 +112,7 @@ public class LiveAPI extends MidiThing {
 				parseClipState(m);
 //				System.out.println("DELETING SYSDATA RESPONDER FOR " + track + "::" + scene);
 				//instance.in.unplug(this);
-				disable(this);
+//				disable(this);
 			}
 
 		}
@@ -131,12 +130,6 @@ public class LiveAPI extends MidiThing {
 			target.setClipTriggered((data & 4) > 0);
 		}
 
-		// OPTIMIZE (this is a memory leak now)
-		// or just call it once, or only set it up once. I dunno
-		private void disable(ClipDataRequester clipDataRequester) {
-			disabled = true;
-		}
-
 		private void parseMessage(byte[] m) {
 			StringBuilder builder = new StringBuilder();
 			for (int i = TEXT_START_FIELD; i < m.length-1; i++) {
@@ -148,10 +141,11 @@ public class LiveAPI extends MidiThing {
 
 		}
 	}
-	public static String getClipName(int track, int scene, ClipDataResponder target) {
-		ClipDataRequester requester = new ClipDataRequester(track,scene, target);
+	public static String getClipName(int track, int scene, Clip target) {
+		new ClipDataRequester(track,scene, target);
 		return "waiting for name";
 	}
+
 	public void sysexReceived(SysexMessage message){
 		//System.out.println(message.toString());
 	}

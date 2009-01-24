@@ -11,7 +11,7 @@ public class ClipGroup {
 
 	private int track;
 	private MapBase[] elements;
-	public SongPad[] pads;
+	public Clip[] pads;
 	private String id;
 	public int colour;
 
@@ -28,14 +28,14 @@ public class ClipGroup {
 
 	private void validatePadsArray() {
 		for (int i = 0; i < pads.length; i++) {
-			SongPad pad = pads[i];
+			Clip pad = pads[i];
 			checkForDuplicates(pad);
 		}
 	}
 
-	private void checkForDuplicates(SongPad pad) {
+	private void checkForDuplicates(Clip pad) {
 		for (int i = 0; i < pads.length; i++) {
-			SongPad checked = pads[i];
+			Clip checked = pads[i];
 			if(checked!=pad){
 				if(pad.track == checked.track && pad.scene == checked.scene) System.out.println("ERROR, you have duplicated a clip in your XML - in group "+ id +"," + pad.pad_id +" is a duplicate");
 				//if(pad.id == checked.id) System.out.println("Error, you can't assign two clips to the same pad");
@@ -46,12 +46,12 @@ public class ClipGroup {
 
 	private void createPadsArray() {
 		int length = countPads();
-		pads = new SongPad[length];
+		pads = new Clip[length];
 		int index = 0;
 		for (int i = 0; i < elements.length; i++) {
 			MapBase element = elements[i];
-			if(element instanceof SongPad ){
-				pads[index] = (SongPad) element;
+			if(element instanceof Clip ){
+				pads[index] = (Clip) element;
 				index ++;
 			}
 		}
@@ -61,7 +61,7 @@ public class ClipGroup {
 		int length = 0;
 		for (int i = 0; i < elements.length; i++) {
 			MapBase element = elements[i];
-			if (element instanceof SongPad) length ++;
+			if (element instanceof Clip) length ++;
 		}
 		return length;
 	}
@@ -79,7 +79,7 @@ public class ClipGroup {
 
 	private MapBase createElement(XMLElement element) {
 		String name = element.getName();
-		if(name.equals("clip")) return new SongPad(element, this);
+		if(name.equals("clip")) return new Clip(element, this);
 		return ElementFactory.create(element);
 	}
 
@@ -98,13 +98,13 @@ public class ClipGroup {
 
 	}
 
-	public SongPad[] getPads() {
+	public Clip[] getPads() {
 		return pads;
 	}
 
 	public void clearAllPlaying() {
 		for (int i = 0; i < pads.length; i++) {
-			SongPad pad = pads[i];
+			Clip pad = pads[i];
 			pad.clearPlaying();
 		}
 
