@@ -11,7 +11,7 @@ import java.util.Observer;
 
 import processing.core.PApplet;
 import processing.xml.XMLElement;
-
+@Deprecated
 public class NoteBone extends MapBase implements Observer {
 
 

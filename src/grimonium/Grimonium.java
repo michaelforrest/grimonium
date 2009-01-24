@@ -31,7 +31,7 @@ import processing.core.PApplet;
 import processing.xml.XMLElement;
 
 /**
- * @author Michael Forrest gonna use midi channel 4 for controller messages
+ *
  */
 public class Grimonium {
 
@@ -42,6 +42,7 @@ public class Grimonium {
 
 	public Grimonium(PApplet applet, String config_xml, String mapping_xml) {
 		this.applet = applet;
+		new GrimoniumOutput(7111,applet);
 		XMLElement xml = new XMLElement(applet, config_xml);
 		boot(applet, xml);
 		XMLElement mapping = new XMLElement(applet, mapping_xml);

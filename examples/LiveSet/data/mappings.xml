@@ -1,84 +1,104 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <set>
 	<songs>
-		<song name="Falling Leaves" tempo="120" sceneoffset="21">
+		<song name="Falling Leaves" tempo="120" sceneoffset="21" visuals="forest">
 			<controls>
 				<keyboard channel="3">piano</keyboard>
 			</controls>
 			<notes><text></text></notes>
 			<group id="drone" track="0" colour="red">
-				<clip pad="0" scene="1"/>
+				<clip scene="1"/>
 			</group>
 			<group id="electronic" track="1" colour="green">
-				<clip pad="4" scene="0"/>
-				<clip pad="8" scene="1"/>
-				<clip pad="12" scene="2"/>
+				<clip scene="0"/>
+				<clip scene="1"/>
+				<clip  scene="2"/>
 			</group>
 			<group id="drums" track="4" colour="blue">
-				<clip pad="13" scene="1"/>
+				<clip scene="1"/>
 			</group>
 			<group id="bass" track="5" colour="purple">
-				<clip pad="14" scene="1"/>
+				<clip scene="1"/>
 			</group>
 			<group id="piano" track="6" colour="orange">
-				<clip pad="15" scene="1"/>
+				<clip cene="1"/>
 			</group>
 		</song>
 		
-		<song name="Horoskope" colour="red" tempo="105" sceneoffset="6">
+		<song name="Horoskope" colour="red" tempo="105" sceneoffset="6" visuals="robot">
+			<controls>
+				<keyboard channel="3">piano</keyboard>
+				
+				<fader id="0" name="strings" channel="3" cc="71">
+					<lcd text="strings"/>
+				</fader>
+			</controls>
 			<notes>
-				<text/>
+				<text>
+					I know you like to think the world is doomed
+					It's gonna blow up, blow up, quite soon
+					What if I told you things are only getting better
+					What if I told you that we never had it so good
+					It's true, ooh ooh ooh
+					It's true, ooh ooh ooh
+					But nevertheless it isn't such a shame 
+					There's not a problem that can be solved if you ignore it 
+					And now it doesn't really matter what you do
+					We're gonna make it anyway it's true, we always do
+				</text>
 			</notes>
 			<group id="beats" colour="red" track="4" >
-				<clip pad="0" scene="0"/>
+				<clip scene="0"/>
 			</group>
 			<group id="bass" colour="purple" track="5">
-				<clip pad="12" scene="0"/>
+				<clip scene="0"/>
 			</group>
 			<group id="bits" colour="green" track="6">
-				<clip pad="13" scene="0"/>
+				<clip scene="0"/>
 			</group>
 			<group id="bits" colour="green" track="7">
-				<clip pad="14" scene="0"/>
+				<clip scene="0"/>
 			</group>
 			<group id="lead" colour="pink" track="8">
-				<clip pad="3" scene="0"/>
-				<clip pad="7" scene="1"/>
-				<clip pad="11" scene="2"/>
-				<clip pad="15" scene="3"/>
+				<clip scene="0"/>
+				<clip scene="1"/>
+				<clip scene="2"/>
+				<clip scene="3"/>
+			</group>
+			<group id="beats" colour="red" track="4" >
+				<clip scene="1"/>
 			</group>
 		</song>
 
-		<song name="Some Day" tempo="140" sceneoffset="43">
+		<song name="Some Day" tempo="140" sceneoffset="43" visuals="bumpybosbo">
 			<controls>
 				<keyboard channel="3">piano</keyboard>
 			</controls>
 			<notes><text></text></notes>
-			<group id="beats" track="1" colour="red">
-				<clip pad="0" scene="0"/>
-				<clip pad="1" scene="1"/>
-				<clip pad="2" scene="2"/>
-				<clip pad="3" scene="3"/>
-				<clip pad="4" scene="4"/>
-				<clip pad="5" scene="5"/>
+			<group id="beats" track="0" colour="red">
+				<clip scene="0"/>
+				<clip scene="1"/>
+				<clip scene="2"/>
+				<clip scene="3"/>
+				<clip scene="4"/>
+				<clip scene="5"/>
 			</group>
-			<group id="bass" track="2" colour="green">
-				<clip pad="6" scene="1"/>
-				<clip pad="7" scene="2"/>
-				<clip pad="8" scene="3"/>
-				<clip pad="9" scene="4"/>
-				<clip pad="10" scene="5"/>
+			<group id="bass" track="1" colour="green">
+				<clip scene="1"/>
+				<clip scene="3"/>
+				<clip scene="4"/>
+				<clip scene="5"/>
 			</group>
-			<group id="music" track="3" colour="blue">
-				<clip pad="11" scene="0"/>
-				<clip pad="12" scene="1"/>
-				<clip pad="13" scene="3"/>
-				<clip pad="14" scene="4"/>
-				<clip pad="15" scene="5"/>
+			<group id="music" track="2" colour="blue">
+				<clip scene="0"/>
+				<clip scene="1"/>
+				<clip scene="3"/>
+				<clip scene="4"/>
+				<clip scene="5"/>
 			</group>
 		</song>
 
-		<song name="Bumpy Bosbo" colour="yellow" tempo="133" sceneoffset="0" pic="songs/cat.png">
+		<song name="Bumpy Bosbo" colour="yellow" tempo="133" sceneoffset="0" pic="songs/cat.png" visuals="bumpybosbo">
 			<notes>
 				<text>This one goes around G and D
 					Play bendy synth.</text>
@@ -101,7 +121,6 @@
 			</controls>
 			<!-- should validate for repetition -->
 			<group id="beats" colour="red" track="0">
-				<freqbone low="kick" med="snare" high="hihat"/>
 				<clip pad="0" scene="0">
 					<visual scene="0" />
 				</clip>
@@ -118,31 +137,24 @@
 					<visual scene="4" />
 				</clip>
 			</group>
-			<group id="notebones" track="9">
-				<notebone note="C0" bone="bosbo"/>
-			</group>
 			<group id="rhythm" colour="yellow" track="2">
-				<freqbone mid="bosbotrance"/>
-				<clip pad="2" scene="0"/>
-				<clip pad="6" scene="1"/>
+				<clip scene="0"/>
+				<clip scene="1"/>
 			</group>
 			<group id="lead" colour="pink" track="3">
-				<freqbone high="bosbolead"/>
-				<clip pad="3" scene="0"/>
-				<clip pad="7" scene="1"/>
+				<clip scene="0"/>
+				<clip scene="1"/>
 			</group>
 			<group id="bass" colour="purple" track="1">
-				<freqbone low="bosbobass"/>
-				<clip pad="10" scene="0"/>
-				<clip pad="11" scene="1"/>
+					<clip scene="0"/>
+				<clip scene="1"/>
 			</group>
 			<group id="bits" colour="green" track="3">
-				<freqbone med="bosbobits" high="bosbohibits"/>
-				<clip pad="13" scene="3"/>
+				<clip scene="3"/>
 			</group>
 		</song>
 
-		<song name="Song Of Technology" colour="green" sceneoffset="10">
+		<song name="Song Of Technology" colour="green" sceneoffset="10" visuals="songoftechnology">
 			<notes>
 				<text>Lorem ipsum dolor sit amet.</text>
 			</notes>
@@ -154,20 +166,19 @@
 					stutter/chorus
 					tonal/scratchloop
 					vinyl</keyboard>
-				<encoder id="0" name="SOMETHING" channel="5" cc="15"/>
+					<keyboard channel="5" low="60">
+						Synth
+					</keyboard>
+				<fader id="0" name="noise" channel="5" cc="71"/>
+				<fader id="1" name="cutoff" channel="5" cc="72"/>
+				<fader id="2" name="rate" channel="5" cc="73"/>
+				<fader id="3" name="SOUND" channel="5" cc="74"/>
+				<joystick>
+					<pitchbend channel="5"/>
+					<up name="mod wheel" channel="5" cc="1"/>
+					<down name="mod wheel" channel="5" cc="1"/>
+				</joystick>
 			</controls>
-			<group id="notebones" track="9">
-				<notebone note="C3" bone="ii"/>
-				<notebone note="D3" bone="oo"/>
-				<notebone note="E3" bone="squint"/>
-				<notebone note="F3" bone="frown"/>
-			</group>
-			<group id="fxbones" track="16">
-				<notebone note="48" bone="fx1"/>
-				<notebone note="54" bone="fx2"/>
-				<notebone note="51" bone="fx3"/>
-				<notebone note="55" bone="fx4"/>
-			</group>
 			<group id="vocals" colour="pink" track="3">
 				<clip pad="10" scene="1" >
 					<visual scene="1" />
@@ -205,7 +216,7 @@
 
 
 		</song>
-		<song name="Violet Sky" sceneoffset="18" colour="purple">
+		<song name="Violet Sky" sceneoffset="18" colour="purple" tempo="75" visuals="forest">
 			<notes>
 				<image source="songs/violet_sky_score.png"/>
 				<text/>
@@ -220,21 +231,7 @@
 					<range from="0.25" to="0.5" layer="strings2"/>
 					<range from="0.5" to="0.75" layer="strings3"/>
 					<range from="0.75" to="1" layer="strings4"/>
-				</multilayerfader>
-				<!-- TODO: work out how to do overlapping ranges --> 
-				<bonetempokeys tempo="0.15" low="40" high="F3" bone="cello"/>
-				<bonetempokeys tempo="0.2" low="F#3" high="100" bone="viola"/>
-				<noterangebone low="40" high="F3" bone="cellopitch"/> 
-				<noterangebone low="F#3" high="100" bone="violapitch"/>
-<!--				<bonetempokeys channel="3" tempo="0.15" low="A#1" high="F5" bone="cello"/>
-				<bonetempokeys channel="3" tempo="0.2" low="F#5" high="D6" bone="viola"/>
-				<noterangebone channel="3" low="A#1" high="D6" bone="cellopitch"/> 
-				<noterangebone channel="3" low="A#1" high="D6" bone="violapitch"/>  -->
-				
-				<!-- piano...-->
-				<bonetempokeyranges tempo="1" low="48" high="84" bone="piano" bonecount="23" channel="3"/>
-		<!--		<bonetempokeyranges tempo="1" low="A#1" high="D6" bone="piano" bonecount="23" channel="3"/>-->
-				
+				</multilayerfader>				
 			</controls>
 			<group id="beats" colour="red" track="0">
 				<clip pad="0" scene="0"/>
@@ -248,6 +245,10 @@
 			<group id="trumpets" colour="yellow" track="2">
 				<clip pad="6" scene="1"/>
 				<clip pad="10" scene="2"/>
+			</group>
+			<group id="backing" track="3" colour="purple">
+				<clip scene="0"/>
+				
 			</group>
 		</song>
 

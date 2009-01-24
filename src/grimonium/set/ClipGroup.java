@@ -11,7 +11,7 @@ public class ClipGroup {
 
 	private int track;
 	private MapBase[] elements;
-	SongPad[] pads;
+	public SongPad[] pads;
 	private String id;
 	public int colour;
 

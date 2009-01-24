@@ -12,7 +12,7 @@ import microkontrol.MicroKontrol;
 import microkontrol.controls.LCD;
 import processing.xml.XMLElement;
 
-public class Song extends Observable{
+public class Song extends Observable {
 
 	public static final String ACTIVATED = "activated";
 	public static final String DEACTIVATED = "deactivated";
@@ -26,6 +26,7 @@ public class Song extends Observable{
 	private String image;
 	private SongNotes notes;
 	public int tempo;
+	public String visuals;
 
 	public Song(XMLElement element) {
 		name = element.getStringAttribute("name");
@@ -33,16 +34,39 @@ public class Song extends Observable{
 		sceneOffset = element.getIntAttribute("sceneoffset");
 		tempo = element.getIntAttribute("tempo");
 		colour = Colours.get(element.getAttribute("colour"));
-		image = element.getAttribute("pic","app/gramophone1.png");
+		image = element.getAttribute("pic", "app/gramophone1.png");
+		visuals = element.getStringAttribute("visuals", "forest");
 		addGroups(element.getChildren("group"));
+		arrangePads();
+
 		addControls(element.getChild("controls"));
 
 		notes = new SongNotes(element.getChild("notes"));
 	}
+	private void addGroups(XMLElement[] children) {
+		groups = new ClipGroup[children.length];
+		adjustSceneOffsets(children);
+		for (int i = 0; i < children.length; i++) {
+			XMLElement element = children[i];
+			ClipGroup group = new ClipGroup(element);
+			groups[i] = group;
+		}
 
+	}
+
+	private void arrangePads() {
+		boolean[] filled = new boolean[16];
+		int[] order = {0, 4, 8, 12, 1, 5, 9, 13, 2, 6, 10, 14, 3, 7, 11, 15};
+		int id = 0;
+		for (ClipGroup group : groups) {
+			for (SongPad pad : group.pads) {
+				pad.setPad(order[id++]);
+			}
+		}
+	}
 
 	private void addControls(XMLElement child) {
-		if(child == null) {
+		if (child == null) {
 			controls = new MapBase[0];
 			return;
 		}
@@ -54,16 +78,6 @@ public class Song extends Observable{
 		}
 	}
 
-	private void addGroups(XMLElement[] children) {
-		groups = new ClipGroup[children.length];
-		adjustSceneOffsets(children);
-		for (int i = 0; i < children.length; i++) {
-			XMLElement element = children[i];
-			ClipGroup group = new ClipGroup(element);
-			groups[i] = group;
-		}
-
-	}
 
 	private void adjustSceneOffsets(XMLElement[] groups) {
 		for (int i = 0; i < groups.length; i++) {
@@ -85,16 +99,21 @@ public class Song extends Observable{
 		mainLCD.setText(name);
 		mainLCD.setColor("orange");
 
-		for (ClipGroup group : groups) group.activate();
-		for (MapBase control : controls) control.activate();
+		for (ClipGroup group : groups)
+			group.activate();
+		for (MapBase control : controls)
+			control.activate();
 
 		setActive(true);
 		setChanged();
 		notifyObservers(ACTIVATED);
 	}
-	public void deactivate(){
-		for (ClipGroup group : groups) group.deactivate();
-		for (MapBase control : controls) control.deactivate();
+
+	public void deactivate() {
+		for (ClipGroup group : groups)
+			group.deactivate();
+		for (MapBase control : controls)
+			control.deactivate();
 		setActive(false);
 		setChanged();
 		notifyObservers(DEACTIVATED);
@@ -109,7 +128,7 @@ public class Song extends Observable{
 		ArrayList<SongPad> result = new ArrayList<SongPad>();
 		for (int i = 0; i < groups.length; i++) {
 			ClipGroup group = groups[i];
-			 addPadsTo(result,group.pads);
+			addPadsTo(result, group.pads);
 		}
 		return result;
 	}
@@ -133,7 +152,6 @@ public class Song extends Observable{
 	public String getImage() {
 		return image;
 	}
-
 
 	public SongNotes getSongNotes() {
 		return notes;

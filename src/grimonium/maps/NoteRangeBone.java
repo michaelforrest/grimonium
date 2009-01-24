@@ -3,7 +3,7 @@ package grimonium.maps;
 import grimonium.Animata;
 import processing.xml.XMLElement;
 import rwmidi.Note;
-
+@Deprecated
 public class NoteRangeBone extends KeyboardRange {
 
 	private float range;

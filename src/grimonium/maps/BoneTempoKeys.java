@@ -8,7 +8,7 @@ import java.util.Observable;
 import java.util.Observer;
 
 import processing.xml.XMLElement;
-
+@Deprecated
 public class BoneTempoKeys extends KeyboardRange implements Observer {
 
 	private Float tempo;

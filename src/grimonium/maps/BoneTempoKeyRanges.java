@@ -3,7 +3,7 @@ package grimonium.maps;
 import grimonium.NoteParser;
 import grimonium.NoteParser.BadNoteFormatException;
 import processing.xml.XMLElement;
-
+@Deprecated
 public class BoneTempoKeyRanges extends MapBase {
 
 	private Integer low;

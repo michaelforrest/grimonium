@@ -22,15 +22,18 @@ public class SongPad extends MapBase implements ClipDataResponder, ButtonListene
 	public final ClipGroup group;
 	private ClipMap[] visuals;
 	public SongPad(XMLElement element, ClipGroup group) {
-
 		this.group = group;
-		pad_id = element.getIntAttribute("pad");
 		scene = element.getIntAttribute("scene");
 		track = element.getIntAttribute("track"); //added automatically by parent class
-		pad = MicroKontrol.getInstance().pads[pad_id];
 
 		addVisuals(element.getChildren("visual"));
 
+		//setPad(element);
+	}
+
+	public void setPad(int pad_id) {
+		this.pad_id = pad_id;
+		pad = MicroKontrol.getInstance().pads[pad_id];
 		pad.listen(this);
 	}
 
@@ -98,7 +101,7 @@ public class SongPad extends MapBase implements ClipDataResponder, ButtonListene
 	public String toString() {
 		return super.toString() + "[" + clipName +"]";
 	}
-	
+
 	@Override
 	public void activate() {
 		super.activate();

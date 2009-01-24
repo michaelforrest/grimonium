@@ -18,10 +18,9 @@ public class GrimoniumView extends ViewBase implements Observer {
 	private boolean clean = false;
 	private GuiController controller;
 	private SongView[] songViews;
-	private MicroKontrolLights microKontrolLights;
 	private Animator zAnimator;
 	private SongViewHelper[] helpers;
-	private ButtonsView buttonsView;
+//	private ButtonsView buttonsView;
 	private MixerView mixerView;
 	private PImage branding;
 
@@ -41,10 +40,10 @@ public class GrimoniumView extends ViewBase implements Observer {
 
 		createViewHelpers();
 		addSongViews();
-		buttonsView = new ButtonsView(applet, grimonium);
+//		buttonsView = new ButtonsView(applet, grimonium);
 		mixerView = new MixerView(applet,grimonium.set);
-		microKontrolLights = new MicroKontrolLights(applet, grimonium);
-
+		new MicroKontrolLights(applet, grimonium);
+		new KeyboardController(applet,grimonium.set);
 		zAnimator = new Animator(0f, this);
 	}
 
@@ -85,7 +84,7 @@ public class GrimoniumView extends ViewBase implements Observer {
 	private void drawCommonElements() {
 		applet.pushMatrix();
 		applet.translate(0, 0, -zAnimator.currentValue);
-		buttonsView.draw();
+//		buttonsView.draw();
 		mixerView.draw();
 		applet.popMatrix();
 	}

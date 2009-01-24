@@ -1,3 +1,5 @@
+import rwmidi.*;
+
 import processing.opengl.*;
 
 import microkontrol.controls.*;

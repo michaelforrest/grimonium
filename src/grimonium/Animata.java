@@ -4,7 +4,7 @@ import oscP5.OscMessage;
 import oscP5.OscP5;
 import processing.core.PApplet;
 import netP5.NetAddress;
-
+@Deprecated
 public class Animata {
 
 	public static NetAddress net;

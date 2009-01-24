@@ -1,5 +1,6 @@
 package grimonium.set;
 
+import grimonium.GrimoniumOutput;
 import grimonium.gui.Colours;
 import grimonium.gui.MixerSource;
 import grimonium.maps.ElementFactory;
@@ -58,6 +59,7 @@ public class GrimoniumSet extends CollectionWithSingleSelectedItem implements En
 		if(current() != null) current().deactivate();
 		super.select(object);
 		current().activate();
+		GrimoniumOutput.visualsChanged(current().visuals);
 	}
 	public Song current() {
 		return (Song) super.current();

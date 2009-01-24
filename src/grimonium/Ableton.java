@@ -11,6 +11,7 @@ import processing.xml.XMLElement;
 import rwmidi.MidiInput;
 import rwmidi.MidiOutput;
 import rwmidi.Note;
+import rwmidi.SysexMessage;
 
 public class Ableton extends MidiThing {
 	public class Message {
@@ -45,12 +46,14 @@ public class Ableton extends MidiThing {
 	private CC play;
 	private final PApplet applet;
 	private int visualsTrack;
+//	 private Clock clock;
 
 	private Ableton(XMLElement xml, PApplet applet) {
 		this.applet = applet;
 		applet.registerDispose(this);
 		mk = MicroKontrol.getInstance();
-		from = getInput(xml.getStringAttribute("in"), this);
+		String inputName = xml.getStringAttribute("in");
+		from = getInput(inputName, this);
 		to = getOutput(xml.getStringAttribute("out"));
 
 		for (int i = 0; i < midiTracks.length; i++)
@@ -67,6 +70,7 @@ public class Ableton extends MidiThing {
 
 		playPause = mk.buttons.get("ENTER");
 		playPause.listen("pressed", this, "togglePlaying");
+//		clock = new Clock(inputName);
 	}
 	public void dispose(){
 		sendCC(stop, 127);
@@ -110,6 +114,12 @@ public class Ableton extends MidiThing {
 
 	public void noteOffReceived(Note n) {
 		midiTracks[n.getChannel()].noteOffReceived(n);
+	}
+//	public void controllerChangeReceived(Controller c){
+//		System.out.println("cc: " + c);
+//	}
+	public void sysexReceived(SysexMessage m){
+		System.out.println("sysex: " + m);
 	}
 
 	public void sendController(int channel, int cc, int value) {
