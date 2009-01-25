@@ -4,8 +4,20 @@ import processing.xml.XMLElement;
 
 public class LEDMap extends MapBase {
 
-	public LEDMap(XMLElement element) {
-		// TODO Auto-generated constructor stub
-	}
+	private LCDHint hint;
 
+	public LEDMap(XMLElement element) {
+		hint = new LCDHint(element, "orange");
+	}
+	@Override
+	public void activate() {
+		super.activate();
+		hint.activateHint();
+	}
+	@Override
+	public void deactivate() {
+		hint.revert();
+		super.deactivate();
+
+	}
 }

@@ -29,7 +29,9 @@
 			<lcd id="7" text="FILTER"/>
 		</fader>
 		
+		<!-- support for lcds is still a little buggy as the behaviour hasn't really been decided yet...-->
 		<lcd id="0" colour="red" text="RED ONE"/>
+		<lcd id="1" colour="orange" text="ORANGE"/>
 		
 	</common>
 	
@@ -45,6 +47,7 @@
 				an example of a keyboard split -->
 				<keyboard channel="3">piano</keyboard>
 				
+				<lcd id="0" colour="red" text="MY NOTE"/>
 			</controls>
 			<notes>
 				<text>Useful notes about this song go in here.</text>

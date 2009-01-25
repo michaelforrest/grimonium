@@ -11,7 +11,7 @@ public class ElementFactory {
 		if(name.equals("button")) return new ButtonMap(element);
 		if(name.equals("keyboard")) return new KeyboardMap(element);
 		if(name.equals("joystick")) return new JoystickMap(element);
-		if(name.equals("led")) return new LEDMap(element);
+		if(name.equals("lcd")) return new LEDMap(element);
 
 		if(name.equals("multilayerfader")) return new MultiLayerFader(element);
 
