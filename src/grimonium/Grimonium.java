@@ -48,6 +48,7 @@ public class Grimonium {
 		XMLElement mapping = new XMLElement(applet, mapping_xml);
 		set = new GrimoniumSet(mapping);
 
+
 	}
 
 	private static void boot(PApplet applet, XMLElement xml) {

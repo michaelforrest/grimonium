@@ -15,7 +15,7 @@ public class NoteRangeBone extends KeyboardRange {
 	}
 	@Override
 	protected void doNoteOn(Note n, int pitch) {
-		float length = 1f - ((float)((pitch - low)) / range);
+		float length = 1f - (((pitch - low)) / range);
 		Animata.setBone(bone, length);
 	}
 	@Override

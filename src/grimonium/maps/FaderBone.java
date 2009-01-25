@@ -5,7 +5,7 @@ import microkontrol.controls.Fader;
 import microkontrol.controls.FaderListener;
 import processing.xml.XMLElement;
 import grimonium.Animata;
-
+@Deprecated
 public class FaderBone extends MapBase implements FaderListener {
 
 	private int faderID;
@@ -29,7 +29,7 @@ public class FaderBone extends MapBase implements FaderListener {
 	public FaderBone(int id, String bone){
 		setup(id,bone);
 	}
-	
+
 	public void moved(Float value) {
 		if(!active) return;
 		Animata.setBone(bone, value);

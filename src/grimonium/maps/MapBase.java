@@ -5,8 +5,6 @@ import grimonium.Ableton;
 import grimonium.LiveAPI;
 
 import java.util.ArrayList;
-import java.util.Observable;
-import java.util.Observer;
 
 import microkontrol.MicroKontrol;
 import microkontrol.controls.LCD;
@@ -94,7 +92,7 @@ public class MapBase  {
 		public String colour;
 
 		public LCDHint(XMLElement element, String colour) {
-			this.colour = colour;
+			this.colour = element.getStringAttribute("colour", colour);
 			id = element.getIntAttribute("id");
 			text = element.getStringAttribute("text", element.getParent().getStringAttribute("name"));
 			lcd = MicroKontrol.getInstance().lcds[id];

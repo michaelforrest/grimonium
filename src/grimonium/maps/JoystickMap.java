@@ -1,8 +1,6 @@
 package grimonium.maps;
 
 import grimonium.Ableton;
-import grimonium.Animata;
-
 import java.util.Observable;
 import java.util.Observer;
 

@@ -6,7 +6,6 @@ import microkontrol.MicroKontrol;
 import microkontrol.controls.Encoder;
 import microkontrol.controls.EncoderListener;
 import microkontrol.controls.LCD;
-import processing.core.PFont;
 import processing.xml.XMLElement;
 
 public class EncoderMap extends MapBase implements EncoderListener {

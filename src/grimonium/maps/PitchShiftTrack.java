@@ -12,10 +12,12 @@ public class PitchShiftTrack extends ChromaticTrack{
 		super(xml);
 		cc = xml.getIntAttribute("cc");
 	}
+	@Override
 	public void pressed() {
 		super.pressed();
 		Ableton.sendCC(4,cc, 0);
 	}
+	@Override
 	public void noteOnReceived(Note n) {
 		if(disabled) return;
 		int transpose = n.getPitch() - root;

@@ -62,8 +62,8 @@ public class LiveAPI extends MidiThing {
 		sendCC(TRIGGER_TRACK, track, scene);
 	}
 
-	private static void sendCC(int message, int track, int scene) {
-		getInstance().out.sendController(message, track, scene);
+	private static void sendCC(int channel, int track, int scene) {
+		getInstance().out.sendController(channel, track, scene);
 	}
 
 	private static LiveAPI getInstance() {

@@ -48,7 +48,7 @@ public class KeyboardRange extends MapBase{
 		Ableton.sendNoteOn(channel, pitch + transpose,n.getVelocity());//adjustVelocityCurve(n));
 	}
 	private int adjustVelocityCurve(Note n) {
-		return (int) (easeOutQuad((float)n.getVelocity() / 127f) * 127f);
+		return (int) (easeOutQuad(n.getVelocity() / 127f) * 127f);
 	}
 	private float easeOutQuad(float t) {
 		return -1 * (t /= 1) * (t - 2);

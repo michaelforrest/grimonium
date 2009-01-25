@@ -30,7 +30,7 @@ public class BoneTempoKeyRanges extends MapBase {
 
 	private void addRanges() {
 		ranges = new BoneTempoKeys[bonecount];
-		float step = (((float)high)-((float)low))/((float)bonecount);
+		float step = (((float)high)-((float)low))/(bonecount);
 		for (int i = 0; i < bonecount; i++) {
 			int rangeLow = low + (int)(i*step);
 			System.out.println("added range low=" + rangeLow + " step was " + step);

@@ -3,9 +3,6 @@ package grimonium.maps;
 import grimonium.Ableton;
 import grimonium.Animata;
 import grimonium.NoteParser;
-import grimonium.Ableton.MidiTrack;
-import grimonium.NoteParser.BadNoteFormatException;
-
 import java.util.Observable;
 import java.util.Observer;
 
@@ -38,7 +35,7 @@ public class NoteBone extends MapBase implements Observer {
 
 	public void update(Observable o, Object e) {
 		if (model.lastNote.getPitch() != note) return;
-		float value = (e.equals("note_on")) ? (float) model.lastNote.getVelocity() / 64.0f : 0.0f;
+		float value = (e.equals("note_on")) ? model.lastNote.getVelocity() / 64.0f : 0.0f;
 		value = value * range;
 		//PApplet.println("sending notebone " + bone + ": " + value);
 		Animata.setBone(bone, value);

@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<set>
+	<common>
+		<!-- ENTER currently sends messages for Play/Stop (will soon start following the state of Live - but doesn't yet).
+				 The SHIFT button quickly jumps to the last song in the set when held, allowing quick access but non-global 
+				 mappings to be kept there. -->
+		<!-- the four top buttons are mapped to CC messages as below.  Inner lcd elements are for the colouring when the button is held-->
+		<button id="SETTING" name="reverb" channel="2" cc="107" type="gate"/>
+		<button id="MESSAGE" name="delay" channel="2" cc="106" type="toggle"/>
+		<button id="SCENE" name="beatrepeat" channel="1" cc="10" type="gate">
+			<lcd id="5" text="GRID" colour="red"/>
+			<lcd id="6" text="PITCH" colour="green"/>
+		</button>
+		<button id="EXIT" name="effectrix" channel="16" note="C3">
+			<lcd id="6" text="PATTERN"/>
+		</button>
+
+		<!-- encoders are mapped to cc messages - you need to set them as 'Relative (signed bit)' within Live -->
+		<encoder id="5" name="beatrepeat" channel="1" cc="4"/>
+		<encoder id="6" name="pitch" channel="1" cc="5"/>
+		
+		<!-- if you put an 'lcd' element inside an encoder element, it sets that lcd to have the right label -->
+		<encoder id="7" name="tempo" channel="1" cc="2">
+			<lcd id="7" text="TEMPO"/>
+		</encoder>
+
+		<!-- faders work the same way as encoders but are absolute -->
+		<fader id="7" name="FILTER" channel="3" cc="5">
+			<lcd id="7" text="FILTER"/>
+		</fader>
+		
+		<lcd id="0" colour="red" text="RED ONE"/>
+		
+	</common>
+	
+	<!-- Put in as many song elements as you want in your set -->
+	<songs>
+		<!-- tempo is only for display so far - will be used for cleverer things in future. 
+				sceneoffset sets the first row for this group of clips -->
+		<song name="My Song" tempo="120" sceneoffset="0">
+			<controls>
+				<!-- put as many different types on control as you need inside the controls element-->
+				
+				<!-- keyboard elements have a description. See lower down in this document for 
+				an example of a keyboard split -->
+				<keyboard channel="3">piano</keyboard>
+				
+			</controls>
+			<notes>
+				<text>Useful notes about this song go in here.</text>
+			</notes>
+			
+			<!-- each group contains a group of clips. track numbers start at 0 -->
+			<!-- note that currently these are automapped across the pads, from top to bottom, left to right-->
+			<!-- this algorithm might change though - I want it to be smart about lining up the clips horizontally where possible -->
+			<group id="drone" track="0" colour="red">
+				<clip scene="1"/>
+			</group>
+			<group id="electronic" track="1" colour="green">
+				<clip scene="0"/>
+				<clip scene="1"/>
+				<clip  scene="2"/>
+			</group>
+			<group id="drums" track="4" colour="blue">
+				<clip scene="1"/>
+			</group>
+			<group id="bass" track="5" colour="purple">
+				<clip scene="1"/>
+			</group>
+			<group id="piano" track="6" colour="orange">
+				<clip scene="1"/>
+			</group>
+		</song>
+		
+		<!-- if you put a picture in your data folder you can use it to  illustrate your song via the pic attribute -->
+		<song name="My Other Song" colour="yellow" tempo="133" sceneoffset="0" pic="songs/cat.png" >
+			<notes>
+				<!-- a basic image tag is supported for a song if text is not enough -->
+				<image source="songs/violet_sky_score.png"/>
+				<text></text>
+			</notes>
+			<controls>
+				<keyboard>
+					<!-- here's an example keyboard split -->
+					<range channel="2" transpose="24" low="0" high="62">BASS</range>
+					<range channel="3" transpose="-12" low="63" high="120">STRINGS</range>
+				</keyboard>
+				<fader id="0" name="strings" channel="3" cc="71">
+					<lcd text="strings"/>
+				</fader>
+				<fader id="2" name="bassfreq" channel="2" cc="71">
+					<lcd text="bassfreq"/>
+				</fader>
+				<joystick >
+					<!-- use up, down, left and right to map to different joystick directions -->
+					<up name="mod wheel" channel="2" cc="1"/>
+				</joystick>
+			</controls>
+
+			<group id="beats" colour="red" track="0">
+				<clip pad="0" scene="0">
+					<visual scene="0" />
+				</clip>
+				<clip pad="1" scene="1">
+					<visual scene="1" />
+				</clip>
+				<clip pad="4" scene="2">
+					<visual scene="2" />
+				</clip>
+				<clip pad="5" scene="3">
+					<visual scene="3" />
+				</clip>
+				<clip pad="12" scene="4">
+					<visual scene="4" />
+				</clip>
+			</group>
+			<group id="rhythm" colour="yellow" track="2">
+				<clip scene="0"/>
+				<clip scene="1"/>
+			</group>
+			<group id="lead" colour="pink" track="3">
+				<clip scene="0"/>
+				<clip scene="1"/>
+			</group>
+			<group id="bass" colour="purple" track="1">
+					<clip scene="0"/>
+				<clip scene="1"/>
+			</group>
+			<group id="bits" colour="green" track="3">
+				<clip scene="3"/>
+			</group>
+		</song>
+
+		<song name="Shift" tempo="100" colour="" sceneoffset="0">
+			<controls>
+				<keyboard channel="16" low="48" high="59">
+					stretch/phaser
+					loop/filter
+					xloop/crush
+					stutter/chorus
+					tonal/scratchloop
+					vinyl</keyboard>
+					
+					<!-- IMPORTANT: if you use a track attribute in a fader, then the CC message set up in the config.xml file will be used. -->
+					<fader id="0" name="Beats" max="127.0" track="0"/>
+					<fader id="1" name="Bass"  max="127.0" track="1"/>
+					<fader id="2" name="Music" max="127.0" track="2"/>
+					<fader id="3" name="Music" max="127.0" track="3"/>
+			</controls>
+			<notes>
+				<text />
+			</notes>
+			
+		</song>
+	</songs>
+
+
+
+</set>
