@@ -30,6 +30,14 @@ public class Clip extends MapBase implements ButtonListener{
 		//setPad(element);
 	}
 
+
+	public Clip(int track, int scene, ClipGroup group) {
+		this.track = track;
+		this.scene = scene;
+		this.group = group;
+	}
+
+
 	public void setPad(int pad_id) {
 		this.pad_id = pad_id;
 		pad = MicroKontrol.getInstance().pads[pad_id];
@@ -51,8 +59,8 @@ public class Clip extends MapBase implements ButtonListener{
 	}
 
 	public void pressed() {
-		System.out.println("pressed " + clipName + " active?" + active);
 		if(!active) return;
+		System.out.println("pressed " + clipName + " playing? " + playing);
 		toggle();
 		GuiController.getInstance().updateView();
 	}
@@ -131,6 +139,8 @@ public class Clip extends MapBase implements ButtonListener{
 
 	public void setClipTriggered(boolean b) {
 		playing = b;
+		updateHardwareView();
+		GuiController.getInstance().updateView();
 	}
 
 

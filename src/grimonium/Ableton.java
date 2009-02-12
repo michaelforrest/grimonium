@@ -32,6 +32,9 @@ public class Ableton extends MidiThing {
 			super(xml.getIntAttribute("channel")-1, null);
 			cc = xml.getIntAttribute("cc");
 		}
+		public void trigger() {
+			sendCC(this, 127);
+		}
 
 	}
 	private static Ableton instance;
@@ -46,6 +49,7 @@ public class Ableton extends MidiThing {
 	private CC play;
 	private final PApplet applet;
 	private int visualsTrack;
+	public static CC stopAllClips;
 //	 private Clock clock;
 
 	private Ableton(XMLElement xml, PApplet applet) {
@@ -63,6 +67,7 @@ public class Ableton extends MidiThing {
 
 		stop = new CC(xml.getChild("globalstop"));
 		play = new CC(xml.getChild("globalplay"));
+		stopAllClips = new CC(xml.getChild("stopallclips"));
 
 		visualsTrack = xml.getIntAttribute("visuals_track");
 

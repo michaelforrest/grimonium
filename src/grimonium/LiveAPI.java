@@ -4,8 +4,6 @@ import grimonium.set.Clip;
 
 import java.util.Hashtable;
 
-import com.sun.corba.se.impl.protocol.giopmsgheaders.Message;
-
 import processing.core.PApplet;
 import processing.xml.XMLElement;
 import rwmidi.MidiInput;
@@ -76,6 +74,7 @@ public class LiveAPI extends MidiThing {
 	}
 	private static final byte CLIP_DATA_HEADER = 1;
 	public static final int HEADER_FIELD = 1;
+	public static final byte CLIP_MONITOR_HEADER = 4;
 
 	public static class ClipDataRequester {
 		private static final int TRACK_FIELD = 2;
@@ -103,18 +102,39 @@ public class LiveAPI extends MidiThing {
 
 		public void sysexReceived(SysexMessage message){
 			byte[] m = message.getMessage();
-			if(m[HEADER_FIELD] != CLIP_DATA_HEADER) return;
-			int track = m[TRACK_FIELD];
-			int scene = m[SCENE_FIELD];
-			if(track == this.track && scene == this.scene){
-//				System.out.println(message.toString() + "received by " + this);
-				parseMessage(m);
-				parseClipState(m);
-//				System.out.println("DELETING SYSDATA RESPONDER FOR " + track + "::" + scene);
-				//instance.in.unplug(this);
-//				disable(this);
+//			System.out.println(message.toString() + "received by " + this);
+			if(m[HEADER_FIELD] == CLIP_DATA_HEADER) {
+				setClipNameData(m);
+			}else{
+				setClipMonitorData(message);
 			}
 
+		}
+		// Track 3, scene 6 message: on, then off
+//		Sysex Message:
+//		0000 - f0 04 03 00 06 01 f7                             - .......
+//		Sysex Message:
+//		0000 - f0 04 03 00 06 00 f7                             - .......
+
+		private void setClipMonitorData(SysexMessage message) {
+//			System.out.println("Reveived monitor data in " + this);
+//			System.out.println(message);
+			byte[] m = message.getMessage();
+
+			if(m[2] == this.track && m[4] == this.scene){
+				target.setClipTriggered(m[5] == 1);
+			}
+		}
+		private boolean isThisClip(byte[] m){
+			int track = m[TRACK_FIELD];
+			int scene = m[SCENE_FIELD];
+			return (track == this.track && scene == this.scene);
+		}
+		private void setClipNameData(byte[] m) {
+			if(isThisClip(m)){
+				parseMessage(m);
+				parseClipState(m);
+			}
 		}
 		/*
 		 	PLAYING

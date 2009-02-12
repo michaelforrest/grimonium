@@ -24,7 +24,9 @@ public class ClipGroup {
 		validatePadsArray();
 	}
 
+	public ClipGroup(){
 
+	}
 
 	private void validatePadsArray() {
 		for (int i = 0; i < pads.length; i++) {
