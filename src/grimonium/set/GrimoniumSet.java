@@ -1,6 +1,8 @@
 package grimonium.set;
 
+import grimonium.Ableton;
 import grimonium.GrimoniumOutput;
+import grimonium.Ableton.MidiTrack;
 import grimonium.gui.Colours;
 import grimonium.gui.MixerSource;
 import grimonium.maps.ElementFactory;
@@ -100,6 +102,17 @@ public class GrimoniumSet extends CollectionWithSingleSelectedItem implements En
 	}
 	public float getTint() {
 		return 255;
+	}
+	public void stopClipsFromOtherSongs() {
+		for(MidiTrack track : Ableton.midiTracks){
+			stopTrackUnlessInGroup(track);
+		}
+	}
+	private void stopTrackUnlessInGroup(MidiTrack track) {
+		for(ClipGroup group : current().groups){
+			if(group.track == track.channel) return;
+		}
+		if(track.stop!=null) track.stop.trigger();
 	}
 
 

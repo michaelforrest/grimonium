@@ -21,6 +21,9 @@ public class Ableton extends MidiThing {
 			this.channel = channel;
 			this.note = note;
 		}
+		public void trigger(){
+			sendNoteOn(channel, note, 127);
+		}
 	}
 	public class CC extends Message{
 		public final int cc;
@@ -140,7 +143,7 @@ public class Ableton extends MidiThing {
 		public CC fader;
 		public Message stop;
 		public Note lastNote;
-		int channel;
+		public int channel;
 
 		MidiTrack(int channel) {
 			this.channel = channel;

@@ -9,7 +9,7 @@ public class ClipGroup {
 
 
 
-	private int track;
+	public int track;
 	private MapBase[] elements;
 	public Clip[] pads;
 	private String id;
